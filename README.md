@@ -31,6 +31,8 @@ The site is published on Replit at mediajacksystems.com without using Replit's A
   download this repository into `artifacts/mediajack/site`, and its production run is
   `node artifacts/mediajack/site/server.mjs` on the port Replit gives it.
 - So publishing = push here, then press Publish (or Republish) in Replit. Replit always builds from the latest `main`.
+- The one-time switch in Replit is `replit/setup.sh` (it keeps the old settings as `artifact.toml.before-github`):
+  `curl -fsSL https://raw.githubusercontent.com/mediajacksystems/mediajacksystems-site/main/replit/setup.sh | sh`
 
 ## The look
 

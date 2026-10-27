@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "MediaJack Systems"
+description = "The MediaJack Systems website. Built from github.com/mediajacksystems/mediajacksystems-site every time it is published."
+version = "2.0.0"
+id = "artifacts/mediajack"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22425
+
+[services.development]
+run = "sh -c 'rm -rf artifacts/mediajack/site && (git clone -q --depth 1 https://github.com/mediajacksystems/mediajacksystems-site.git artifacts/mediajack/site || (mkdir -p artifacts/mediajack/site && curl -fsSL https://github.com/mediajacksystems/mediajacksystems-site/archive/refs/heads/main.tar.gz | tar xz --strip-components=1 -C artifacts/mediajack/site)) && node artifacts/mediajack/site/server.mjs'"
+
+[services.production]
+
+[services.production.build]
+args = [ "sh", "-c", "rm -rf artifacts/mediajack/site && (git clone -q --depth 1 https://github.com/mediajacksystems/mediajacksystems-site.git artifacts/mediajack/site || (mkdir -p artifacts/mediajack/site && curl -fsSL https://github.com/mediajacksystems/mediajacksystems-site/archive/refs/heads/main.tar.gz | tar xz --strip-components=1 -C artifacts/mediajack/site))" ]
+
+[services.production.run]
+args = [ "node", "artifacts/mediajack/site/server.mjs" ]
+
+[services.production.run.env]
+PORT = "22425"
+NODE_ENV = "production"
+
+[services.env]
+PORT = "22425"
+BASE_PATH = "/"
