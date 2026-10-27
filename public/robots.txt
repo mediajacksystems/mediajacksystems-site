@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mediajacksystems.com/sitemap.xml
