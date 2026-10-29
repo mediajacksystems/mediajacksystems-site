@@ -4,7 +4,7 @@
 Each page starts with a <!--meta {...} --> block (path, title, description, nav, jsonld, robots, sitemap).
 Run:  python3 src/build.py      (no packages needed). The output in public/ is what gets published.
 """
-import json, re, pathlib, hashlib, datetime
+import json, re, pathlib, hashlib, datetime, subprocess
 from html import escape
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -48,14 +48,26 @@ def jsonld(kind, meta):
     elif kind == 'services':
         graph = [{**BUSINESS, 'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': 'Marketing services', 'itemListElement': [
             {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': n, 'description': d, 'url': SITE + u, 'provider': {'@id': SITE + '/#business'}}} for n, d, u in SERVICES]}},
-            crumbs('Services', '/services/')]
+            JACK, crumbs('Services', '/services/')]
     elif kind == 'about':
         graph = [{**JACK, 'description': 'Owner of MediaJack Systems, a print and digital marketing firm in Englewood, Colorado; fractional CMO.'}, {'@type': 'AboutPage', 'url': SITE + '/about/', 'about': {'@id': SITE + '/about/#jack'}}, crumbs('About', '/about/')]
     elif kind == 'contact':
-        graph = [{'@type': 'ContactPage', 'url': SITE + '/contact/', 'about': {'@id': SITE + '/#business'}}, BUSINESS, crumbs('Contact', '/contact/')]
+        graph = [{'@type': 'ContactPage', 'url': SITE + '/contact/', 'about': {'@id': SITE + '/#business'}}, BUSINESS, JACK, crumbs('Contact', '/contact/')]
     if not graph:
         return ''
     return '<script type="application/ld+json">' + json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, separators=(',', ':')) + '</script>'
+
+def changed(page):
+    """The day a page last changed: its own file or the shared layout, from git (today for changes not yet committed)."""
+    days = []
+    for f in (page, SRC / 'layout.html'):
+        try:
+            dirty = subprocess.run(['git', 'status', '--porcelain', '--', str(f)], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+            day = datetime.date.today().isoformat() if dirty else subprocess.run(['git', 'log', '-1', '--format=%cs', '--', str(f)], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+        except OSError:
+            day = ''
+        days.append(day or datetime.date.today().isoformat())
+    return max(days)
 
 def build():
     layout = (SRC / 'layout.html').read_text(encoding='utf-8')
@@ -68,6 +80,8 @@ def build():
         meta = json.loads(m.group(1)); body = raw[m.end():].rstrip() + '\n'
         path = meta['path']
         html = layout
+        if 'noindex' in meta.get('robots', ''):
+            html = html.replace('<link rel="canonical" href="{{canonical}}">\n', '')    # a page kept out of search points nowhere
         nav = meta.get('nav', '')
         vals = {
             'title': meta['title'], 'og_title': meta.get('og_title', meta['title']), 'description': meta['description'],
@@ -83,11 +97,10 @@ def build():
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(html, encoding='utf-8')
         if meta.get('sitemap', True):
-            pages.append(path)
-    today = datetime.date.today().isoformat()
+            pages.append((path, changed(f)))
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for p in sorted(pages, key=lambda x: (x != '/', x)):
-        sm.append(f'  <url><loc>{SITE}{p}</loc><lastmod>{today}</lastmod></url>')
+    for p, day in sorted(pages, key=lambda x: (x[0] != '/', x[0])):
+        sm.append(f'  <url><loc>{SITE}{p}</loc><lastmod>{day}</lastmod></url>')
     sm.append('</urlset>')
     (OUT / 'sitemap.xml').write_text('\n'.join(sm) + '\n', encoding='utf-8')
     print('built', len(pages) + 1, 'pages, assets version', version)
