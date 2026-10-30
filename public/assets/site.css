@@ -297,3 +297,13 @@ h3 { font-size: var(--step-2); line-height: 1.1; }
   .site-header, .band, .site-footer, .surfaces { display: none; }
   body { font-size: 12pt; }
 }
+
+/* prices (services page) */
+.prices { display: grid; gap: clamp(1.75rem, 4vw, 3rem); }
+@media (min-width: 860px) { .prices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.price-card { border-top: 3px solid var(--ink); padding-top: var(--space-3); }
+.price-for { margin-top: 0.4rem; color: var(--graphite); }
+.price-card dl { margin-top: var(--space-2); }
+.price-card dl div { display: flex; justify-content: space-between; align-items: baseline; gap: 1.25rem; padding-block: 0.85rem; border-bottom: 1px solid var(--line); }
+.price-card dd { margin: 0; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.price-note { margin-top: var(--space-3); max-width: 46rem; color: var(--graphite); font-size: var(--step-1); line-height: 1.5; }
