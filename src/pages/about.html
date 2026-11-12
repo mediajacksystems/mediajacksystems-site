@@ -1,20 +1,24 @@
 <!--meta
-{"path": "/about/", "title": "About Jack Johnson | MediaJack Systems", "og_title": "About Jack Johnson, MediaJack Systems", "description": "Jack Johnson runs MediaJack Systems in Englewood, Colorado: a career in sales and marketing, now print and digital marketing for growing businesses.", "nav": "about", "jsonld": "about"}
+{"path": "/about/", "title": "About Jack Johnson | MediaJack Systems", "og_title": "About Jack Johnson, MediaJack Systems", "description": "Jack Johnson runs MediaJack Systems in Englewood, Colorado: a career in sales and marketing, now print and digital marketing for local businesses.", "nav": "about", "jsonld": "about"}
 -->
 <div class="page-head">
   <div class="wrap">
     <h1>About Jack Johnson</h1>
-    <p class="lede">I run MediaJack Systems, a one-person marketing firm in Englewood, Colorado. I plan, make and run marketing, in print and online, for small and growing businesses.</p>
+    <p class="lede">I run MediaJack Systems, a one-person marketing firm in Englewood, Colorado. I plan, make and run marketing, in print and online, for local businesses. When you call, you get me.</p>
   </div>
 </div>
 
 <section class="section" aria-labelledby="story-title">
-  <div class="wrap about-strip">
-    <h2 class="big" id="story-title">A career on the selling side</h2>
+  <div class="wrap about-strip{{#if portrait}} about-strip--photo{{/if}}">
+    <div>
+      <h2 class="big" id="story-title">A career on the selling side</h2>
+      {{portrait}}
+    </div>
     <div class="prose">
       <p>I started out selling advertising to local businesses across the country. That job teaches you fast what owners care about: whether the phone rings, what it costs and whether the person who sold it to you picks up afterward.</p>
       <p>From there I spent seven years at a Texas energy company running lead generation, investor relations and every presentation that went with them, and built two company platforms from the ground up.</p>
       <p>Today I'm also the part-time marketing lead, or fractional CMO, for three companies. MediaJack Systems brings the same work to businesses that need marketing done right without hiring a department.</p>
+      {{#if capacity}}<p>{{capacity}}</p>{{/if}}
     </div>
   </div>
 </section>
@@ -22,7 +26,7 @@
 <section class="section section--mist" aria-labelledby="how-title">
   <div class="wrap why">
     <div>
-      <h2 id="how-title">How I work</h2>
+      <h2 id="how-title">What you can hold me to</h2>
     </div>
     <dl>
       <div>
@@ -45,13 +49,18 @@
   </div>
 </section>
 
+{{work}}
+
+{{testimonials}}
+
 <section class="section band" aria-labelledby="cta-title">
   <div class="wrap">
     <h2 id="cta-title">Let's talk about your business.</h2>
-    <p>Call, email or ask for a free check-up. You'll hear back from me, not a sales team.</p>
+    <p>Call, send a message or ask for a free check-up. You'll hear back from me, not a sales team.</p>
     <div class="actions">
-      <a class="btn" href="/contact/#check-up">Get a free marketing check-up</a>
+      <a class="btn" href="/check-up/">Get a free marketing check-up</a>
       <a class="btn btn--line" href="tel:+19704010185">Call (970) 401-0185</a>
+      {{booking_btn}}
     </div>
   </div>
 </section>

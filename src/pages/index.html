@@ -5,12 +5,13 @@
   <div class="wrap">
     <div>
       <h1 id="hero-title">Print and digital marketing, handled by one person you can call.</h1>
-      <p class="lede">I'm Jack Johnson. I plan, make and run marketing for small and growing businesses: your website, Google listing, social pages, emails and ads, plus the cards, mailers and signs that go out the door. Every job is a flat fee, quoted before I start.</p>
+      <p class="lede">I plan, make and run marketing for local businesses: contractors, salons, restaurants and shops. Your website, Google listing, social pages, emails and ads, plus the cards, mailers and signs that go out the door. Every job is a flat fee, quoted before I start.</p>
+      {{byline}}
       <div class="actions">
-        <a class="btn" href="/contact/#check-up">Get a free marketing check-up</a>
+        <a class="btn" href="/check-up/">Get a free marketing check-up</a>
         <a class="btn btn--line" href="tel:+19704010185">Call (970) 401-0185</a>
       </div>
-      <p class="hero-note">Based in Englewood, Colorado. Working with businesses across the US.</p>
+      <p class="hero-note">Based in Englewood, Colorado. Websites from $500. <a href="#prices">See prices</a></p>
     </div>
     <figure class="surfaces">
       <svg viewBox="-12 -12 584 584" role="img" aria-labelledby="surfaces-title">
@@ -96,6 +97,16 @@
   </div>
 </section>
 
+<section class="section section--tight" id="prices" aria-labelledby="prices-title">
+  <div class="wrap">
+    <div class="section-head section-head--row">
+      <h2 id="prices-title">What it costs</h2>
+      <p>Where most jobs start. Every one is a flat fee, quoted in writing before I start. <a href="/services/#prices">All prices</a></p>
+    </div>
+    {{> prices-strip}}
+  </div>
+</section>
+
 <section class="section section--mist" aria-labelledby="services-title">
   <div class="wrap">
     <div class="section-head">
@@ -124,8 +135,9 @@
           <p class="what">Look like the business you are, everywhere at once.</p>
         </div>
         <ul>
+          <li><a href="/websites/">New websites, from $500</a></li>
+          <li>Fixes to the website you have, $295</li>
           <li>Logos and brand guides</li>
-          <li>New websites and website fixes</li>
           <li>Landing pages for offers and ads</li>
           <li>Photo and video for your site and socials</li>
         </ul>
@@ -175,15 +187,19 @@
   </div>
 </section>
 
-<section class="section" aria-labelledby="checkup-title">
+{{work}}
+
+{{testimonials}}
+
+<section class="section{{#if work}} section--flush-top{{/if}}" aria-labelledby="checkup-title">
   <div class="wrap">
     <div class="checkup crop">
       <div>
         <h2 id="checkup-title">Start with a free marketing check-up.</h2>
-        <p class="lede">Send me your website, or just your business name and town. I'll look at what your customers see and send back a short list, in plain English, of what I'd fix first. No charge and no obligation.</p>
+        <p class="lede">Send me your website, or just your business name and town. I look at what your customers see and email back one short list, in plain English, of what I'd fix first and why. No charge and no obligation.</p>
         <div class="actions">
-          <a class="btn" href="mailto:jack@mediajacksystems.com?subject=Free%20marketing%20check-up&amp;body=My%20business%20and%20website%3A%20">Ask for my check-up</a>
-          <a class="btn btn--line" href="tel:+19704010185">Or call (970) 401-0185</a>
+          <a class="btn" href="/check-up/">Ask for my check-up</a>
+          <a class="btn btn--line" href="/check-up/#self-check">Check it yourself in a minute</a>
         </div>
       </div>
       <ul aria-label="What the check-up looks at">
@@ -222,40 +238,36 @@
   </div>
 </section>
 
-<section class="section" aria-labelledby="why-title">
-  <div class="wrap why">
+<section class="section" aria-labelledby="about-title">
+  <div class="wrap about-strip{{#if portrait}} about-strip--photo{{/if}}">
     <div>
-      <h2 id="why-title">Why one person instead of an agency</h2>
+      <h2 class="big" id="about-title">Who you'd be working with</h2>
+      {{portrait}}
     </div>
-    <dl>
-      <div>
-        <dt>You talk to the person doing the work.</dt>
-        <dd>No account managers and no hand-offs. The person who quotes the job is the person who answers the phone when it's done.</dd>
-      </div>
-      <div>
-        <dt>Print and digital, planned together.</dt>
-        <dd>Your mailer, your sign, your website and your Google listing say the same thing, so customers recognize you wherever they see you.</dd>
-      </div>
-      <div>
-        <dt>Plain English.</dt>
-        <dd>No jargon and no forty-page reports. What was done, what it cost, what happened.</dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
-<section class="section section--mist" aria-labelledby="about-title">
-  <div class="wrap about-strip">
-    <h2 class="big" id="about-title">Who you'd be working with</h2>
     <div class="prose">
-      <p>I've spent my career on the selling side of business. I sold advertising to local businesses across the country, then spent seven years at a Texas energy company running lead generation, investor relations and every presentation that went with them.</p>
+      <p>I'm Jack Johnson. I've spent my career on the selling side of business. I sold advertising to local businesses across the country, then spent seven years at a Texas energy company running lead generation, investor relations and every presentation that went with them.</p>
       <p>Today I'm also the part-time marketing lead, or fractional CMO, for three companies. MediaJack Systems is how I bring the same work to businesses that need marketing done right without hiring a department.</p>
-      <p><a href="/about/">More about me and how I work</a></p>
+      <h3>Why one person instead of an agency</h3>
+      <dl class="why-list">
+        <div>
+          <dt>You talk to the person doing the work.</dt>
+          <dd>No account managers and no hand-offs. The person who quotes the job is the person who answers the phone when it's done.</dd>
+        </div>
+        <div>
+          <dt>Print and digital, planned together.</dt>
+          <dd>Your mailer, your sign, your website and your Google listing say the same thing, so customers recognize you wherever they see you.</dd>
+        </div>
+        <div>
+          <dt>Plain English.</dt>
+          <dd>No jargon and no forty-page reports. What was done, what it cost, what happened.</dd>
+        </div>
+      </dl>
+      <p><a class="more" href="/about/">More about me and how I work</a></p>
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="faq-title">
+<section class="section section--mist" aria-labelledby="faq-title">
   <div class="wrap">
     <div class="section-head">
       <h2 id="faq-title">Questions owners ask</h2>
@@ -264,6 +276,10 @@
       <details>
         <summary>What does it cost?</summary>
         <div><p>Websites start at $500, and hosting with small updates is $50 a month. Setting up a social platform with 4 starting posts is $150, and 12 posts a month is $100 a month. For bigger businesses, websites start at $1,500. Every job is a flat fee, quoted in writing before I start, and the check-up is free. <a href="/services/#prices">See all prices</a>.</p></div>
+      </details>
+      <details>
+        <summary>I already have a website. Can you just fix it?</summary>
+        <div><p>Yes. I fix what's wrong with the site you have for a flat $295. It's done within a week, and you pay when it's done. The free check-up tells you what needs fixing first.</p></div>
       </details>
       <details>
         <summary>Do you only work with Colorado businesses?</summary>
@@ -288,10 +304,11 @@
 <section class="section band" aria-labelledby="cta-title">
   <div class="wrap">
     <h2 id="cta-title">Tell me what you're working on.</h2>
-    <p>A new website, a mailer that has to go out next month or the whole marketing department: it starts with a call or an email.</p>
+    <p>A new website, a mailer that has to go out next month or the whole marketing department: it starts with a call or a message.</p>
     <div class="actions">
-      <a class="btn" href="mailto:jack@mediajacksystems.com">Email jack@mediajacksystems.com</a>
+      <a class="btn" href="/check-up/">Get a free marketing check-up</a>
       <a class="btn btn--line" href="tel:+19704010185">Call (970) 401-0185</a>
+      {{booking_btn}}
     </div>
   </div>
 </section>

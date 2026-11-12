@@ -1,8 +1,16 @@
 # MediaJack Systems
 
-> MediaJack Systems LLC is a one-person print and digital marketing firm in Englewood, Colorado, run by Jack Johnson. It plans, makes and runs marketing for small and growing businesses across the US. Every job is a flat fee, quoted in writing before work starts.
+> MediaJack Systems LLC is a one-person print and digital marketing firm in Englewood, Colorado, run by Jack Johnson. It plans, makes and runs marketing for local businesses (contractors, salons, restaurants, shops) across the US. Every job is a flat fee, quoted in writing before work starts.
 
 Contact: Jack Johnson, (970) 401-0185, jack@mediajacksystems.com
+
+## Starting prices
+
+- Website for a small business, with a gallery of its work: $500. Hosting and small updates: $50 a month.
+- Website for a bigger operation: $1,500. Hosting and updates: $150 a month.
+- Fixing the problems on a website a business already has: a flat $295, done within a week, paid when it is done.
+- Social media: $150 per platform set up with 4 posts ($200 for bigger operations); 12 posts a month for $100 a month ($300 for bigger operations).
+- Print, ads, email and fractional CMO work are quoted for the job. The marketing check-up is free.
 
 ## Services
 
@@ -14,5 +22,8 @@ Contact: Jack Johnson, (970) 401-0185, jack@mediajacksystems.com
 
 ## Pages
 
+- [Websites for local businesses, from $500](https://mediajacksystems.com/websites/)
+- [The free marketing check-up, with an eight-question self-check](https://mediajacksystems.com/check-up/)
+- [Services and prices](https://mediajacksystems.com/services/)
 - [About Jack Johnson](https://mediajacksystems.com/about/)
-- [Contact and free marketing check-up](https://mediajacksystems.com/contact/)
+- [Contact](https://mediajacksystems.com/contact/)

@@ -1,10 +1,10 @@
 <!--meta
-{"path": "/contact/", "title": "Contact Jack Johnson | MediaJack Systems", "og_title": "Contact MediaJack Systems", "description": "Call (970) 401-0185 or email jack@mediajacksystems.com. Ask for a free marketing check-up of your website, Google listing, social pages and print.", "nav": "contact", "jsonld": "contact"}
+{"path": "/contact/", "title": "Contact Jack Johnson | MediaJack Systems", "og_title": "Contact MediaJack Systems", "description": "Call (970) 401-0185, email jack@mediajacksystems.com, send a message or book a 30-minute call. You get Jack Johnson, not a sales team.", "nav": "contact", "jsonld": "contact", "form_id": "check-up", "form_title": "Send me a message", "form_lede": "A question, a job you need done, or a request for a free check-up. Tell me what's going on.", "form_topic": "Message from the contact page", "form_button": "Send my message", "form_subject": "A%20question%20for%20MediaJack%20Systems"}
 -->
 <div class="page-head">
   <div class="wrap">
     <h1>Let's talk about your marketing.</h1>
-    <p class="lede">Call or email me directly. You'll get me, not a sales team.</p>
+    <p class="lede">Call, email, send a message or pick a time. You'll get me, not a sales team.</p>
   </div>
 </div>
 
@@ -19,16 +19,24 @@
           <div><button class="btn btn--line btn--small copy-btn" type="button" data-copy="jack@mediajacksystems.com">Copy email address</button></div>
           <p class="status" role="status" aria-live="polite"></p>
         </li>
+        {{#if booking_url}}<li><span class="label">Pick a time</span><a href="{{booking_url}}" rel="noopener">Book a 30-minute call</a></li>{{/if}}
+        {{#if hours}}<li><span class="label">Hours</span><span class="value">{{hours}}</span></li>{{/if}}
         <li><span class="label">Based in</span><span class="value">Englewood, Colorado</span></li>
         <li><span class="label">Working with</span><span class="value">Businesses across the US</span></li>
       </ul>
     </div>
-    <div class="checkup checkup--single crop" id="check-up">
+    {{> form}}
+  </div>
+</section>
+
+<section class="section section--mist" aria-labelledby="first-title">
+  <div class="wrap">
+    <div class="checkup crop">
       <div>
-        <h2>Ask for a free marketing check-up</h2>
-        <p class="lede">Email me your website, or just your business name and town. I'll look at what your customers see and send back a short list, in plain English, of what I'd fix first.</p>
+        <h2 id="first-title">Not sure what to ask for?</h2>
+        <p class="lede">Start with the free marketing check-up. I look at what your customers see and email back a short list of what I'd fix first.</p>
         <div class="actions">
-          <a class="btn" href="mailto:jack@mediajacksystems.com?subject=Free%20marketing%20check-up&amp;body=My%20business%20and%20website%3A%20">Email for my check-up</a>
+          <a class="btn" href="/check-up/">See how the check-up works</a>
         </div>
       </div>
       <ul aria-label="What the check-up looks at">

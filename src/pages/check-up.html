@@ -1,0 +1,87 @@
+<!--meta
+{"path": "/check-up/", "title": "Free marketing check-up | MediaJack Systems", "og_title": "A free marketing check-up for your business", "description": "Send your website or business name. Jack Johnson looks at what your customers see and emails back a short list of what to fix first. Free, no obligation.", "jsonld": "checkup", "form_id": "ask", "form_title": "Ask for your check-up", "form_lede": "Tell me who you are and where to look. That's all I need to start.", "form_topic": "Free check-up", "form_button": "Send my check-up request", "form_subject": "Free%20marketing%20check-up"}
+-->
+<div class="page-head">
+  <div class="wrap">
+    <h1>The free marketing check-up.</h1>
+    <p class="lede">Send me your website, or just your business name and town. I look at your business the way a customer does and email back one short list, in plain English: what I'd fix first, and why. It's free, and you owe me nothing after.</p>
+    <div class="actions">
+      <a class="btn" href="#ask">Ask for my check-up</a>
+      <a class="btn btn--line" href="#self-check">Check it yourself first</a>
+    </div>
+  </div>
+</div>
+
+<section class="section" aria-labelledby="looks-title">
+  <div class="wrap why">
+    <div>
+      <h2 id="looks-title">What I look at, and what you get back</h2>
+    </div>
+    <dl>
+      <div>
+        <dt>Your website, on a phone and a computer.</dt>
+        <dd>How fast it loads, whether it says what you do and where, and how many taps it takes to call you.</dd>
+      </div>
+      <div>
+        <dt>Your Google listing and reviews.</dt>
+        <dd>Whether the hours, phone number and categories are right, and what a stranger sees when they search your name.</dd>
+      </div>
+      <div>
+        <dt>Your social pages.</dt>
+        <dd>Whether they look alive and match the rest of the business.</dd>
+      </div>
+      <div>
+        <dt>Anything you hand out or mail.</dt>
+        <dd>Cards, flyers, mailers and signs. Send a photo of them.</dd>
+      </div>
+      <div>
+        <dt>What comes back.</dt>
+        <dd>One email from me with a short list, most important first. If you want any of it done, I quote it as a flat fee. If you don't, the list is still yours.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="section section--mist" id="self-check" aria-labelledby="self-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="self-title">Check it yourself first: eight questions</h2>
+      <p>Tick every one you can honestly say yes to. It takes about a minute, and nothing you tick leaves this page.</p>
+    </div>
+    <form class="selfcheck" data-selfcheck>
+      <fieldset>
+        <legend class="sr-only">Eight yes or no questions about your marketing</legend>
+        <ol>
+          <li><label><input type="checkbox" name="q1"> <span>When you search your business name on Google, a profile shows up with the right hours and phone number.</span></label><p class="fix" data-fix>Your Google Business Profile is the first thing most local customers see. It's the first thing I check.</p></li>
+          <li><label><input type="checkbox" name="q2"> <span>You've replied to your recent Google reviews, the good and the bad.</span></label><p class="fix" data-fix>Replies show the next customer that someone is home. A simple routine fixes this.</p></li>
+          <li><label><input type="checkbox" name="q3"> <span>On a phone, someone can call you from your website with one tap.</span></label><p class="fix" data-fix>A phone number that can't be tapped loses calls. It's usually a quick fix.</p></li>
+          <li><label><input type="checkbox" name="q4"> <span>Your website is up on your phone before you count to three.</span></label><p class="fix" data-fix>Slow pages are often oversized photos. I measure it and tell you what's heavy.</p></li>
+          <li><label><input type="checkbox" name="q5"> <span>Your home page says what you do and where, before anyone scrolls.</span></label><p class="fix" data-fix>If a stranger can't tell in five seconds, they leave. I'll show you what they see.</p></li>
+          <li><label><input type="checkbox" name="q6"> <span>Your name, address and phone number are written the same way on your website, Google and Facebook.</span></label><p class="fix" data-fix>Mismatched details confuse customers and Google alike. I list every place they differ.</p></li>
+          <li><label><input type="checkbox" name="q7"> <span>You've posted or updated something online in the last month.</span></label><p class="fix" data-fix>A page that went quiet a year ago looks like a business that closed.</p></li>
+          <li><label><input type="checkbox" name="q8"> <span>Your cards, flyers and signs look like they come from the same business as your website.</span></label><p class="fix" data-fix>When print and online don't match, customers don't connect them. I look at both, because I make both.</p></li>
+        </ol>
+      </fieldset>
+      <div class="selfcheck-result" data-result aria-live="polite">
+        <p>Every box you can't tick is something the free check-up looks at.</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="#ask" data-send-answers>Send these answers with my request</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="ask-title">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 id="ask-title" class="big">Or reach me directly</h2>
+      <ul class="contact-list">
+        <li><span class="label">Phone</span><a href="tel:+19704010185">(970) 401-0185</a></li>
+        <li><span class="label">Email</span><a href="mailto:jack@mediajacksystems.com?subject=Free%20marketing%20check-up&amp;body=My%20business%20and%20website%3A%20">jack@mediajacksystems.com</a></li>
+        {{#if booking_url}}<li><span class="label">Or talk it through</span><a href="{{booking_url}}" rel="noopener">Book a 30-minute call</a></li>{{/if}}
+      </ul>
+    </div>
+    {{> form}}
+  </div>
+</section>

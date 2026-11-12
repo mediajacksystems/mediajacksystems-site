@@ -1,7 +1,8 @@
 // MediaJack Systems: a tiny static web server for the files in ./public (no packages needed, Node 18+).
 // Replit runs it as the published site: `node server.mjs`, listening on $PORT.
 // It serves pretty URLs (/services/ -> public/services/index.html), sends the old site's addresses to their new
-// homes with a permanent redirect, compresses text, and sets security and caching headers.
+// homes with a permanent redirect, compresses text, sets security and caching headers, and passes messages from
+// the form to Jack's inbox through Resend when RESEND_API_KEY is set.
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -23,6 +24,7 @@ const TEXT = new Set(['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '
 const REDIRECTS = {
   '/services': '/services/', '/about': '/about/', '/contact': '/contact/', '/privacy': '/privacy/', '/accessibility': '/accessibility/',
   '/ease': '/', '/discretion': '/', '/exemption-check': '/', '/login': '/', '/faq': '/#faq-title',
+  '/check-up': '/check-up/', '/checkup': '/check-up/', '/websites': '/websites/', '/website': '/websites/', '/prices': '/services/#prices', '/pricing': '/services/#prices',
   '/privacy-policy': '/privacy/', '/terms-of-use': '/privacy/', '/terms': '/privacy/',
 };
 
@@ -33,7 +35,70 @@ const HEADERS = {
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
   'Strict-Transport-Security': 'max-age=63072000; includeSubDomains',
   'X-Frame-Options': 'DENY',
+  'Cross-Origin-Opener-Policy': 'same-origin',
 };
+
+// ---- the message form. It is on only when RESEND_API_KEY is set (a Replit Secret; nothing is ever written to disk).
+// The page asks GET /api/check-up first: 204 means "show the form", 404 means "keep the email button".
+const MAIL = {
+  key: process.env.RESEND_API_KEY || '',
+  url: process.env.RESEND_API_URL || 'https://api.resend.com/emails',
+  to: process.env.CONTACT_TO_EMAIL || 'jack@mediajacksystems.com',
+  from: process.env.CONTACT_FROM_EMAIL || 'MediaJack website <website@mediajacksystems.com>',
+};
+const JSON_HEADERS = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' };
+const FAIL = 'That did not send. Call (970) 401-0185 or email jack@mediajacksystems.com instead.';
+const hits = new Map();                                             // address -> times of recent sends
+function allowed(ip) {
+  const now = Date.now(), recent = (hits.get(ip) || []).filter((t) => now - t < 3600e3);
+  if (recent.length >= 5) { hits.set(ip, recent); return false; }
+  recent.push(now); hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return true;
+}
+const clean = (v, max) => String(v ?? '').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '').trim().slice(0, max);
+const oneLine = (v, max) => clean(v, max).replace(/[\r\n]+/g, ' ');
+function reply(res, status, body) { res.writeHead(status, { ...HEADERS, ...JSON_HEADERS }); res.end(JSON.stringify(body)); }
+
+function formApi(req, res) {
+  if (req.method === 'GET' || req.method === 'HEAD') { res.writeHead(MAIL.key ? 204 : 404, { ...HEADERS, 'Cache-Control': 'no-store' }); return res.end(); }
+  if (req.method !== 'POST') { res.writeHead(405, { Allow: 'GET, HEAD, POST', ...HEADERS }); return res.end(); }
+  if (!MAIL.key) return reply(res, 503, { ok: false, error: FAIL });
+  if (!/^application\/json\b/i.test(String(req.headers['content-type'] || ''))) return reply(res, 415, { ok: false, error: FAIL });
+  const origin = req.headers.origin;                                // a form on another site cannot post here
+  if (origin) { try { if (new URL(origin).host !== req.headers.host) return reply(res, 403, { ok: false, error: FAIL }); } catch { return reply(res, 403, { ok: false, error: FAIL }); } }
+  let size = 0; const chunks = [];
+  req.on('data', (c) => { size += c.length; if (size > 20000) { reply(res, 413, { ok: false, error: 'That message is too long. Shorten it, or email jack@mediajacksystems.com.' }); req.destroy(); } else chunks.push(c); });
+  req.on('error', () => {});
+  req.on('end', async () => {
+    if (res.writableEnded) return;
+    let d;
+    try { d = JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { return reply(res, 400, { ok: false, error: FAIL }); }
+    if (!d || typeof d !== 'object' || Array.isArray(d)) return reply(res, 400, { ok: false, error: FAIL });
+    const name = oneLine(d.name, 100), email = oneLine(d.email, 200);
+    if (name.length < 2) return reply(res, 422, { ok: false, error: 'Enter your name.' });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return reply(res, 422, { ok: false, error: 'Enter an email address I can reply to, like name@example.com.' });
+    // a filled trap field or a form sent within two seconds is a robot: say "sent" and send nothing
+    if (clean(d.company_url, 10) || !(Number(d.elapsed) > 2000)) return reply(res, 200, { ok: true });
+    const ip = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+    if (!allowed(ip)) return reply(res, 429, { ok: false, error: 'That is a lot of messages in one hour. Call (970) 401-0185 instead.' });
+    const text = [
+      `Name: ${name}`, `Email: ${email}`, `Phone: ${oneLine(d.phone, 40) || '(none given)'}`,
+      `Business and website: ${oneLine(d.business, 200) || '(none given)'}`, `Heard about MediaJack from: ${oneLine(d.source, 200) || '(not said)'}`,
+      `Sent from: ${oneLine(d.topic, 80) || 'the website'}`, '', clean(d.message, 3000) || '(no message)',
+    ].join('\n');
+    try {
+      const r = await fetch(MAIL.url, {
+        method: 'POST', signal: AbortSignal.timeout(10000),
+        headers: { Authorization: `Bearer ${MAIL.key}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ from: MAIL.from, to: [MAIL.to], reply_to: email, subject: `Website: ${oneLine(d.topic, 80) || 'message'} from ${name}`, text }),
+      });
+      if (!r.ok) { console.error(`form: the mail service answered ${r.status}`); return reply(res, 502, { ok: false, error: FAIL }); }
+      console.log('form: message delivered to the mail service');
+      return reply(res, 200, { ok: true });
+    } catch (err) { console.error(`form: could not reach the mail service (${err.name})`); return reply(res, 502, { ok: false, error: FAIL }); }
+  });
+}
 
 // files are small: read each once, keep it and its compressed forms in memory
 const cache = new Map();
@@ -85,10 +150,11 @@ function send(req, res, status, file, extra = {}, versioned = false) {
 }
 
 function handle(req, res) {
-  if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405, { Allow: 'GET, HEAD', ...HEADERS }); return res.end(); }
   let url;
   try { url = new URL(req.url, 'http://localhost'); } catch { res.writeHead(400, HEADERS); return res.end(); }
   const pth = url.pathname;
+  if (pth === '/api/check-up') return formApi(req, res);
+  if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405, { Allow: 'GET, HEAD', ...HEADERS }); return res.end(); }
   if (pth === '/healthz') { res.writeHead(200, { 'Content-Type': 'text/plain', ...HEADERS }); return res.end('ok'); }
   const to = REDIRECTS[pth.replace(/\/+$/, '') || '/'];
   if (to && to !== pth) { res.writeHead(301, { Location: to + (url.search || ''), ...HEADERS }); return res.end(); }

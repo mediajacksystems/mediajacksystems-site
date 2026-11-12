@@ -1,0 +1,42 @@
+{
+  "_how_this_works": "Facts the site shows only when they are filled in. Leave a value empty (\"\" or []) and that part of every page stays off. Run python3 src/build.py after any change.",
+  "booking_url": "https://calendar.app.google/YdYUyjPf8TCajAJZ6",
+  "booking_label": "Book a 30-minute call",
+  "photo": "jack-johnson",
+  "photo_alt": "Jack Johnson, owner of MediaJack Systems",
+  "reply_promise": "",
+  "capacity": "",
+  "hours": "",
+  "profiles": {
+    "google_business": "",
+    "linkedin": "",
+    "facebook": "",
+    "instagram": ""
+  },
+  "work_note": "Client names are left off. Every number comes from the job's own records.",
+  "work": [
+    {
+      "client": "A landscape architecture studio in Colorado",
+      "job": "A new website in place of an old WordPress one",
+      "number": "210 MB to 17 MB",
+      "number_label": "of photos in two project galleries",
+      "detail": "Same photos at a twelfth of the weight, so the galleries open on a phone. Then I set up visitor counts and Google Search Console, so the owner can see what the site brings in."
+    },
+    {
+      "client": "A freight broker in Texas",
+      "job": "A website with working tools for truckers",
+      "number": "148,848",
+      "number_label": "places on its driver map",
+      "detail": "Truck stops, repair shops, scales, washes and parking across the country, gathered from public sources. The site also has a rate checker, a fuel surcharge check and an oversize-load check."
+    },
+    {
+      "client": "An oil and gas company in Texas",
+      "job": "A printed project book",
+      "number": "19 pages",
+      "number_label": "laid out for letter-size print",
+      "detail": "Geology and figures set for print, through three rounds of changes with the company's president and its geologist."
+    }
+  ],
+  "work_also": "Also on the books: the websites of two Texas oil companies, which I built and host.",
+  "testimonials": []
+}

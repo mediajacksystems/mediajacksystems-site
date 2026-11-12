@@ -22,6 +22,7 @@
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+{{preload_photo}}
 <link rel="stylesheet" href="/assets/site.css?v={{version}}">
 <script src="/assets/site.js?v={{version}}" defer></script>
 {{jsonld}}
@@ -38,40 +39,44 @@
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul>
         <li><a href="/services/"{{cur_services}}>Services</a></li>
-        <li><a href="/#how-it-works">How it works</a></li>
+        <li><a href="/websites/"{{cur_websites}}>Websites</a></li>
         <li><a href="/about/"{{cur_about}}>About</a></li>
         <li><a href="/contact/"{{cur_contact}}>Contact</a></li>
       </ul>
     </nav>
-    <a class="header-phone" href="tel:+19704010185">(970) 401-0185</a>
-    <a class="btn btn--small" href="/contact/#check-up">Free check-up</a>
+    <a class="header-phone" href="tel:+19704010185" aria-label="Call (970) 401-0185"><span class="header-phone__verb">Call</span><span class="header-phone__num">(970) 401-0185</span></a>
+    <a class="btn btn--small" href="/check-up/">Free check-up</a>
   </div>
 </header>
 <main id="main">
 {{body}}
 </main>
 <footer class="site-footer">
+  <div class="colour-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="wrap">
     <div>
       <p class="brand-line">MediaJack Systems</p>
-      <p>Print and digital marketing for small and growing businesses. Based in Englewood, Colorado, working with businesses across the US.</p>
+      <p>Print and digital marketing for local businesses. Based in Englewood, Colorado, working with businesses across the US.</p>
     </div>
     <div>
       <h2>Get in touch</h2>
       <ul>
         <li><a href="tel:+19704010185">(970) 401-0185</a></li>
         <li><a href="mailto:jack@mediajacksystems.com">jack@mediajacksystems.com</a></li>
-        <li><a href="/contact/#check-up">Free marketing check-up</a></li>
+        <li><a href="/check-up/">Free marketing check-up</a></li>
+        {{booking_li}}
       </ul>
     </div>
     <div>
       <h2>Pages</h2>
       <ul>
-        <li><a href="/services/">Services</a></li>
+        <li><a href="/services/">Services and prices</a></li>
+        <li><a href="/websites/">Websites</a></li>
         <li><a href="/about/">About</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li><a href="/privacy/">Privacy</a></li>
         <li><a href="/accessibility/">Accessibility</a></li>
+        {{profile_links}}
       </ul>
     </div>
     <p class="legal">&copy; <span data-year>2026</span> MediaJack Systems LLC. No cookies, no tracking.</p>
