@@ -60,6 +60,7 @@ p, ul, ol, dl, figure { margin: 0; }
 p + p { margin-top: 1em; }
 a { color: var(--leaf); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
 a:hover { color: var(--canopy); text-decoration-thickness: 2px; }
+a[href^="tel:"] { white-space: nowrap; }   /* a phone number never breaks across two lines */
 :focus-visible { outline: 3px solid var(--leaf); outline-offset: 3px; border-radius: 2px; }
 strong { font-weight: 650; }
 

@@ -111,7 +111,7 @@ def picture(cls, sizes, width, height, lazy=True):
         return ''
     base = f'/assets/img/{PHOTO}'
     load = ' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high"'
-    return (f'<picture><source type="image/webp" srcset="{base}-480.webp 480w, {base}-880.webp 880w" sizes="{sizes}">'
+    return (f'<picture><source type="image/webp" srcset="{base}-480.webp 480w, {base}-640.webp 640w, {base}-880.webp 880w" sizes="{sizes}">'
             f'<img class="{cls}" src="{base}-880.jpg" width="{width}" height="{height}" alt="{e(CFG.get("photo_alt", "Jack Johnson"))}"{load}></picture>')
 
 def parts():
@@ -132,9 +132,12 @@ def parts():
         base = f'/assets/img/{PHOTO}'
         p['byline'] = (f'<p class="byline"><picture><source type="image/webp" srcset="{base}-160.webp"><img src="{base}-160.jpg" width="64" height="64" alt=""></picture>'
                        '<span><strong>Jack Johnson</strong>, owner. I quote the job, do the work and answer the phone.</span></p>')
-        p['portrait'] = f'<figure class="portrait crop">{picture("", "(max-width: 960px) 80vw, 400px", 880, 1100)}<figcaption>Jack Johnson, Englewood, Colorado</figcaption></figure>'
+        def figure(lazy):
+            return f'<figure class="portrait crop">{picture("", "(max-width: 960px) 80vw, 400px", 880, 1100, lazy)}<figcaption>Jack Johnson, Englewood, Colorado</figcaption></figure>'
+        p['portrait'] = figure(True)          # far down the home page: loads when the reader gets near it
+        p['portrait_lead'] = figure(False)    # near the top of About, where it is the biggest thing on screen: loads first
     else:
-        p['byline'] = p['portrait'] = ''
+        p['byline'] = p['portrait'] = p['portrait_lead'] = ''
     # work samples: job tickets
     work = CFG.get('work', [])
     if work:
