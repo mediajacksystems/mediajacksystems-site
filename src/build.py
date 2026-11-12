@@ -39,8 +39,12 @@ BUSINESS = {
     'knowsAbout': ['Local SEO', 'Google Business Profile', 'AI search visibility', 'Website design', 'Branding', 'Social media marketing', 'Email marketing', 'Google Ads', 'Facebook and Instagram ads', 'Direct mail', 'Every Door Direct Mail', 'Print marketing', 'Fractional CMO'],
 }
 JACK = {'@type': 'Person', '@id': SITE + '/about/#jack', 'name': 'Jack Johnson', 'jobTitle': 'Owner', 'worksFor': {'@id': SITE + '/#business'}, 'url': SITE + '/about/', 'email': 'jack@mediajacksystems.com', 'telephone': '+1-970-401-0185'}
-if PROFILES:
-    BUSINESS['sameAs'] = PROFILES
+# A personal LinkedIn profile (/in/...) is Jack's, not the company's: it goes on the person, and the rest on the business.
+BUSINESS_PROFILES = [u for u in PROFILES if '/in/' not in u]
+if BUSINESS_PROFILES:
+    BUSINESS['sameAs'] = BUSINESS_PROFILES
+if CFG.get('profiles', {}).get('google_business'):
+    BUSINESS['hasMap'] = CFG['profiles']['google_business']
 if CFG.get('profiles', {}).get('linkedin'):
     JACK['sameAs'] = [CFG['profiles']['linkedin']]
 if PHOTO:
@@ -125,7 +129,7 @@ def parts():
     p['reply_promise'] = e(CFG.get('reply_promise', ''))
     p['capacity'] = e(CFG.get('capacity', ''))
     p['hours'] = e(CFG.get('hours', ''))
-    names = {'google_business': 'Google Business Profile', 'linkedin': 'LinkedIn', 'facebook': 'Facebook', 'instagram': 'Instagram'}
+    names = {'google_business': 'MediaJack on Google', 'linkedin': 'Jack on LinkedIn', 'facebook': 'Facebook', 'instagram': 'Instagram'}
     p['profile_links'] = ''.join(f'<li><a href="{e(u)}" rel="noopener me">{names.get(k, k)}</a></li>' for k, u in CFG.get('profiles', {}).items() if u)
     # the photo
     if PHOTO:
