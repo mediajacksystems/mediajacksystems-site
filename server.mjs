@@ -39,7 +39,7 @@ const HEADERS = {
 };
 
 // ---- the message form. It is on only when RESEND_API_KEY is set (a Replit Secret; nothing is ever written to disk)
-// and Resend can send from the "from" address's domain. The page asks GET /api/check-up first:
+// and Resend can send from the "from" address's domain. The page asks GET /form/check-up first:
 // 204 means "show the form", 404 means "keep the email button".
 const MAIL = {
   key: process.env.RESEND_API_KEY || process.env.Resend || '',   // the Replit Secret may be named either way
@@ -177,7 +177,7 @@ function handle(req, res) {
   let url;
   try { url = new URL(req.url, 'http://localhost'); } catch { res.writeHead(400, HEADERS); return res.end(); }
   const pth = url.pathname;
-  if (pth === '/api/check-up') return formApi(req, res);
+  if (pth === '/form/check-up') return formApi(req, res);
   if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405, { Allow: 'GET, HEAD', ...HEADERS }); return res.end(); }
   if (pth === '/healthz') { res.writeHead(200, { 'Content-Type': 'text/plain', ...HEADERS }); return res.end('ok'); }
   const to = REDIRECTS[pth.replace(/\/+$/, '') || '/'];

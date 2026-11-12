@@ -36,7 +36,7 @@
   if (form && window.fetch) {
     var note = form.querySelector('.form-status');
     var started = Date.now();
-    fetch('/api/check-up').then(function (r) {
+    fetch('/form/check-up').then(function (r) {
       if (r.status === 204) { form.hidden = false; if (fallback) fallback.hidden = true; }
     }).catch(function () {});
     var say = function (state, text) { note.setAttribute('data-state', state); note.textContent = text; };
@@ -56,7 +56,7 @@
       Array.prototype.forEach.call(form.elements, function (el) { if (el.name) data[el.name] = el.value; });
       var btn = form.querySelector('button[type=submit]');
       btn.disabled = true; say('', 'Sending.');
-      fetch('/api/check-up', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      fetch('/form/check-up', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { return r.json().then(function (body) { return { ok: r.ok && body.ok, body: body }; }); })
         .then(function (res) {
           btn.disabled = false;
