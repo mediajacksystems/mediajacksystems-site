@@ -66,7 +66,7 @@ The form on `/contact/` and `/check-up/` posts to `/api/check-up` on this server
 
 To switch it on, in Replit (Secrets), Jack adds:
 
-- `RESEND_API_KEY`: a Resend API key (required).
+- `RESEND_API_KEY`: a Resend API key (required). A secret named `Resend` works too.
 - `CONTACT_FROM_EMAIL`: optional. Defaults to `MediaJack website <website@mediajacksystems.com>`. The domain has to be verified in Resend.
 - `CONTACT_TO_EMAIL`: optional. Defaults to `jack@mediajacksystems.com`.
 

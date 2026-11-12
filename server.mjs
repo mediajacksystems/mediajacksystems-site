@@ -42,7 +42,7 @@ const HEADERS = {
 // and Resend can send from the "from" address's domain. The page asks GET /api/check-up first:
 // 204 means "show the form", 404 means "keep the email button".
 const MAIL = {
-  key: process.env.RESEND_API_KEY || '',
+  key: process.env.RESEND_API_KEY || process.env.Resend || '',   // the Replit Secret may be named either way
   url: process.env.RESEND_API_URL || 'https://api.resend.com/emails',
   to: process.env.CONTACT_TO_EMAIL || 'jack@mediajacksystems.com',
   from: process.env.CONTACT_FROM_EMAIL || 'MediaJack website <website@mediajacksystems.com>',
