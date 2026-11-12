@@ -329,7 +329,7 @@ h3 { font-size: var(--step-2); line-height: 1.1; }
 .price-strip li { padding: 1.1rem 1.25rem 1.2rem 0; border-bottom: 1px solid var(--line); }
 .price-strip li + li { padding-left: 1.25rem; border-left: 1px solid var(--line); }
 .price-strip .amount { display: block; font-stretch: 125%; font-weight: 800; font-size: var(--step-3); line-height: 1; font-variant-numeric: lining-nums; }
-.price-strip small { font-size: 0.42em; font-stretch: 100%; font-weight: 600; color: var(--graphite); white-space: nowrap; }
+.price-strip small { font-size: max(0.42em, 0.9375rem); font-stretch: 100%; font-weight: 600; color: var(--graphite); white-space: nowrap; }
 .price-strip .for { display: block; margin-top: 0.55rem; color: var(--graphite); }
 
 /* ---------------------------------------------------------------- job tickets: real work, with its number */
