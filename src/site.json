@@ -25,7 +25,7 @@
     {
       "client": "A freight broker in Texas",
       "job": "A website with working tools for truckers",
-      "number": "148,848",
+      "number": "Nearly 150,000",
       "number_label": "places on its driver map",
       "detail": "Truck stops, repair shops, scales, washes and parking across the country, gathered from public sources. The site also has a rate checker, a fuel surcharge check and an oversize-load check."
     },
@@ -38,5 +38,11 @@
     }
   ],
   "work_also": "Also on the books: the websites of two Texas oil companies, which I built and host.",
-  "testimonials": []
+  "testimonials": [
+    {
+      "quote": "Jack's systems and marketing plans brought us more than 300 new leads.",
+      "name": "Scott J.",
+      "business": "co-owner of an oil company"
+    }
+  ]
 }

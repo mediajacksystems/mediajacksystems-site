@@ -38,8 +38,9 @@ const HEADERS = {
   'Cross-Origin-Opener-Policy': 'same-origin',
 };
 
-// ---- the message form. It is on only when RESEND_API_KEY is set (a Replit Secret; nothing is ever written to disk).
-// The page asks GET /api/check-up first: 204 means "show the form", 404 means "keep the email button".
+// ---- the message form. It is on only when RESEND_API_KEY is set (a Replit Secret; nothing is ever written to disk)
+// and Resend can send from the "from" address's domain. The page asks GET /api/check-up first:
+// 204 means "show the form", 404 means "keep the email button".
 const MAIL = {
   key: process.env.RESEND_API_KEY || '',
   url: process.env.RESEND_API_URL || 'https://api.resend.com/emails',
@@ -60,10 +61,29 @@ const clean = (v, max) => String(v ?? '').replace(/[\u0000-\u0008\u000b\u000c\u0
 const oneLine = (v, max) => clean(v, max).replace(/[\r\n]+/g, ' ');
 function reply(res, status, body) { res.writeHead(status, { ...HEADERS, ...JSON_HEADERS }); res.end(JSON.stringify(body)); }
 
+// Is the sending domain verified? Asked at start, then every 10 minutes until it is. A send-only key can't ask,
+// so then the form shows, and a refused send hides it again until the next check.
+const FROM_DOMAIN = ((MAIL.from.match(/@([^\s>]+)/) || [])[1] || '').toLowerCase();
+let mailReady = false;
+async function checkMail() {
+  try {
+    const r = await fetch(new URL('/domains', MAIL.url), { headers: { Authorization: `Bearer ${MAIL.key}` }, signal: AbortSignal.timeout(10000) });
+    const body = await r.json().catch(() => ({}));
+    if (r.ok) {
+      const d = (Array.isArray(body.data) ? body.data : []).find((x) => String(x.name || '').toLowerCase() === FROM_DOMAIN);
+      mailReady = Boolean(d) && d.status === 'verified';
+      console.log(mailReady ? `form: on, ${FROM_DOMAIN} is verified` : `form: off until ${FROM_DOMAIN} is verified in Resend (now: ${d ? d.status : 'not added'})`);
+    } else if (body.name === 'restricted_api_key') {
+      mailReady = true; console.log('form: on (a send-only key cannot check the domain)');
+    } else { mailReady = false; console.error(`form: off, the mail service answered ${r.status} to the domain check`); }
+  } catch (err) { console.error(`form: could not check the mail service (${err.name})`); }
+}
+if (MAIL.key) { checkMail(); setInterval(() => { if (!mailReady) checkMail(); }, 600e3).unref(); }
+
 function formApi(req, res) {
-  if (req.method === 'GET' || req.method === 'HEAD') { res.writeHead(MAIL.key ? 204 : 404, { ...HEADERS, 'Cache-Control': 'no-store' }); return res.end(); }
+  if (req.method === 'GET' || req.method === 'HEAD') { res.writeHead(MAIL.key && mailReady ? 204 : 404, { ...HEADERS, 'Cache-Control': 'no-store' }); return res.end(); }
   if (req.method !== 'POST') { res.writeHead(405, { Allow: 'GET, HEAD, POST', ...HEADERS }); return res.end(); }
-  if (!MAIL.key) return reply(res, 503, { ok: false, error: FAIL });
+  if (!MAIL.key || !mailReady) return reply(res, 503, { ok: false, error: FAIL });
   if (!/^application\/json\b/i.test(String(req.headers['content-type'] || ''))) return reply(res, 415, { ok: false, error: FAIL });
   const origin = req.headers.origin;                                // a form on another site cannot post here
   if (origin) { try { if (new URL(origin).host !== req.headers.host) return reply(res, 403, { ok: false, error: FAIL }); } catch { return reply(res, 403, { ok: false, error: FAIL }); } }
@@ -93,7 +113,11 @@ function formApi(req, res) {
         headers: { Authorization: `Bearer ${MAIL.key}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ from: MAIL.from, to: [MAIL.to], reply_to: email, subject: `Website: ${oneLine(d.topic, 80) || 'message'} from ${name}`, text }),
       });
-      if (!r.ok) { console.error(`form: the mail service answered ${r.status}`); return reply(res, 502, { ok: false, error: FAIL }); }
+      if (!r.ok) {
+        console.error(`form: the mail service answered ${r.status}`);
+        if (r.status === 401 || r.status === 403) mailReady = false;   // key or domain refused: back to the email button until the next check
+        return reply(res, 502, { ok: false, error: FAIL });
+      }
       console.log('form: message delivered to the mail service');
       return reply(res, 200, { ok: true });
     } catch (err) { console.error(`form: could not reach the mail service (${err.name})`); return reply(res, 502, { ok: false, error: FAIL }); }

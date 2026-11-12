@@ -61,7 +61,8 @@ The full brand book is `brand/BRAND.md`.
 ## The message form
 
 The form on `/contact/` and `/check-up/` posts to `/api/check-up` on this server, which passes the message to Jack's inbox through
-[Resend](https://resend.com). It is off until the server has a key, and while it is off the pages show the email button instead.
+[Resend](https://resend.com). It is off until the server has a key and Resend says the sending domain is verified
+(the server asks at start, then every 10 minutes until it is). While it is off the pages show the email button instead.
 
 To switch it on, in Replit (Secrets), Jack adds:
 
