@@ -2,21 +2,26 @@
 {"path": "/contact/", "title": "Contact Jack Johnson | MediaJack Systems", "og_title": "Contact MediaJack Systems", "description": "Call (970) 401-0185, email jack@mediajacksystems.com, send a message or book a 30-minute call. You get Jack Johnson, not a sales team.", "nav": "contact", "jsonld": "contact", "form_id": "check-up", "form_title": "Send me a message", "form_lede": "A question, a job you need done, or a request for a free check-up. Tell me what's going on.", "form_topic": "Message from the contact page", "form_button": "Send my message", "form_subject": "A%20question%20for%20MediaJack%20Systems"}
 -->
 <div class="page-head">
-  <div class="wrap">
-    <h1>Let's talk about your marketing.</h1>
-    <p class="lede">Call, email, send a message or pick a time. Either way, you get me.</p>
+  <div class="wrap stand">
+    <span class="posts" aria-hidden="true"></span>
+    <div class="sign sign--page" data-shine>
+      <p class="sign__tab">Contact</p>
+      <h1>Let's talk about your marketing.</h1>
+      <p class="sign__line">Call, email, send a message or pick a time. Either way, you get me.</p>
+      <span class="shine" aria-hidden="true"></span>
+    </div>
   </div>
 </div>
 
 <section class="section" aria-labelledby="reach-title">
-  <div class="wrap contact-grid">
+  <div class="wrap split split--even">
     <div>
       <h2 id="reach-title" class="sr-only">Ways to reach me</h2>
       <ul class="contact-list">
         <li><span class="label">Phone</span><a href="tel:+19704010185">(970) 401-0185</a></li>
         <li>
           <span class="label">Email</span><a href="mailto:jack@mediajacksystems.com">jack@mediajacksystems.com</a>
-          <div><button class="btn btn--line btn--small copy-btn" type="button" data-copy="jack@mediajacksystems.com">Copy email address</button></div>
+          <div><button class="plate copy-btn" type="button" data-copy="jack@mediajacksystems.com">Copy email address</button></div>
           <p class="status" role="status" aria-live="polite"></p>
         </li>
         {{#if booking_url}}<li><span class="label">Pick a time</span><a href="{{booking_url}}" rel="noopener">Book a 30-minute call</a></li>{{/if}}
@@ -29,22 +34,15 @@
   </div>
 </section>
 
-<section class="section section--mist" aria-labelledby="first-title">
-  <div class="wrap">
-    <div class="checkup crop">
-      <div>
-        <h2 id="first-title">Not sure what to ask for?</h2>
-        <p class="lede">Start with the free marketing check-up. I look at what your customers see and email back a short list of what I'd fix first.</p>
-        <div class="actions">
-          <a class="btn" href="/check-up/">See how the check-up works</a>
-        </div>
+<section class="section band" aria-labelledby="first-title">
+  <div class="wrap band__grid">
+    <div>
+      <h2 id="first-title">Not sure what to ask for?</h2>
+      <p class="lede">Start with the free marketing check-up. I look at what your customers see and email back a short list of what I'd fix first.</p>
+      <div class="actions">
+        <a class="plate plate--ink" href="/check-up/">See how the check-up works</a>
       </div>
-      <ul aria-label="What the check-up looks at">
-        <li>Your website, on a phone and a computer</li>
-        <li>Your Google listing and reviews</li>
-        <li>Your social pages</li>
-        <li>Anything you hand out or mail</li>
-      </ul>
     </div>
+    {{> looks}}
   </div>
 </section>

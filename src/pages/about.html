@@ -1,17 +1,22 @@
 <!--meta
-{"path": "/about/", "title": "About Jack Johnson | MediaJack Systems", "og_title": "About Jack Johnson, MediaJack Systems", "description": "Jack Johnson runs MediaJack Systems in Englewood, Colorado: a career in sales and marketing, now print and digital marketing for local businesses.", "nav": "about", "jsonld": "about"}
+{"path": "/about/", "title": "About Jack Johnson | MediaJack Systems", "og_title": "About Jack Johnson, MediaJack Systems", "description": "Jack Johnson runs MediaJack Systems in Englewood, Colorado: a career in sales and marketing, now print and digital marketing for local businesses.", "nav": "about", "jsonld": "about", "cta_title": "Let's talk about your business.", "cta_text": "Call, send a message or ask for a free check-up. I'm the one who answers."}
 -->
 <div class="page-head">
-  <div class="wrap">
-    <h1>About Jack Johnson</h1>
-    <p class="lede">I run MediaJack Systems, a one-person marketing firm in Englewood, Colorado. I do marketing for local businesses, in print and online. When you call, you get me.</p>
+  <div class="wrap stand">
+    <span class="posts" aria-hidden="true"></span>
+    <div class="sign sign--page" data-shine>
+      <p class="sign__tab">About</p>
+      <h1>About Jack Johnson</h1>
+      <p class="sign__line">I run MediaJack Systems, a one-person marketing firm in Englewood, Colorado. I do marketing for local businesses, in print and online. When you call, you get me.</p>
+      <span class="shine" aria-hidden="true"></span>
+    </div>
   </div>
 </div>
 
 <section class="section" aria-labelledby="story-title">
-  <div class="wrap about-strip{{#if portrait}} about-strip--photo{{/if}}">
+  <div class="wrap split">
     <div>
-      <h2 class="big" id="story-title">A career on the selling side</h2>
+      <h2 id="story-title">A career on the selling side</h2>
       {{portrait_lead}}
     </div>
     <div class="prose">
@@ -23,12 +28,12 @@
   </div>
 </section>
 
-<section class="section section--mist" aria-labelledby="how-title">
-  <div class="wrap why">
+<section class="section section--ruled" aria-labelledby="how-title">
+  <div class="wrap split">
     <div>
       <h2 id="how-title">What you can hold me to</h2>
     </div>
-    <dl>
+    <dl class="pairs">
       <div>
         <dt>A written price before I start.</dt>
         <dd>Each quote lists what's included and when it'll be done. If the job changes, you get a new quote first.</dd>
@@ -53,14 +58,4 @@
 
 {{testimonials}}
 
-<section class="section band" aria-labelledby="cta-title">
-  <div class="wrap">
-    <h2 id="cta-title">Let's talk about your business.</h2>
-    <p>Call, send a message or ask for a free check-up. I'm the one who answers.</p>
-    <div class="actions">
-      <a class="btn" href="/check-up/">Get a free marketing check-up</a>
-      <a class="btn btn--line" href="tel:+19704010185">Call (970) 401-0185</a>
-      {{booking_btn}}
-    </div>
-  </div>
-</section>
+{{> closing}}
