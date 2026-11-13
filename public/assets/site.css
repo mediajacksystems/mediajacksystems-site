@@ -434,7 +434,7 @@ a.blade:active { transform: translateY(1px); }
 .band .plate--white:hover { background: #fff; }
 .band__maker { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
 .band__maker > .actions { margin-top: 0; }
-.looks { margin-top: .9rem; }
+.band__maker > .looks { margin-top: .9rem; }
 .looks h3 { font-size: 1.125rem; font-weight: 800; padding-bottom: 12px; }
 .looks ul { list-style: none; padding: 0; }
 .looks li { border-top: 3px solid #000; padding: 13px 0 11px; font-weight: 700; font-size: 1.2rem; line-height: 1.25; text-wrap: balance; }
@@ -467,7 +467,7 @@ a.blade:active { transform: translateY(1px); }
 @media (min-width: 700px) {
   .maker { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
   .maker__stage { padding-top: 42px; }
-  .looks ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(1.5rem, 3vw, 2.5rem); }
+  .band__maker .looks ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(1.5rem, 3vw, 2.5rem); }
 }
 @media (min-width: 900px) {
   .band__maker { grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr); grid-template-areas: "say stage" "maker stage" "actions stage" "looks looks"; column-gap: clamp(2.5rem, 5vw, 4.5rem); }
@@ -475,13 +475,13 @@ a.blade:active { transform: translateY(1px); }
   .maker { grid-area: maker; }
   .maker__stage { grid-area: stage; align-self: center; }
   .band__maker > .actions { grid-area: actions; }
-  .looks { grid-area: looks; margin-top: clamp(1.75rem, 4vw, 3rem); }
-  .looks ul { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .band__maker > .looks { grid-area: looks; margin-top: clamp(1.75rem, 4vw, 3rem); }
+  .band__maker .looks ul { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (min-width: 900px) and (scripting: none) {
   .band__maker { grid-template-areas: "say looks" "actions looks"; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: end; }
-  .looks { margin-top: 0; }
-  .looks ul { display: block; }
+  .band__maker > .looks { margin-top: 0; }
+  .band__maker .looks ul { display: block; }
 }
 
 /* ---------------------------------------------------------------- mile markers along one route: the steps */
@@ -612,10 +612,14 @@ a.blade:active { transform: translateY(1px); }
 .service .pairs { border-top: 0; gap: 0 clamp(1.5rem, 3vw, 2.5rem); }
 .service .pairs > div { padding: .15rem 0 1.1rem; border-bottom: 0; }
 .service .pairs dt { font-size: 1.125rem; }
+.shorts { list-style: none; padding: 0; display: grid; gap: 0 clamp(1.5rem, 3vw, 2.5rem); }
+.shorts li { padding: .15rem 0 1.1rem; font-weight: 800; font-size: 1.125rem; line-height: 1.2; text-wrap: balance; }
+.service__proof { margin-top: .35rem; color: var(--ink-muted); max-width: 34em; }
 @media (min-width: 900px) {
   .service { grid-template-columns: minmax(0, 430px) minmax(0, 1fr); gap: clamp(2rem, 4.5vw, 3.75rem); align-items: start; }
   .service .pairs { display: block; columns: 2; column-gap: clamp(1.5rem, 3vw, 2.5rem); padding-top: .4rem; }
   .service .pairs > div { break-inside: avoid; }
+  .shorts { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: .4rem; }
 }
 
 /* the price board: a green distance sign, service on the left, price on the right */
@@ -628,7 +632,10 @@ a.blade:active { transform: translateY(1px); }
 .board tbody th { padding-right: 18px; text-align: left; font-weight: 600; }
 .board td { text-align: right; font-weight: 800; white-space: nowrap; }
 .board table + table { margin-top: 34px; }
+.board__also { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 18px; margin-top: 26px; padding-top: 18px; border-top: 4px solid #fff; font-size: clamp(1.15rem, 3.9vw, 1.45rem); line-height: 1.16; }
+.board__also span { font-weight: 600; }
 .price-note { margin-top: clamp(1.5rem, 4vw, 2.25rem); max-width: 33em; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.45; }
+.price-note + .price-note { margin-top: .8em; font-weight: 600; }
 @media (min-width: 900px) {
   .board { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 50px 56px 48px; }
   .board table + table { margin-top: 0; }
@@ -639,6 +646,7 @@ a.blade:active { transform: translateY(1px); }
   .board table:first-child td, .board table:first-child caption { padding-right: 44px; }
   .board table + table caption, .board table + table tbody th { padding-left: 44px; }
   .board caption { caption-side: top; }
+  .board__also { grid-column: 1 / -1; margin-top: 30px; padding-top: 22px; }
 }
 .packages { display: grid; gap: clamp(2.5rem, 6vw, 4rem); }
 .package > p { margin: .4rem 0 1.5rem; color: var(--ink-muted); }

@@ -29,14 +29,14 @@ BUSINESS = {
     'url': SITE + '/',
     'logo': SITE + '/apple-touch-icon.png',
     'image': SITE + '/assets/img/og-image.png',
-    'description': 'Print and digital marketing for local businesses: websites, Google and AI search, branding, social media, email, ads, print and direct mail, and fractional CMO work. Flat fees, quoted before work starts.',
+    'description': 'Marketing and custom systems for local businesses: websites, Google and AI search, branding, social media, email, ads, print and direct mail, fractional CMO work, and custom-built software. Flat fees, quoted in writing before work starts.',
     'telephone': '+1-970-401-0185',
     'email': 'jack@mediajacksystems.com',
     'priceRange': '$295 to $1,500',
     'address': {'@type': 'PostalAddress', 'addressLocality': 'Englewood', 'addressRegion': 'CO', 'postalCode': '80111', 'addressCountry': 'US'},
     'areaServed': [{'@type': 'City', 'name': 'Englewood, Colorado'}, {'@type': 'City', 'name': 'Denver, Colorado'}, {'@type': 'Country', 'name': 'United States'}],
     'founder': {'@id': SITE + '/about/#jack'},
-    'knowsAbout': ['Local SEO', 'Google Business Profile', 'AI search visibility', 'Website design', 'Branding', 'Social media marketing', 'Email marketing', 'Google Ads', 'Facebook and Instagram ads', 'Direct mail', 'Every Door Direct Mail', 'Print marketing', 'Fractional CMO'],
+    'knowsAbout': ['Local SEO', 'Google Business Profile', 'AI search visibility', 'Website design', 'Branding', 'Social media marketing', 'Email marketing', 'Google Ads', 'Facebook and Instagram ads', 'Direct mail', 'Every Door Direct Mail', 'Print marketing', 'Fractional CMO', 'Custom software'],
 }
 JACK = {'@type': 'Person', '@id': SITE + '/about/#jack', 'name': 'Jack Johnson', 'jobTitle': 'Owner', 'worksFor': {'@id': SITE + '/#business'}, 'url': SITE + '/about/', 'email': 'jack@mediajacksystems.com', 'telephone': '+1-970-401-0185'}
 # A personal LinkedIn profile (/in/...) is Jack's, not the company's: it goes on the person, and the rest on the business.
@@ -58,6 +58,7 @@ SERVICES = [
     ('Social media and email', 'Social media management, email newsletters and campaigns, follow-ups and content.', '/services/#stay-in-touch'),
     ('Print and direct mail', 'Business cards, postcards and direct mail including Every Door Direct Mail, flyers, brochures, signs, banners, vehicle graphics and trade show displays.', '/services/#print'),
     ('Part-time marketing lead', 'Fractional CMO: marketing plan, budget and calendar, vendor management, sales materials and plain-English reporting.', '/services/#run-it'),
+    ('Custom systems', 'Software built around how a business works: tools on a website such as calculators, checkers and maps, lead capture and follow-up systems, and company platforms built from the ground up. Quoted for the job.', '/services/#custom-systems'),
 ]
 # Jack's price list of 30 Oct 2026: (what, price in USD, per month?)
 PRICES = [
@@ -87,7 +88,7 @@ def jsonld(kind, meta):
     if kind == 'home':
         graph = [{'@type': 'WebSite', '@id': SITE + '/#site', 'name': 'MediaJack Systems', 'url': SITE + '/', 'publisher': {'@id': SITE + '/#business'}}, {**BUSINESS, 'hasOfferCatalog': price_catalog}, JACK]
     elif kind == 'services':
-        graph = [{**BUSINESS, 'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': 'Marketing services', 'itemListElement': [
+        graph = [{**BUSINESS, 'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': 'Marketing services and custom systems', 'itemListElement': [
             {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': n, 'description': d, 'url': SITE + u, 'provider': {'@id': SITE + '/#business'}}} for n, d, u in SERVICES] + [offer(*p) for p in PRICES]}},
             JACK, crumbs('Services', '/services/')]
     elif kind == 'websites':
@@ -98,7 +99,7 @@ def jsonld(kind, meta):
         graph = [{'@type': 'WebPage', 'url': SITE + '/check-up/', 'name': meta['title'], 'description': meta['description'], 'about': {'@id': SITE + '/#business'}},
                  BUSINESS, JACK, crumbs('Free check-up', '/check-up/')]
     elif kind == 'about':
-        graph = [{**JACK, 'description': 'Owner of MediaJack Systems, a print and digital marketing firm in Englewood, Colorado; fractional CMO.'}, {'@type': 'AboutPage', 'url': SITE + '/about/', 'about': {'@id': SITE + '/about/#jack'}}, crumbs('About', '/about/')]
+        graph = [{**JACK, 'description': 'Owner of MediaJack Systems, a marketing and custom systems firm in Englewood, Colorado; fractional CMO.'}, {'@type': 'AboutPage', 'url': SITE + '/about/', 'about': {'@id': SITE + '/about/#jack'}}, crumbs('About', '/about/')]
     elif kind == 'contact':
         graph = [{'@type': 'ContactPage', 'url': SITE + '/contact/', 'about': {'@id': SITE + '/#business'}}, BUSINESS, JACK, crumbs('Contact', '/contact/')]
     if not graph:
