@@ -58,6 +58,7 @@ body {
 img, svg { display: block; max-width: 100%; }
 h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
 p + p { margin-top: 1em; }
+p, li, dd { text-wrap: pretty; }                                 /* no single word left hanging on a last line */
 strong, b { font-weight: 800; }
 
 a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: .18em; }
@@ -316,6 +317,8 @@ a.brand:hover { background: none; }
 @media (min-width: 1100px) {
   .intro { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem clamp(2.5rem, 6vw, 5.5rem); align-items: start; }
   .intro__where { grid-column: 2; grid-row: 1 / span 2; margin-top: .45rem; }
+  .distance { padding: 28px 38px 26px; }
+  .distance li { padding: 27px 0 22px; }
 }
 
 /* ---------------------------------------------------------------- sections */
@@ -339,6 +342,7 @@ h2 + .lede { margin-top: 1rem; }
 @media (min-width: 900px) {
   .split { grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: start; }
   .split--even { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .split h2 { font-size: clamp(2.1rem, 5.2vw, 4rem); }
 }
 
 /* ---------------------------------------------------------------- price plates: white regulatory signs */
@@ -492,6 +496,7 @@ a.blade:active { transform: translateY(1px); }
 @media (min-width: 900px) {
   .band__maker { grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr); grid-template-areas: "say stage" "maker stage" "actions stage" "looks looks"; column-gap: clamp(2.5rem, 5vw, 4.5rem); }
   .band__say { grid-area: say; }
+  .band h2 { font-size: min(4.6rem, 4.55vw); }
   .maker { grid-area: maker; }
   .maker__stage { grid-area: stage; align-self: center; }
   .band__maker > .actions { grid-area: actions; }
