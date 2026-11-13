@@ -1,106 +1,169 @@
 # MediaJack Systems brand book
 
-The rules every page, email and printed piece follows. The same text leads the "MediaJack Systems" design system in Claude
-(tokens, components and logo files); `README.md` in this folder has the palette table with print values, `logo/` the logo files.
+The rules every page, email and printed piece follows. `README.md` in this folder has the palette table with print values and the list of logo files; `logo/` has the files.
 
-MediaJack Systems is Jack Johnson's one-person print and digital marketing shop in Englewood, Colorado: websites, Google and AI search, social, email and ads, plus the cards, mailers and signs that go out the door, each for a flat fee. The colours are Jack's three favourites, black, silver and the green of trees after rain, and the palette is named for that moment: wet bark, rain silver, a washed leaf. The brand looks like good print: sharp corners, rules instead of shadows, one accent, and printers' marks (the registration mark, crop marks) as the only ornament.
+## The idea
+
+Customers follow signs. Jack puts them up.
+
+MediaJack Systems is Jack Johnson's one-person print and digital marketing shop in Englewood, Colorado. Marketing for a local business is wayfinding: the Google listing, the website, the mailer and the sign out front all point a customer to the door. So the brand is built from the American road-sign system, the design system every contractor, salon owner and shop owner already reads every day.
+
+It keeps Jack's three colours, black, silver and the green of trees after rain, and puts them where they already live together: asphalt, aluminium and highway green. It adds one colour, the fluorescent yellow-green of warning signs and safety vests, because marketing is about being seen. Road signs say short true things in big letters. So does Jack.
 
 ## Voice
 
 - Write as Jack, in the first person singular: "I", "me". Never "we". One person you can call is the pitch.
 - Use the words an owner uses: "Get found", "Look the part", "Stay in touch", "Put it in their hands", "Run it for you". No jargon ("omnichannel", "leverage", "solutions").
-- Short sentences, facts over adjectives: "Every job is a flat fee, quoted before I start." "No hourly billing."
+- Short sentences, facts over adjectives, like a sign: "Flat fee." "One person." "Quoted in writing first."
 - Sentence case for headings and buttons. A button starts with a verb: "Get a free marketing check-up", "Call (970) 401-0185".
-- No exclamation marks, no emoji, no hype words ("best", "#1", "guaranteed").
+- No exclamation marks, no emoji, no em dashes, no hype words ("best", "#1", "guaranteed").
 - Headings are statements. The only questions are the FAQ's, in the owner's words ("What does it cost?").
+- The brand line is "Customers follow signs. I put them up." Use it once on a page at most. Don't add road puns beyond the lines in the direction.
 - Never invent clients, reviews, logos, numbers or results. Clients stay unnamed unless Jack names them.
 - Write the phone number and email address out in full, as links.
 
 ## Colour
 
-Three colours lead; the rest exist so the three work.
+Green is a surface. Hi-vis is the action.
 
-| Token | Value | What it is for |
+| Token | Screen | Role |
 |---|---|---|
-| `wet-bark` | #0f1412 | Jack's black. Text, dark bands, the ring of the mark. |
-| `rain-silver` | #c2c8cb | Jack's silver. The mark's quarters, drawings, text on `wet-bark`. |
-| `rain-leaf` | #246b3c | Jack's green. The one accent: links, primary buttons, focus, numerals. |
-| `canopy` | #163f25 | `rain-leaf` hovered and pressed; deep green grounds. |
-| `moss` | #4d8b5c | Stripes and drawings only. |
-| `new-leaf` | #8fd19e | Green on `wet-bark`: links and buttons in dark bands. |
-| `dew` | #e2efe5 | Pale green ground behind green text. |
-| `mist` | #eef1f0 | Silver-tinted ground: alternate sections, footer, panels. |
-| `pewter` | #8c9499 | Dark silver: posts, quiet marks, muted text on `wet-bark`. |
-| `graphite` | #48514d | Secondary text on light grounds. |
-| `paper` | #ffffff | The page. |
-| `ember`, `amber`, `amber-fill` | #b42318, #8a5b00, #f5c451 | Errors and warnings, always with words. |
+| `guide` | #00674a | Highway green. Sign plates: the hero sign, street blades, the price board, mile markers. |
+| `guide-deep` | #00503a | `guide` hovered and pressed. |
+| `hivis` | #d6ee00 (P3: `color(display-p3 .85 .94 .08)`) | Fluorescent yellow-green. The one colour that means "do this": primary plates, the hi-vis panel, the check-up band, the logo. Always with black on it, never white. |
+| `ink` | #000000 | Text, legends on white and hi-vis, borders on white plates. Real black, like sign paint. |
+| `asphalt` | #1c1d1f | The road: the strip under the hero, the night section, the footer. |
+| `paper` | #ffffff | The page, white regulatory plates, legends on green. |
+| `overcast` | #eceeed | Alternate sections and the hero sky. Cool, never cream. |
+| `aluminum` | #b9bfc1 | Posts and hairlines. Never text on light grounds. |
+| `ink-muted` | #33383a | Secondary text on light grounds. |
+| `work` | #f58220 | Construction orange. Only the work zone marker on the jobs section. |
+| `stop` | #b3202b | Errors, always with words. |
 
-- Build pages from the role tokens: `surface`, `surface-alt`, `ink`, `ink-muted`, `accent`, `accent-strong`, `on-accent`, `accent-soft`, `border`, `border-strong`, `focus`, `danger`, `warning`. Use the brand names directly only for the mark, the drawings and print.
-- `accent` is the only colour that means "do this". One primary button per view.
-- Silver is a material, not a text colour on light grounds: `rain-silver` is too light to read on `paper` (1.7:1). Use it for the mark, drawings, hairlines and words on `wet-bark` (11:1), and as the metallic blend (`mist` to `rain-silver` to `pewter`) on the Look the part stripe.
-- On `wet-bark`, switch the accent to `new-leaf` (10.4:1) and put `wet-bark` text on a `new-leaf` button.
-- `moss`, `pewter` and `line` never carry words on light grounds.
-- The site is light. The dark theme is for anything set on `wet-bark`: the closing band, slides, social cards.
+- Body copy is black on `paper` or `overcast`.
+- Links in running text are black with a 2px underline and get a hi-vis highlight behind them on hover and focus.
+- `hivis` is too light to carry anything on `paper` or `overcast` (1.3:1 and 1.1:1). On light grounds it always sits inside a black line: the inset border of a plate, the outline of the mark.
+- `aluminum` and `work` never carry words on light grounds.
 
-Contrast of the pairs in use (WCAG 2): `ink` on `surface` 18.6:1 and on `surface-alt` 16.4:1; `ink-muted` 8.2:1 and 7.2:1; `accent` 6.5:1 and 5.7:1; `on-accent` on `accent` 6.5:1; `rain-silver` on `wet-bark` 11:1; `new-leaf` on `wet-bark` 10.4:1. Dark theme: `ink` 16.4:1, `ink-muted` 8.5:1, `accent` 10.4:1.
+### Contrast
+
+Measured with the WCAG 2 formula for every pair in use. AA needs 4.5:1 for body text and 3:1 for large text and for the edges of controls.
+
+| Foreground | Background | Ratio | Use |
+|---|---|---|---|
+| `ink` | `paper` | 21.0:1 | body text |
+| `ink` | `overcast` | 18.0:1 | body text on alternate sections |
+| `ink` | `hivis` | 16.1:1 | plate and panel legends, the check-up band |
+| `ink` | `aluminum` | 11.3:1 | rare: a label on a post |
+| `ink` | `work` | 8.1:1 | the legend in the work zone marker |
+| `ink-muted` | `paper` | 11.9:1 | secondary text |
+| `ink-muted` | `overcast` | 10.2:1 | secondary text |
+| `paper` | `guide` | 6.9:1 | sign legends, blades |
+| `paper` | `guide-deep` | 9.5:1 | pressed blades |
+| `paper` | `asphalt` | 16.9:1 | night section, footer |
+| `overcast` | `asphalt` | 14.5:1 | secondary text in the footer |
+| `aluminum` | `asphalt` | 9.1:1 | quiet text in the footer |
+| `hivis` | `asphalt` | 12.9:1 | hi-vis plates and the mark at night |
+| `hivis` | `guide` | 5.3:1 | the hi-vis panel and the mark on a green plate |
+| `stop` | `paper` | 6.7:1 | error text |
+| `stop` | `overcast` | 5.7:1 | error text |
+| `paper` | `stop` | 6.7:1 | text on an error plate |
+| `aluminum` | `paper` | 1.9:1 | posts and hairlines only, never text |
+| `work` | `paper` | 2.6:1 | the marker's fill only, always with its black border |
+| `hivis` | `paper` | 1.3:1 | never without a black edge |
 
 ### In print
 
-| Colour | Coated CMYK | Spot | Notes |
-|---|---|---|---|
-| Wet Bark | text: K100 only; large areas: C60 M40 Y40 K100 | Pantone Black 3 C | Never rich black in small type. |
-| Rain Silver | C29 M18 Y19 K0 | Pantone 877 C (metallic) | On cards, the silver quarters and lines can be silver foil. |
-| Rain Leaf | C82 M26 Y88 K34 | Pantone 349 C | Proof it on uncoated stock, where it prints darker. |
-| Canopy | C84 M33 Y88 K66 | | |
-| Moss | C70 M18 Y72 K19 | | |
-| Mist | C7 M5 Y6 K0 | | Very light: proof it, it can vanish on some stocks. |
+The road-sign colours have published spot colour matches from the Federal Highway Administration (MUTCD color specifications, https://mutcd.fhwa.dot.gov/kno-colorspec.htm). That page lists them "for printing purposes only" and says they are not for sign fabrication.
 
-CMYK values are the screen colours converted to FOGRA39 coated (relative colorimetric). Pantone matches are the nearest by published screen values: check them against a swatch book before a spot-colour job.
+| Colour | Spot | Source of the match | Process (CMYK) |
+|---|---|---|---|
+| Guide green #00674a | Pantone 342 C | FHWA lists PMS 342 for sign green | FHWA lists 100-0-100-0 for green. That is the sign standard, and it prints brighter than our screen green. For our green, have the printer convert #00674a with their profile and proof it. |
+| Hi-vis #d6ee00 | none | FHWA: "There are no Pantones available for fluorescent alternatives of standard colors." FHWA lists PMS 382 for standard (non-fluorescent) yellow-green. | Starting point C10 M0 Y100 K7 (uncalibrated). 382 C is the nearest by the FHWA list; check it against a swatch book. For signs, yard signs and magnets, ask for fluorescent yellow-green sheeting or ink by name. |
+| Work orange #f58220 | Pantone 152 C | FHWA lists PMS 152 for orange | Starting point C0 M47 Y87 K4 (uncalibrated) |
+| Stop red #b3202b | Pantone 1805 C | FHWA lists PMS 1805 for red | Starting point C0 M82 Y76 K30 (uncalibrated) |
+| Ink #000000 | Pantone Black C | nearest by screen value, check against a swatch book | text K100 only; large solid areas can take a rich black the printer recommends |
+| Asphalt #1c1d1f | none | nearest by screen value, check against a swatch book | ask the printer for a rich black build |
+| Aluminium #b9bfc1 | Pantone 877 C (metallic) where a real silver is wanted | a choice, not a match | Starting point C4 M1 Y0 K24 (uncalibrated) |
+| Overcast #eceeed | none | | Starting point K7 (uncalibrated). Very light: proof it. |
+
+"Uncalibrated" means a plain arithmetic conversion from the screen value, made without a press profile. Use it to brief a printer, never as a final value: the printer converts from the hex with their own profile and sends a proof. The green and the hi-vis matter most; see them printed before a run.
 
 ## Type
 
-- One family: Archivo (variable, weight 100 to 900, width 62% to 125%; SIL Open Font License), in `fonts/archivo-var.woff2`.
-- Headlines (`display`, `title`, `subtitle`): weight 800 at 118% width, tracking -0.012em, balanced lines. The wordmark and step numerals (`numeral`) run at 125%.
-- Reading text stays at normal width: `body` 18/1.6, `lede` 21/1.5 in `ink-muted`, `small` 15/1.5. Short bold lines (`lead-in`, `button`) at 106% to 108%.
-- Keep lines under 40em, ledes under 38em.
+- One family: Overpass (variable, weights 400 to 900; SIL Open Font License), drawn from Highway Gothic, the US road-sign alphabet. Self-hosted as `overpass-var.woff2`. Nothing else loads.
+- Sign legends and the hero H1: weight 800, mixed case like modern guide signs, line height about 1.
+- Section headings (H2): weight 900, tracking -0.012em, `clamp(2.1rem, 7vw, 4rem)`.
+- Body 18px/1.55, weight 400. Ledes 1.15 to 1.4rem. Nothing under 15px.
+- ALL CAPS only where a real sign would use them: inside white regulatory plates (the price plates) and the small tags on street blades. Never as a label above a heading.
+- Numerals are the heroes on price plates and job numbers: weight 900.
+- The wordmark: "MediaJack" in weight 800, "Systems" in weight 500.
 - Anything a mail client renders uses Arial: mail clients ignore web fonts.
 
-## Layout and spacing
+## The parts
 
-- Content runs to `content-max` (1180px) inside the `gutter` (16px to 40px).
-- Sections take `space-5` above and below and alternate `surface` and `surface-alt`; the last band before the footer is `wet-bark`.
-- Two-column layouts (words and drawing, name and list) become one column below 960px; the navigation folds into a Menu button below 820px.
-- `space-1` to `space-4` for the gaps inside a section.
+Spend the boldness on the signs. Everything between them is quiet: white or overcast ground, black text, generous space, no cards, no shadows, no gradients except the metal of the posts and the light of the headlights.
 
-## Lines, corners and depth
+1. **Guide sign.** A `guide` plate, 22px radius, a 5px `paper` border inset 6px. Legends in `paper`, weight 800.
+2. **Exit tab.** A small green tab on the top right edge of a guide sign with the same white border, open at the bottom. The hero's says "Englewood, Colorado".
+3. **Hi-vis panel.** Across the bottom of a guide sign: `hivis` with a 3px black line inset 4px, black legend, one arrow. It is the primary call to action, like the EXIT ONLY panel on a real sign.
+4. **Plates (buttons).** Primary: `hivis` with a black inset line. Secondary: `paper` with a black line. On the hi-vis band: black. At least 48px tall, 8px radius, weight 800. Pressed: down 1px. No arrows on buttons.
+5. **Speed-limit price plates.** White, 4:5, black inset border, a small caps label on top ("WEBSITE FROM") and a huge numeral ("$500"), weight 900. A plain-case note sits under each plate. Keep them deadpan and exact: the prices are Jack's real price list.
+6. **Street blades and post.** The five services as green street-name blades on one aluminium post, each a link with a right arrow and a small caps tag in the owner's words.
+7. **The road.** An `asphalt` strip with white edge lines and a dashed hi-vis centre line, used once, under the hero. Dashed white lane marks open the night section.
+8. **Work zone marker.** One small `work` diamond with a black border on the jobs section. The jobs themselves are plain: a black 4px rule, a 900-weight number from the job's own records, two lines of fact and a real screenshot.
+9. **Hi-vis band.** The free check-up is the main offer, so it gets the loudest block on the page: full-bleed `hivis`, black type, black plates.
+10. **Night.** The last section before the footer is `asphalt`. The closing sign glows a little, as if headlights just found it.
+11. **Posts.** Aluminium posts under a sign where it helps it read as a sign (the hero, the blades). Don't overdo it.
 
-- Rules do the work shadows would: a `rule-heavy` line in `ink` over every list (services, steps, FAQ), `rule` lines in `border` between rows.
-- Corners are print-sharp: `radius-sm` (2px) for buttons, `radius-hair` for stripes, `radius-full` only for dots and the map pill.
-- No shadows. The only gradient is the silver blend.
-- Printers' marks are the only ornament: crop marks frame the one thing to do (CheckupPanel, the message form) and the photo of Jack; the registration mark is the logo and sits on every job ticket; a dashed tear line splits a job ticket; one colour bar (leaf, moss, new-leaf, silver, pewter, graphite) runs above the footer like a press sheet's control strip.
+The only arrows are sign arrows: the hero's big arrow, the panel's arrow and the blades' arrows. They all share one shape (a head with swept-back barbs), and the arrow in the mark is drawn from the same shape.
+
+## Motion: headlights
+
+Signs are retroreflective: they shine back at the light that finds them. That is the one motion idea.
+
+- On load, one soft band of light sweeps across the hero sign, once, in about 1.5 seconds.
+- When the closing night sign scrolls into view, it lights up, once.
+- On devices with a mouse, a soft light follows the pointer across a sign.
+- Plates and blades answer a press. Nothing else moves. No fade-ins.
+- All of it is off under `prefers-reduced-motion`.
 
 ## Imagery
 
-- Real work, not drawings: the first screen shows a client website on a computer and a phone, made from screenshots, in plain frames (a hairline browser bar, an ink phone bezel) inside crop marks. No placeholder text or stand-in images anywhere.
-- No stock photos, no mascots, no icon sets. Photographs only of Jack and his real work. The one photo of Jack appears small beside his name in the first screen and large, in crop marks, where the page says who you'd be working with.
-- Real jobs are shown as job tickets: client (kind and place, name left off), job, one number from the job's own records, two lines of detail. Never an invented number.
+- Real photos and real work only: screenshots of real client sites and photos of Jack. No stock photos, no mascots, no icon sets, no drawings standing in for work.
+- No placeholder text or stand-in images anywhere.
+- Client names stay off unless Jack names them. Never an invented number.
 
 ## Logo
 
-The registration mark with two `rain-leaf` and two `rain-silver` quarters, beside the wordmark "MediaJack Systems" in Archivo ExtraBold at 125% width. Use the files in the Logos group as they are: the light-ground file on `paper`, `mist` and `dew`, the silver-ring file on `wet-bark`, the one-colour file for one-ink print. Clear space is half the mark's width on every side.
+The mark is a hi-vis diamond warning sign with a black inset border. Inside is a black J that is also an up arrow: J for Jack, and an arrow because the job is pointing customers the right way. The wordmark is "MediaJack" in Overpass ExtraBold with "Systems" smaller in Medium, or both on one line where space is tight. The letters are outlines in the files, so they need no font.
 
-## Motion
+| File | Use |
+|---|---|
+| `mediajack-mark.svg` | The mark on `paper`, `overcast` and `guide`. |
+| `mediajack-mark-on-dark.svg` | The mark on `asphalt` and photos (no hairline edge). |
+| `mediajack-mark-one-color.svg` | One-ink black print: rubber stamps, invoices, one-colour jobs. |
+| `mediajack-lockup.svg` | Mark and two-line wordmark on light grounds. |
+| `mediajack-lockup-on-dark.svg` | White wordmark for `asphalt` and `guide`. |
+| `mediajack-lockup-one-line.svg` | Where height is tight: headers, footers, letterhead. |
+| `png/` | Each of the above at 512 and 1024 px wide, transparent. |
 
-One moment only: on load, the drawing's pieces settle into place (0.9s, staggered), and only when the visitor allows motion (`prefers-reduced-motion: no-preference`). Nothing else moves.
+- Clear space: half the mark's width on every side, kept clear of text and edges.
+- Smallest size: the mark at 16px on screen (use `favicon.svg`, the small-size cut) and 8mm wide in print. The lockup at 120px or 30mm wide.
+- The small-size cut (`public/favicon.svg`) moves the inset border out to the edge of the plate and enlarges the J, so the mark still reads at 16 and 32px. Use it only for icons.
+- Don't recolour the mark, rotate it off its point, put white in it, add a shadow, stretch it, or set the wordmark in another font.
+- On `hivis` grounds, use the one-colour mark or the lockup in black; the hi-vis mark disappears there.
 
 ## Email
 
-- Every email from jack@mediajacksystems.com ends with the EmailSignature: the `wet-bark`, `rain-silver`, `rain-leaf` stripe and the site as a short plain link.
-- Cold emails (the Agent Keep's US Desk) set what was found in a `mist` panel with a `rain-leaf` rule and numbers, and end with the marketing-email footer and the postal address.
+- Every email from jack@mediajacksystems.com ends with the signature: Jack's name, the phone number and the site as a short plain link, with one thin `hivis` line above it edged in black. Set in Arial.
+- Cold emails (the Agent Keep's US Desk) set what was found in an `overcast` panel with a black rule, and end with the marketing-email footer and the postal address.
 - No images, no tracking, links written out short.
 
 ## Accessibility
 
-- Every text pair meets WCAG 2.2 AA in both themes; the site is checked with axe-core on every page, at desktop and phone width.
-- Focus is always visible: a 3px `focus` outline 3px out, or the `focus-ring` shadow.
-- Colour never carries meaning alone: stripes sit beside service names, errors beside words.
+- Every text pair meets WCAG 2.2 AA (the table above). The site is checked with axe-core on every page, at desktop and phone width.
+- Focus is always visible: a 3px black outline, 3px out. On `guide` or `asphalt`, 3px white.
+- Targets are at least 44px; plates are at least 48px tall.
+- Colour never carries meaning alone: the hi-vis panel says what it does, errors say what went wrong, the work zone marker sits beside words.
+- All motion stops under `prefers-reduced-motion`.
