@@ -206,12 +206,13 @@ a.brand:hover { background: none; }
 .sign--hero h1 { font-size: clamp(2.5rem, 12.6vw, 3.3rem); line-height: .98; padding-bottom: 18px; border-bottom: 4px solid #fff; }
 .sign--hero .sign__line { margin-top: 15px; }
 .sign--hero .panel { margin: 20px -12px 14px; }
-.hero__call { grid-row: 2; position: relative; z-index: 1; justify-self: center; width: min(100%, 420px); margin: 16px 0 30px; }
+.hero__call { grid-row: 2; position: relative; z-index: 1; justify-self: center; width: min(100% - 8px, 420px); margin: 16px 0 30px; }   /* the 4px halo ends at the sign's edge */
 .road { grid-row: 3; grid-column: 1 / -1; position: relative; height: 64px; background: var(--asphalt); }
 .road::before { content: ""; position: absolute; inset: 8px 0; border-block: 3px solid var(--lane); }
 .road::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 6px; margin-top: -3px; background: repeating-linear-gradient(90deg, var(--hivis) 0 54px, transparent 54px 108px); }
 .byline { grid-row: 4; z-index: 1; display: flex; align-items: center; gap: 13px; padding-top: 30px; font-size: 1rem; line-height: 1.38; max-width: 27em; }
-.byline img { width: 54px; height: 62px; flex: none; object-fit: cover; border-radius: 7px; box-shadow: 0 0 0 2px #000; }
+.byline picture { flex: none; }
+.byline img { width: 56px; height: 56px; object-fit: cover; object-position: 50% 50%; border-radius: 7px; box-shadow: 0 0 0 2px #000; }
 .hero-lede { grid-row: 5; z-index: 1; margin-top: 20px; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.45; max-width: 31em; }
 @media (max-width: 359px) { .sign--hero { padding-inline: 21px; } .sign--hero .panel { margin-inline: -7px; } }
 @media (min-width: 700px) {
@@ -232,14 +233,15 @@ a.brand:hover { background: none; }
 }
 @media (min-width: 1000px) {
   .hero { grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, var(--max)) minmax(var(--gutter), 1fr); padding-top: 72px; }
-  .hero .posts { grid-row: 1 / 4; }
+  .hero .posts { grid-row: 1 / 3; }
   .posts::before { left: 17%; }
   .posts::after { right: 17%; }
-  .hero__row { grid-row: 2; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 22px; }
+  .hero__row { grid-row: 2; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 30px; margin: 22px 0 34px; }
+  .sign--hero .sign__line span { display: block; }               /* one sentence a line */
   .hero__call { width: auto; margin: 0; padding-inline: 1.3em; }
   .byline { padding: 0; font-size: .9375rem; max-width: 20.5em; }
-  .hero-lede { grid-row: 3; justify-self: center; width: 58%; margin: 30px 0 42px; text-align: center; text-wrap: balance; }
-  .road { grid-row: 4; height: 76px; }
+  .road { grid-row: 3; height: 76px; }
+  .hero-lede { grid-row: 4; justify-self: start; max-width: 34em; margin-top: clamp(3rem, 5vw, 4.25rem); font-size: 1.4rem; line-height: 1.42; color: #000; }   /* the standfirst, below the road */
   .road::before { inset: 9px 0; }
 }
 
@@ -276,10 +278,18 @@ h2 + .lede { margin-top: 1rem; }
 .limit__top { width: min-content; font-weight: 800; font-size: 1rem; line-height: 1.05; letter-spacing: .03em; text-transform: uppercase; }
 .limit__num { margin-top: .08em; font-weight: 900; font-size: clamp(3rem, 14vw, 5.2rem); line-height: .95; letter-spacing: -.01em; }
 .limit__unit { font-weight: 800; font-size: 1rem; line-height: 1.05; letter-spacing: .04em; text-transform: uppercase; }
+/* The legend fills the plate like a real speed-limit sign: label up top, numeral low, the two together about two
+   thirds of the height inside the black border (19px of edge and border). Sized from the plate's own width
+   (100cqw, no padding). The numeral is as big as it can be with 10% of the width inside the border clear on each
+   side: Overpass 900 "$500" is 2.55em wide, "$1,500" 3.24em. */
 @supports (width: 1cqw) {
-  .limit__top, .limit__unit { font-size: max(.9375rem, 9.6cqw); }
-  .limit__num { font-size: 34cqw; }
-  .limit--long .limit__num { font-size: 26cqw; }
+  .limit__plate { display: flex; flex-direction: column; align-items: center; padding: 0; }
+  .limit__plate > :first-child { margin-top: calc(9.5px + (125cqw - 19px) * .155); }
+  .limit__plate > :last-child { margin-bottom: calc(9.5px + (125cqw - 19px) * .155); }
+  .limit__top, .limit__unit { font-size: max(1.2rem, 10.5cqw); }
+  .limit__num { margin-top: auto; font-size: calc((100cqw - 19px) * .31); letter-spacing: -.02em; }
+  .limit--long .limit__num { font-size: calc((100cqw - 19px) * .243); }
+  .limit__unit { margin-top: .1em; }
 }
 .limit__note { font-size: 1rem; line-height: 1.36; max-width: 14.5em; color: var(--ink-muted); }
 .limits-more { margin-top: clamp(1.75rem, 4vw, 2.5rem); }
@@ -310,6 +320,7 @@ a.blade:active { transform: translateY(1px); }
 .ticks li { position: relative; padding-left: 20px; }
 .ticks li::before { content: ""; position: absolute; left: 0; top: .66em; width: 10px; height: 3px; background: #000; }
 .ticks a { display: inline-block; padding-block: .7rem; margin-block: -.7rem; color: #000; }
+@media (max-width: 699px) { .fingerpost .ticks { display: none; } }
 @media (min-width: 900px) {
   .way { grid-template-columns: minmax(0, 430px) minmax(0, 1fr); gap: clamp(2rem, 4.5vw, 3.75rem); align-items: start; }
   .way__body { padding: 4px 0 0; }

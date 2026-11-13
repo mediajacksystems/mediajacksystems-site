@@ -152,7 +152,7 @@ def parts():
     # the photo
     if PHOTO:
         base = f'/assets/img/{PHOTO}'
-        p['byline'] = (f'<p class="byline"><picture><source type="image/webp" srcset="{base}-160.webp"><img src="{base}-160.jpg" width="54" height="62" alt=""></picture>'
+        p['byline'] = (f'<p class="byline"><picture><source type="image/webp" srcset="{base}-160.webp"><img src="{base}-160.jpg" width="56" height="56" alt=""></picture>'
                        '<span><strong>Jack Johnson</strong>, owner. You deal with me from the first call to the finished job.</span></p>')
         def figure(lazy):
             return (f'<figure class="portrait">{picture("(max-width: 420px) 80vw, 322px", 880, 1100, lazy)}'
