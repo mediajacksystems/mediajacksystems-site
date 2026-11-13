@@ -246,7 +246,7 @@ def build():
                 prev = seg
             elif 'check-up' in seg:
                 seg = re.sub(r'check-up[.,]?', lambda m: f'<span class="nb">{m.group(0)}</span>', seg)
-                if re.search(r'class="[^"]*\bplate\b', prev):                 # a plate lays its text out as one piece, so keep it one piece
+                if re.match(r'<(a|button|summary)\b', prev):                     # a link or button may lay its text out as one piece, so keep it one piece
                     seg = f'<span>{seg}</span>'
             out.append(seg)
         rest = ''.join(out)
