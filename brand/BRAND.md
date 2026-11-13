@@ -6,7 +6,7 @@ The rules every page, email and printed piece follows. `README.md` in this folde
 
 Customers follow signs. Jack puts them up.
 
-MediaJack Systems is Jack Johnson's one-person print and digital marketing shop in Englewood, Colorado. Marketing for a local business is wayfinding: the Google listing, the website, the mailer and the sign out front all point a customer to the door. So the brand is built from the American road-sign system, the design system every contractor, salon owner and shop owner already reads every day.
+MediaJack Systems is Jack Johnson's one-person shop in Englewood, Colorado: marketing for local businesses, and custom-built systems for the ones that need them. He works in person around Denver and by phone, email and video anywhere in the US. Marketing for a local business is wayfinding: the Google listing, the website, the mailer and the sign out front all point a customer to the door. So the brand is built from the American road-sign system, the design system every contractor, salon owner and shop owner already reads every day.
 
 It keeps Jack's three colours, black, silver and the green of trees after rain, and puts them where they already live together: asphalt, aluminium and highway green. It adds one colour, the fluorescent yellow-green of warning signs and safety vests, because marketing is about being seen. Road signs say short true things in big letters. So does Jack.
 
@@ -32,10 +32,10 @@ Green is a surface. Hi-vis is the action.
 | `guide-deep` | #00503a | `guide` hovered and pressed. |
 | `hivis` | #d6ee00 (P3: `color(display-p3 .85 .94 .08)`) | Fluorescent yellow-green. The one colour that means "do this": primary plates, the hi-vis panel, the check-up band, the logo. Always with black on it, never white. |
 | `ink` | #000000 | Text, legends on white and hi-vis, borders on white plates. Real black, like sign paint. |
-| `asphalt` | #1c1d1f | The road: the strip under the hero, the night section, the footer. |
+| `asphalt` | #1c1d1f | The road: the night section and the footer. |
 | `paper` | #ffffff | The page, white regulatory plates, legends on green. |
-| `overcast` | #eceeed | Alternate sections and the hero sky. Cool, never cream. |
-| `aluminum` | #b9bfc1 | Posts and hairlines. Never text on light grounds. |
+| `overcast` | #eceeed | Alternate sections. Cool, never cream. |
+| `aluminum` | #b9bfc1 | The blades' post and hairlines. Never text on light grounds. |
 | `ink-muted` | #33383a | Secondary text on light grounds. |
 | `work` | #f58220 | Construction orange. Only the work zone marker on the jobs section. |
 | `stop` | #b3202b | Errors, always with words. |
@@ -64,7 +64,7 @@ Measured with the WCAG 2 formula for every pair in use. AA needs 4.5:1 for body 
 | `overcast` | `asphalt` | 14.5:1 | secondary text in the footer |
 | `aluminum` | `asphalt` | 9.1:1 | quiet text in the footer |
 | `hivis` | `asphalt` | 12.9:1 | hi-vis plates and the mark at night |
-| `hivis` | `guide` | 5.3:1 | the hi-vis panel and the mark on a green plate |
+| `hivis` | `guide` | 5.3:1 | the hi-vis band on a green sign, the mark on a green plate, a green sign on the hi-vis band |
 | `stop` | `paper` | 6.7:1 | error text |
 | `stop` | `overcast` | 5.7:1 | error text |
 | `paper` | `stop` | 6.7:1 | text on an error plate |
@@ -92,8 +92,8 @@ The road-sign colours have published spot colour matches from the Federal Highwa
 ## Type
 
 - One family: Overpass (variable, weights 400 to 900; SIL Open Font License), drawn from Highway Gothic, the US road-sign alphabet. Self-hosted as `overpass-var.woff2`. Nothing else loads.
-- Sign legends and the hero H1: weight 800, mixed case like modern guide signs, line height about 1.
-- Section headings (H2): weight 900, tracking -0.012em, `clamp(2.1rem, 7vw, 4rem)`.
+- Sign legends: weight 800, mixed case like modern guide signs, line height about 1. The home page's two giant words ("Marketing", "Systems") are set at 700 from tablet width up, where 800 reads as weight rather than as sign lettering, and at 800 on phones. They are as large as the page's column allows, with "for local businesses." at about a quarter of their size.
+- Section headings (H2): weight 900, tracking -0.012em, `clamp(2.1rem, 7vw, 4rem)`. The brand line is bigger: `clamp(2.4rem, 6.5vw, 5.5rem)`.
 - Body 18px/1.55, weight 400. Ledes 1.15 to 1.4rem. Nothing under 15px.
 - ALL CAPS only where a real sign would use them: inside white regulatory plates (the price plates) and the small tags on street blades. Never as a label above a heading.
 - Numerals are the heroes on price plates and job numbers: weight 900.
@@ -102,27 +102,30 @@ The road-sign colours have published spot colour matches from the Federal Highwa
 
 ## The parts
 
-Spend the boldness on the signs. Everything between them is quiet: white or overcast ground, black text, generous space, no cards, no shadows, no gradients except the metal of the posts and the light of the headlights.
+Spend the boldness on the signs. Everything between them is quiet: white or overcast ground, black text, generous space, no cards, no shadows, no gradients except the metal of the one post and the light of the headlights.
 
-1. **Guide sign.** A `guide` plate, 22px radius, a 5px `paper` border inset 6px. Legends in `paper`, weight 800.
-2. **Exit tab.** A small green tab on the top right edge of a guide sign with the same white border, open at the bottom. The hero's says "Englewood, Colorado".
-3. **Hi-vis panel.** Across the bottom of a guide sign: `hivis` with a 3px black line inset 4px, black legend, one arrow. It is the primary call to action, like the EXIT ONLY panel on a real sign.
-4. **Plates (buttons).** Primary: `hivis` with a black inset line. Secondary: `paper` with a black line. On the hi-vis band: black. At least 48px tall, 8px radius, weight 800. Pressed: down 1px. No arrows on buttons.
-5. **Speed-limit price plates.** White, 4:5, black inset border, a small caps label on top ("WEBSITE FROM") and a huge numeral ("$500"), weight 900. A plain-case note sits under each plate. Keep them deadpan and exact: the prices are Jack's real price list.
-6. **Street blades and post.** The five services as green street-name blades on one aluminium post, each a link with a right arrow and a small caps tag in the owner's words.
-7. **The road.** An `asphalt` strip with white edge lines and a dashed hi-vis centre line, used once, under the hero. Dashed white lane marks open the night section.
-8. **Work zone marker.** One small `work` diamond with a black border on the jobs section. The jobs themselves are plain: a black 4px rule, a 900-weight number from the job's own records, two lines of fact and a real screenshot.
-9. **Hi-vis band.** The free check-up is the main offer, so it gets the loudest block on the page: full-bleed `hivis`, black type, black plates.
-10. **Night.** The last section before the footer is `asphalt`. The closing sign glows a little, as if headlights just found it.
-11. **Posts.** Aluminium posts under a sign where it helps it read as a sign (the hero, the blades). Don't overdo it.
+1. **Guide sign.** A `guide` plate framed by one thin `paper` line (2px on phones, 3px from tablet width) set in from the edge. Legends in `paper`. Thin lines, big type: the sign should never look boxed in.
+2. **The sign as the screen.** On the home page the first screen under the header is the sign: full-bleed green, edge to edge, with the thin white line inset 16px (10px on phones). Two giant destinations, the sign arrow, a rule, one line. Every inner page's head is the same sign at the height of its words. No posts, no road, no second button under it.
+3. **Plaque and exit tab.** On a full-bleed sign the place or page name is a small outlined plaque inside the line (top right on wide screens above the arrow, top left on phones). On a sign that stands on a ground (the sign maker, the 404 sign) it is an exit tab on the top right edge. The home page's says "Englewood, Colorado".
+4. **Hi-vis band.** Along the foot of a sign, inside the line: one flat `hivis` band with a black legend, like the EXIT ONLY panel on a real sign. It holds the main thing to do and, where there are two, a thin black rule between them (the check-up with its arrow, then the phone number). Each part is a full-size link.
+5. **Plates (buttons).** Primary: `hivis` with a black inset line. Secondary: `paper` with a black line. On the check-up band: black. At least 48px tall, 8px radius, weight 800. Pressed: down 1px. No arrows on buttons.
+6. **Speed-limit price plates.** White, 4:5, black inset border, a small caps label on top ("WEBSITE FROM"), a huge numeral ("$500", weight 900) and a small caps sub-label ("A MONTH") where there is one. The dollar sign is set at 55 percent and raised to the numeral's top. Every plate has the same three rows, so the numerals in a row share one baseline. A plain-case note sits under each plate. Keep them deadpan and exact: the prices are Jack's real price list. Custom systems have no plate and no price: they are quoted for the job.
+7. **Street blades and post.** The six services as green street-name blades on one slim aluminium post, each a link with a right arrow and a small caps tag in the owner's words (Get found, Look the part, Stay in touch, Put it in their hands, Run it for you, Built to order).
+8. **Distance sign.** A green plate with three rows and white rules between them: the place on the left in weight 800, how the work is done on the right in weight 600. It is where "local, and anywhere in the US" is said. The price board on the services page is the same sign.
+9. **Work zone marker.** One small `work` diamond with a black border on the jobs section. The jobs themselves are plain: a black 4px rule, a 900-weight number from the job's own records, two lines of fact and a real screenshot.
+10. **The check-up band and the sign maker.** The free check-up is the main offer, so it gets the loudest block on the page: full-bleed `hivis`, black type, black plates. In it, two fields (business name and town) draw the visitor's own business on a green guide sign as they type, with the exit tab, the arrow and "Next right". Long names step down through three sizes. The preview is for the eye only; the fields carry the meaning, and nothing is sent.
+11. **Night.** The last section before the footer is `asphalt`, opened by dashed white lane marks. The closing sign glows a little, as if headlights just found it.
+12. **Posts.** Only two things stand on posts: the service blades (one slim post) and the 404 sign, which is off the route. Nothing else.
 
-The only arrows are sign arrows: the hero's big arrow, the panel's arrow and the blades' arrows. They all share one shape (a head with swept-back barbs), and the arrow in the mark is drawn from the same shape.
+No section adds a decorative object. If in doubt, take it out.
+
+The only arrows are sign arrows: the big guide arrow (the hero's and the sign maker's, a slim shaft pointing up and to the right), the band's arrow and the blades' arrows. They share one head shape with swept-back barbs, and the arrow in the mark is drawn from the same shape.
 
 ## Motion: headlights
 
 Signs are retroreflective: they shine back at the light that finds them. That is the one motion idea.
 
-- On load, one soft band of light sweeps across the hero sign, once, in about 1.5 seconds.
+- On load, one soft band of light sweeps across the first screen, once, in about 1.5 seconds.
 - When the closing night sign scrolls into view, it lights up, once.
 - On devices with a mouse, a soft light follows the pointer across a sign.
 - Plates and blades answer a press. Nothing else moves. No fade-ins.
@@ -165,5 +168,5 @@ The mark is a hi-vis diamond warning sign with a black inset border. Inside is a
 - Every text pair meets WCAG 2.2 AA (the table above). The site is checked with axe-core on every page, at desktop and phone width.
 - Focus is always visible: a 3px black outline, 3px out. On `guide` or `asphalt`, 3px white.
 - Targets are at least 44px; plates are at least 48px tall.
-- Colour never carries meaning alone: the hi-vis panel says what it does, errors say what went wrong, the work zone marker sits beside words.
+- Colour never carries meaning alone: the hi-vis band says what it does, errors say what went wrong, the work zone marker sits beside words.
 - All motion stops under `prefers-reduced-motion`.

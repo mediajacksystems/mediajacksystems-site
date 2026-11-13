@@ -179,7 +179,8 @@ a.brand:hover { background: none; }
   min-height: 60px; padding: 15px 18px 11px 20px; border-radius: inherit; color: #000;
   font-weight: 800; font-size: clamp(1.2rem, 5.2vw, 1.4rem); line-height: 1.08; text-decoration: none;
 }
-.panel + .panel { border-top: 2px solid #000; border-radius: 0; }
+.panel + .panel { border-radius: 0; }
+.panel + .panel::before { content: ""; position: absolute; inset: 0 0 auto; height: 2px; background: #000; }   /* the thin black rule between two */
 .panel:hover { background: none; }
 .panel:hover > span { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: .16em; }
 .panel:active > * { transform: translateY(1px); }
@@ -193,7 +194,8 @@ a.brand:hover { background: none; }
   .sign__face { padding: 46px 52px 0; }
   .sign__exits { grid-template-columns: minmax(0, 1fr) auto; margin-top: 28px; }
   .panel { min-height: 72px; padding: 20px 26px 16px 30px; font-size: clamp(1.3rem, 2.7vw, 1.75rem); }
-  .panel + .panel { border-top: 0; border-left: 2px solid #000; padding-inline: clamp(26px, 3.4vw, 44px); }
+  .panel + .panel { padding-inline: clamp(26px, 3.4vw, 44px); }
+  .panel + .panel::before { inset: 0 auto 0 0; width: 2px; height: auto; }
   .panel .arrow { width: 38px; height: 38px; }
 }
 

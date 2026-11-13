@@ -8,10 +8,10 @@ The sign system: asphalt, aluminium and highway green, plus the fluorescent yell
 | Guide deep | #00503A | 0 80 58 | printer converts from the hex | | pressed and hovered green |
 | Hi-vis | #D6EE00 | 214 238 0 | C10 M0 Y100 K7 (uncalibrated) | none for fluorescent; 382 C nearest by the FHWA list, check a swatch book | the action colour, the mark, the check-up band |
 | Ink | #000000 | 0 0 0 | K100 for text | Pantone Black C (nearest by screen value, check a swatch book) | text, borders, legends |
-| Asphalt | #1C1D1F | 28 29 31 | rich black from the printer | | the road, night, footer |
+| Asphalt | #1C1D1F | 28 29 31 | rich black from the printer | | night, footer |
 | Paper | #FFFFFF | 255 255 255 | no ink | | the page, white plates |
 | Overcast | #ECEEED | 236 238 237 | K7 (uncalibrated); proof it | | alternate sections, the sky |
-| Aluminium | #B9BFC1 | 185 191 193 | C4 M1 Y0 K24 (uncalibrated) | 877 C (metallic) if a real silver is wanted | posts, hairlines |
+| Aluminium | #B9BFC1 | 185 191 193 | C4 M1 Y0 K24 (uncalibrated) | 877 C (metallic) if a real silver is wanted | the blades' post, hairlines |
 | Ink muted | #33383A | 51 56 58 | printer converts from the hex | | secondary text |
 | Work orange | #F58220 | 245 130 32 | C0 M47 Y87 K4 (uncalibrated) | Pantone 152 C (FHWA orange) | the work zone marker only |
 | Stop red | #B3202B | 179 32 43 | C0 M82 Y76 K30 (uncalibrated) | Pantone 1805 C (FHWA red) | errors, with words |

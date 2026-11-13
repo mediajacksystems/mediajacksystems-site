@@ -1,6 +1,6 @@
 # mediajacksystems.com
 
-The website for MediaJack Systems LLC: print and digital marketing for local businesses, run by Jack Johnson in Englewood, Colorado.
+The website for MediaJack Systems LLC: marketing and custom systems for local businesses, run by Jack Johnson in Englewood, Colorado.
 
 Plain HTML and CSS, one small script, no packages, no build tools to install, no cookies and no tracking.
 
@@ -15,6 +15,7 @@ How the site is graded (11 categories, 92 checks) and its score: https://claude.
 | `src/layout.html` | The header, footer and `<head>` shared by every page. |
 | `src/build.py` | Puts the layout, pages, partials and `src/site.json` together into `public/`, and writes `sitemap.xml`. |
 | `src/partials/` | Pieces used on more than one page: the message form, the price plates, the check-up list, the closing sign. |
+| `public/assets/site.js` | The one small script: the menu, the headlights, the sign maker, the form and the self-check. Everything works without it. |
 | `src/site.json` | The booking link, the photo, the work samples and the other facts that switch parts of the site on. |
 | `public/assets/site.css` | All the styles. Colours and spacing are set at the top; each sign part has its own block. |
 | `server.mjs` | A tiny Node web server for `public/` (pretty URLs, redirects from the old site, compression, security headers) and the message form's endpoint. |
@@ -43,10 +44,11 @@ The site is published on Replit at mediajacksystems.com without using Replit's A
 Customers follow signs, so the site is built from the American road-sign system. The full brand book is `brand/BRAND.md`.
 
 - Type: Overpass (drawn from Highway Gothic, the US road-sign alphabet), one variable file, self-hosted. Licence: SIL Open Font License, `public/assets/fonts/OFL.txt`. A fallback with matching measurements is set in the CSS, so nothing moves when the font arrives.
-- Colours: highway green `#00674a` (sign plates), hi-vis yellow-green `#d6ee00` (the one colour that means "do this", always with black text), black `#000000`, asphalt `#1c1d1f`, overcast `#eceeed`, aluminium `#b9bfc1` (posts and hairlines), construction orange `#f58220` (the work-zone sign only) and stop red `#b3202b` (errors). They are set at the top of `public/assets/site.css`.
-- The parts: the guide sign with its exit tab and hi-vis panel (`.sign`, `.panel`), plates for buttons (`.plate`), speed-limit price plates (`.limit`), street blades on a post (`.blade`, `.fingerpost`), the price board (`.board`), mile markers for steps (`.route`), the road strip (`.road`), the hi-vis band (`.band`) and the night section with the closing sign (`.night`).
+- Colours: highway green `#00674a` (sign plates), hi-vis yellow-green `#d6ee00` (the one colour that means "do this", always with black text), black `#000000`, asphalt `#1c1d1f`, overcast `#eceeed`, aluminium `#b9bfc1` (the blades' post and hairlines), construction orange `#f58220` (the work-zone sign only) and stop red `#b3202b` (errors). They are set at the top of `public/assets/site.css`.
+- The parts: the guide sign with its thin white line (`.sign`); the sign as the screen, full-bleed under the header, for the home page's first screen and every inner page's head (`.sign--bleed`, `.sign--hero`, `.sign--page`) with its plaque (`.sign__tab`) and the hi-vis band along its foot (`.sign__exits`, `.panel`); plates for buttons (`.plate`); speed-limit price plates (`.limit`); street blades on a post (`.blade`, `.fingerpost`); the distance sign (`.distance`) and the price board (`.board`); mile markers for steps (`.route`); the hi-vis check-up band with the sign maker (`.band`, `.maker`); and the night section with the closing sign (`.night`).
+- The sign maker (home page, in the check-up band): two fields, business name and town, draw a guide sign as the visitor types. It only sets text and switches classes, sends nothing, and is hidden when JavaScript is off. "Ask for my check-up" keeps the two values in the tab's `sessionStorage` and the check-up page puts them in the form's business field, once.
 - Sign legends are real text. Capitals come from CSS only.
-- Motion is one idea, headlights: a band of light crosses the hero sign once, the closing sign lights up when it comes into view, and a soft light follows the pointer across a sign. All of it is off when the device asks for reduced motion.
+- Motion is one idea, headlights: a band of light crosses the first screen once, the closing sign lights up when it comes into view, and a soft light follows the pointer across a sign. All of it is off when the device asks for reduced motion.
 - Accessibility: WCAG 2.2 AA, checked with axe-core on every page at phone and desktop widths. White on green is 6.9:1 and black on hi-vis is 16:1.
 - The strict content policy in `server.mjs` allows no inline styles or scripts, so custom properties are set from `site.js`.
 
