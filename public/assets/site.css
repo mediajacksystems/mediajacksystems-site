@@ -174,6 +174,17 @@ a.brand:hover { background: none; }
 .panel:active { transform: translateY(1px); }
 .sign .panel:focus-visible { outline: 4px solid #000; outline-offset: -13px; border-radius: 10px; }
 .panel .arrow { width: 34px; height: 34px; transform: rotate(135deg); margin-top: -3px; }
+/* the bottom of a sign: the hi-vis panel and a white one beside it, inside the border */
+.sign__exits { position: relative; z-index: 2; display: grid; gap: 6px; margin: 20px calc(var(--edge) - var(--pad)) var(--edge); }
+.panel--white { justify-content: center; min-height: 56px; background: #fff; text-align: center; }
+.panel--white:hover { background: #fff; }
+@media (min-width: 700px) {
+  .sign { border-radius: 22px; }
+  .sign::before { inset: 6px; border-width: 5px; border-radius: 16px; }
+  .sign__tab { right: 30px; padding: 15px 18px 12px; font-size: 1rem; }
+  .panel .arrow { width: 42px; height: 42px; }
+  .panel--white { padding-inline: clamp(24px, 3.4vw, 52px); }
+}
 
 /* headlights: signs are retroreflective, so they shine back at the light that finds them */
 .shine { position: absolute; inset: 0; z-index: 3; border-radius: inherit; overflow: hidden; pointer-events: none; }
@@ -188,7 +199,7 @@ a.brand:hover { background: none; }
   .shine::after { content: ""; position: absolute; inset: 0; background: radial-gradient(340px circle at var(--mx, -999px) var(--my, -999px), rgba(255, 255, 255, .2), transparent 70%); }
 }
 
-/* posts: two aluminium posts behind a sign and whatever is mounted under it */
+/* posts: only the 404 sign still stands on them, off the route */
 .stand { position: relative; }
 .posts { position: absolute; inset: 40px 0 0; pointer-events: none; }
 .posts::before, .posts::after { content: ""; position: absolute; top: 0; bottom: 0; width: 14px; background: var(--post); }
@@ -196,6 +207,7 @@ a.brand:hover { background: none; }
 .posts::after { right: 15%; }
 .stand > .sign, .stand > .plate { z-index: 1; }
 .stand > .plate { position: relative; }
+@media (min-width: 1000px) { .posts::before { left: 17%; } .posts::after { right: 17%; } }
 
 /* ---------------------------------------------------------------- the first screen: the screen is the sign */
 /* One guide sign fills the screen under the header. Its two destinations are as large as the width allows
@@ -215,10 +227,7 @@ a.brand:hover { background: none; }
 .hero__big { margin-left: -.047em; }                             /* the M's side bearing: its stem stands on the rule's end */
 .hero__for { margin-top: .22em; font-size: .5em; font-weight: 700; line-height: 1; letter-spacing: 0; }
 .sign--hero .sign__line { padding-top: 14px; border-top: 4px solid #fff; max-width: none; font-size: clamp(1.15rem, 1.62vw, 1.45rem); text-wrap: balance; }
-.sign__exits { display: grid; gap: 6px; margin: 20px calc(var(--edge) - var(--pad)) var(--edge); }
 .sign--hero .panel { min-height: 62px; }
-.panel--white { justify-content: center; background: #fff; }
-.panel--white:hover { background: #fff; }
 @media (max-width: 359px) { .sign--hero { --pad: 20px; } }
 @media (min-width: 700px) {
   .hero__screen { --m: 24px; --tab: 42px; }
@@ -233,9 +242,7 @@ a.brand:hover { background: none; }
   .hero__for { font-size: max(1.75rem, .27em); margin-top: .3em; }
   .sign--hero .sign__arrow { display: block; grid-area: 1 / 1; justify-self: end; width: calc(var(--big) * 1.66); height: auto; margin-top: calc(var(--big) * .02); }
   .sign--hero .sign__line { padding-top: 18px; border-top-width: 5px; }
-  .sign__exits { grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin-top: 24px; }
   .sign--hero .panel { min-height: 72px; padding-block: 20px 17px; font-size: clamp(1.25rem, 2.7vw, 1.6rem); }
-  .panel--white { padding-inline: clamp(24px, 3.4vw, 52px); }
 }
 @supports (height: 1svh) { @media (min-width: 700px) { .sign--hero { --big: clamp(5.25rem, min(13vw, (100svh - 26.25rem) / 2.65), 12.5rem); } } }
 @media (min-width: 1000px) {
@@ -290,10 +297,11 @@ a.brand:hover { background: none; }
 .section--overcast { background: var(--overcast); }
 .section--ruled { border-top: 1px solid var(--aluminum); }
 h2 + .lede { margin-top: 1rem; }
-.section--after-intro { padding-top: clamp(3.25rem, 8vw, 6.5rem); }
 .section-head { margin-bottom: clamp(2rem, 5vw, 3.25rem); }
 .section-head h2 { max-width: 17ch; }
 .section-head h2 .line { display: block; }
+.section-head .brandline { max-width: none; font-size: 12vw; line-height: .98; }   /* the brand line, at poster size: three lines on a phone, two from 480px */
+@media (min-width: 480px) { .section-head .brandline { font-size: clamp(2.4rem, 6.5vw, 5.5rem); } .brandline .line { white-space: nowrap; } }
 .split > .section-head { margin-bottom: 0; }
 .section-head p { margin-top: .85rem; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.45; color: var(--ink-muted); max-width: 32em; }
 .split { display: grid; gap: clamp(2rem, 5vw, 4rem); }
@@ -311,37 +319,36 @@ h2 + .lede { margin-top: 1rem; }
 .limits { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 14px; }
 .limit { display: grid; gap: 12px; justify-items: center; align-content: start; text-align: center; }
 .limit__plate {
-  container-type: inline-size; position: relative; display: grid; align-content: center; justify-items: center;
-  width: 100%; max-width: 236px; aspect-ratio: 4 / 5; padding: 12% 8% 9%; background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px #9aa1a4;
+  container-type: inline-size; position: relative; display: grid; grid-template-rows: 2.2rem auto 1.1rem; row-gap: .35rem; align-content: center; justify-items: center;
+  width: 100%; max-width: 236px; aspect-ratio: 4 / 5; background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px #9aa1a4;
 }
 .limit__plate::before { content: ""; position: absolute; inset: 5px; border: 4.5px solid #000; border-radius: 9.5px; }
-.limit__top { width: min-content; font-weight: 800; font-size: 1rem; line-height: 1.05; letter-spacing: .03em; text-transform: uppercase; }
-.limit__num { margin-top: .08em; font-weight: 900; font-size: clamp(3rem, 14vw, 5.2rem); line-height: .95; letter-spacing: -.01em; }
-.limit__unit { font-weight: 800; font-size: 1rem; line-height: 1.05; letter-spacing: .04em; text-transform: uppercase; }
-/* The legend fills the plate like a real speed-limit sign: label up top, numeral low, the two together about two
-   thirds of the height inside the black border (19px of edge and border). Sized from the plate's own width
-   (100cqw, no padding). The numeral is as big as it can be with 10% of the width inside the border clear on each
-   side: Overpass 900 "$500" is 2.55em wide, "$1,500" 3.24em. */
+.limit__top { align-self: center; width: min-content; font-weight: 800; font-size: 1rem; line-height: 1.05; letter-spacing: .03em; text-transform: uppercase; }
+.limit__num { align-self: end; font-weight: 900; font-size: clamp(3rem, 14vw, 4.6rem); line-height: .76; letter-spacing: -.02em; white-space: nowrap; }
+.limit__cur { display: inline-block; margin-right: .04em; font-size: .55em; line-height: 0; letter-spacing: 0; vertical-align: .34em; }
+.limit__unit { grid-row: 3; align-self: end; font-weight: 800; font-size: 1rem; line-height: 1.05; letter-spacing: .04em; text-transform: uppercase; }
+/* The legend fills the plate like a real speed-limit sign. Every plate has the same three rows (label, numeral,
+   sub-label), sized from the plate's own width (100cqw), so the numerals in a row share one baseline whether or not
+   a plate has a sub-label. The dollar sign is set at 55% and raised to the numeral's top, which lets the numeral
+   grow: "$500" is then 2.23em wide and takes 82% of the width inside the black border (19px of edge and border). */
 @supports (width: 1cqw) {
-  .limit__plate { display: flex; flex-direction: column; align-items: center; padding: 0; }
-  .limit__plate > :first-child { margin-top: calc(9.5px + (125cqw - 19px) * .155); }
-  .limit__plate > :last-child { margin-bottom: calc(9.5px + (125cqw - 19px) * .155); }
-  .limit__top, .limit__unit { font-size: max(1.2rem, 10.5cqw); }
-  .limit__num { margin-top: auto; font-size: calc((100cqw - 19px) * .31); letter-spacing: -.02em; }
-  .limit--long .limit__num { font-size: calc((100cqw - 19px) * .243); }
-  .limit__unit { margin-top: .1em; }
+  .limit__plate { grid-template-rows: 22.5cqw 28.5cqw 11.5cqw; row-gap: 5.5cqw; padding-top: 2cqw; }
+  .limit__top, .limit__unit { font-size: max(.9375rem, 10.5cqw); }
+  .limit__num { font-size: calc((100cqw - 19px) * .368); }
+  .limit--long .limit__num { font-size: calc((100cqw - 19px) * .29); }
 }
 .limit__note { font-size: 1rem; line-height: 1.36; max-width: 14.5em; color: var(--ink-muted); }
-.limits-more { margin-top: clamp(1.75rem, 4vw, 2.5rem); }
+.limits-also { margin-top: clamp(1.75rem, 4vw, 2.5rem); max-width: 30em; font-weight: 600; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.4; }
+.limits-more { margin-top: 1rem; }
 .more { display: inline-block; padding-block: .7rem; margin-block: -.7rem; font-weight: 700; }
 @media (min-width: 760px) {
   .limits { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
   .limits--pair { grid-template-columns: repeat(2, minmax(0, 236px)); }
 }
 
-/* ---------------------------------------------------------------- street blades on a post: the five services */
+/* ---------------------------------------------------------------- street blades on a post: the six services */
 .fingerpost { position: relative; list-style: none; margin: 0; padding: 20px 0 0; display: grid; gap: clamp(1.75rem, 4vw, 2.75rem); }
-.fingerpost::before { content: ""; position: absolute; left: 14px; top: 0; bottom: -34px; width: 14px; background: var(--post); border-radius: 5px 5px 0 0; }
+.fingerpost::before { content: ""; position: absolute; left: 17px; top: 0; bottom: -34px; width: 8px; background: linear-gradient(90deg, #b3b9bc, #e4e7e8 45%, #bcc2c4); border-radius: 4px 4px 0 0; }
 .way { position: relative; display: grid; gap: 14px; }
 .blade {
   position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 14px;
@@ -435,19 +442,18 @@ a.blade:active { transform: translateY(1px); }
 .route p { margin-top: 6px; color: var(--ink-muted); max-width: 30em; }
 @media (min-width: 900px) {
   .route { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); }
-  .route::before { content: ""; position: absolute; left: 0; right: 0; top: 88px; height: 6px; background: var(--asphalt); border-radius: 3px; }
-  .route li { padding: 118px 0 0; }
-  .route li::after, .route li:not(:last-child)::after { content: ""; position: absolute; left: 25px; top: 72px; bottom: auto; width: 6px; height: 16px; background: var(--post); }
+  .route::before { content: ""; position: absolute; left: 0; right: 0; top: 72px; height: 6px; background: var(--asphalt); border-radius: 3px; }   /* the plates stand on the line */
+  .route li { padding: 104px 0 0; }
+  .route li:not(:last-child)::after { content: none; }
   .route h3 { padding-top: 0; }
 }
 
 /* ---------------------------------------------------------------- who you'd be working with */
-.portrait { position: relative; isolation: isolate; margin: clamp(1.5rem, 4vw, 2.25rem) 0 0; max-width: 340px; padding-bottom: 28px; }
-.portrait::before { content: ""; position: absolute; left: calc(50% - 7px); top: 30px; bottom: 0; z-index: -1; width: 14px; background: var(--post); }
+.portrait { margin: clamp(1.5rem, 4vw, 2.25rem) 0 0; max-width: 340px; }
 .portrait picture { position: relative; display: block; padding: 9px; background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px #9aa1a4; }
 .portrait picture::after { content: ""; position: absolute; inset: 5px; border: 4.5px solid #000; border-radius: 9.5px; }
 .portrait img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 5px; }
-.portrait .blade { margin-top: 12px; min-height: 0; display: block; padding: 14px 20px 12px; }
+.portrait .blade { margin-top: 8px; min-height: 0; display: block; padding: 14px 20px 12px; }
 .portrait .blade__name, .portrait .blade__tag { display: block; }
 .prose p, .prose ul { max-width: 34em; }
 .prose h2 { margin: 2.25rem 0 .7rem; font-weight: 800; font-size: 1.6rem; line-height: 1.12; letter-spacing: 0; }
@@ -474,8 +480,6 @@ a.blade:active { transform: translateY(1px); }
 .night::before { content: ""; position: absolute; left: 50%; top: 4%; width: min(1500px, 190%); height: 86%; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(255, 255, 255, .085), transparent); pointer-events: none; }
 .lanes { position: relative; height: 10px; margin-top: 34px; background: repeating-linear-gradient(90deg, var(--lane) 0 54px, transparent 54px 108px); }
 .night .stand { max-width: 880px; margin-top: clamp(3.25rem, 8vw, 5.5rem); padding-bottom: clamp(2.5rem, 6vw, 4rem); display: grid; justify-items: center; }
-.night .posts { inset: 40px 0 0; }
-.night .posts::before, .night .posts::after { background: linear-gradient(90deg, #4f5558, #8d9396 45%, #5a6063); }
 .sign--night { width: 100%; padding: 36px 26px 0; box-shadow: 0 0 90px rgba(60, 230, 160, .26), 0 0 26px rgba(60, 230, 160, .2); }
 .sign--night.is-dim { box-shadow: 0 0 0 rgba(60, 230, 160, 0); }
 .sign--night h2 { max-width: 15ch; font-size: clamp(2.1rem, 7vw, 4rem); line-height: 1.02; }
@@ -489,8 +493,6 @@ a.blade:active { transform: translateY(1px); }
 @media (min-width: 700px) {
   .sign--night { padding: 50px 52px 0; }
   .sign--night .panel { margin: 30px -38px 14px; padding: 23px 28px 20px 30px; }
-  .night .posts::before { left: 9%; }
-  .night .posts::after { right: 9%; }
   .night__plates { display: flex; justify-content: center; width: auto; gap: 16px; margin-top: 22px; }
 }
 
@@ -513,21 +515,23 @@ a.blade:active { transform: translateY(1px); }
 
 /* ---------------------------------------------------------------- inner pages: a shorter guide sign */
 .page-head { background: var(--overcast); padding-top: 56px; }
-.page-head .stand { padding-bottom: 36px; display: grid; }
-.sign--page { padding: 28px 26px 30px; }
+.page-head > .wrap { padding-bottom: 36px; display: grid; }
+.sign--page { --pad: 26px; --edge: 14px; padding: 28px var(--pad) 30px; }
 .sign--page h1 { max-width: 17ch; font-size: clamp(2.1rem, 9.4vw, 3.9rem); line-height: 1; padding-bottom: 16px; border-bottom: 4px solid #fff; }
 .sign--page .sign__line { margin-top: 15px; max-width: 40em; text-wrap: pretty; }
 .sign--page.sign--panel { padding-bottom: 0; }
-.sign--page .panel { margin: 20px -12px 14px; }
+.sign--page > .panel { margin: 20px -12px 14px; }
 .page-head .plate--post { justify-self: center; width: min(100%, 420px); margin-top: 16px; }
-@media (max-width: 359px) { .sign--page { padding-inline: 21px; } .sign--page .panel { margin-inline: -7px; } }
+@media (max-width: 359px) { .sign--page { --pad: 21px; } .sign--page > .panel { margin-inline: -7px; } }
 @media (min-width: 700px) {
   .page-head { padding-top: 64px; }
-  .page-head .stand { padding-bottom: 44px; }
-  .sign--page { padding: 46px 52px 46px; }
+  .page-head > .wrap { padding-bottom: 44px; }
+  .sign--page { --pad: 52px; padding: 46px var(--pad) 46px; }
   .sign--page h1 { max-width: 20ch; padding-bottom: 22px; }
   .sign--page .sign__line { margin-top: 20px; }
-  .sign--page .panel { margin: 28px -38px 14px; padding: 23px 28px 20px 30px; }
+  .sign--page > .panel { margin: 28px -38px 14px; }
+  .sign--page .panel { padding: 23px 28px 20px 30px; }
+  .sign--page .sign__exits { margin-top: 28px; }
   .page-head .plate--post { width: auto; padding-inline: 1.3em; margin-top: 20px; }
 }
 
@@ -635,6 +639,6 @@ h2 + .contact-list { margin-top: 1.75rem; }
 
 @media (max-width: 479px) { .actions .plate, .form .plate { width: 100%; } }
 @media print {
-  .site-header, .night, .site-footer, .road, .posts, .form-wrap, .selfcheck { display: none; }
+  .site-header, .night, .site-footer, .posts, .form-wrap, .selfcheck, .maker, .maker__stage { display: none; }
   body { font-size: 12pt; }
 }

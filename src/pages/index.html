@@ -1,5 +1,5 @@
 <!--meta
-{"path": "/", "title": "MediaJack Systems | Print and digital marketing, flat fees", "og_title": "Print and digital marketing, handled by one person you can call", "description": "Websites from $500, Google, social, email, ads and print, planned and run by one marketing pro in Englewood, Colorado. Flat fees, quoted before work starts.", "jsonld": "home", "cta_title": "Tell me what you're working on.", "cta_text": "Big job or small, it starts with a call or a message."}
+{"path": "/", "title": "Marketing and custom systems for local businesses | MediaJack Systems", "og_title": "Marketing and custom systems, handled by one person you can call", "description": "I do the marketing for local businesses and build custom systems for the ones that need them. Flat fees, quoted in writing. Englewood, Colorado, working with businesses across the US.", "jsonld": "home", "cta_title": "Tell me what you're working on.", "cta_text": "Big job or small, it starts with a call or a message."}
 -->
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__screen">
@@ -29,21 +29,56 @@
   </div>
 </section>
 
-<section class="section section--overcast section--after-intro" id="prices" aria-labelledby="prices-title">
+<section class="section section--overcast" id="prices" aria-labelledby="prices-title">
   <div class="wrap">
     <div class="section-head">
       <h2 id="prices-title">What it costs</h2>
       <p>Where most jobs start.</p>
     </div>
     {{> plates}}
+    <p class="limits-also">Custom systems are quoted for the job, in writing, before I start.</p>
     <p class="limits-more"><a class="more" href="/services/#prices">All prices</a></p>
+  </div>
+</section>
+
+<section class="section band" aria-labelledby="checkup-title">
+  <div class="wrap band__maker">
+    <div class="band__say">
+      <h2 id="checkup-title">Start with a free marketing <span class="nb">check-up.</span></h2>
+      <p class="lede">Send me your website, or just your business name and town. I'll look at what your customers see and email you a short list of what I'd fix first and why. It's free, and you don't owe me anything.</p>
+    </div>
+    <div class="maker" data-maker>
+      <div class="field">
+        <label for="m-business">Business name</label>
+        <input id="m-business" type="text" maxlength="40" autocomplete="organization" autocapitalize="words" spellcheck="false" enterkeyhint="next" data-maker-in="name">
+      </div>
+      <div class="field">
+        <label for="m-town">Town</label>
+        <input id="m-town" type="text" maxlength="30" autocomplete="address-level2" autocapitalize="words" spellcheck="false" enterkeyhint="go" data-maker-in="town">
+      </div>
+    </div>
+    <div class="maker__stage" aria-hidden="true">
+      <div class="sign maker__sign">
+        <p class="sign__tab" data-maker-out="town">Your town</p>
+        <div class="maker__face">
+          <p class="maker__name" data-maker-out="name">Your business</p>
+          <svg class="arrow" viewBox="0 0 100 100" focusable="false"><use href="#arrow-guide"/></svg>
+          <p class="maker__next">Next right</p>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <a class="plate plate--ink" href="/check-up/" data-maker-go>Ask for my check-up</a>
+      <a class="plate plate--white" href="/check-up/#self-check">Check it yourself in a minute</a>
+    </div>
+    {{> looks}}
   </div>
 </section>
 
 <section class="section" aria-labelledby="services-title">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="services-title"><span class="line">Customers follow signs.</span> <span class="line">I put them up.</span></h2>
+      <h2 class="brandline" id="services-title"><span class="line">Customers follow&nbsp;signs.</span> <span class="line">I put them&nbsp;up.</span></h2>
       <p>Pick the part that's giving you trouble, or hand me all of it.</p>
     </div>
     <ul class="fingerpost">
@@ -111,6 +146,18 @@
         </ul>
         </div>
       </li>
+      <li class="way">
+        <a class="blade" href="/services/#custom-systems"><h3 class="blade__name">Custom systems</h3><span class="blade__tag">Built to order</span>{{arrow}}</a>
+        <div class="way__body">
+          <p class="way__what">Software built around how your business works, for when ready-made tools don't fit.</p>
+          <ul class="ticks">
+          <li>Tools on your website: calculators, checkers and maps</li>
+          <li>Lead capture and follow-up systems</li>
+          <li>Company platforms built from the ground up</li>
+          <li>Then the marketing to get people using it</li>
+        </ul>
+        </div>
+      </li>
     </ul>
   </div>
 </section>
@@ -118,20 +165,6 @@
 {{work}}
 
 {{testimonials}}
-
-<section class="section band" aria-labelledby="checkup-title">
-  <div class="wrap band__grid">
-    <div>
-      <h2 id="checkup-title">Start with a free marketing <span class="nb">check-up.</span></h2>
-      <p class="lede">Send me your website, or just your business name and town. I'll look at what your customers see and email you a short list of what I'd fix first and why. It's free, and you don't owe me anything.</p>
-      <div class="actions">
-        <a class="plate plate--ink" href="/check-up/">Ask for my check-up</a>
-        <a class="plate plate--white" href="/check-up/#self-check">Check it yourself in a minute</a>
-      </div>
-    </div>
-    {{> looks}}
-  </div>
-</section>
 
 <section class="section" id="how-it-works" aria-labelledby="how-title">
   <div class="wrap">
@@ -197,6 +230,10 @@
       <details>
         <summary>Can you take on just one thing?</summary>
         <div><p>Yes. Plenty of work starts with one mailer, one sign or one website fix. If it goes well, you'll know who to call for the next thing.</p></div>
+      </details>
+      <details>
+        <summary>What is a custom system?</summary>
+        <div><p>Software built for your business when ready-made tools don't fit. For a freight broker I built a rate checker, a fuel surcharge check and a map of nearly 150,000 places for their drivers. Tell me what you need and I'll quote it in writing.</p></div>
       </details>
       <details>
         <summary>What is a fractional CMO?</summary>
