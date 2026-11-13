@@ -16,6 +16,26 @@
       if (e.key === 'Escape' && nav.classList.contains('open')) { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = 'Menu'; toggle.focus(); }
     });
   }
+  // headlights: a sign shines back at the pointer, and the closing sign lights up when it comes into view
+  var still = !window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!still) {
+    if (matchMedia('(hover: hover)').matches) document.querySelectorAll('[data-shine]').forEach(function (el) {
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      }, { passive: true });
+      el.addEventListener('pointerleave', function () { el.style.removeProperty('--mx'); el.style.removeProperty('--my'); });
+    });
+    if ('IntersectionObserver' in window) document.querySelectorAll('[data-light]').forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight) return;      // already on screen: leave it lit
+      el.classList.add('is-dim');
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { el.classList.remove('is-dim'); el.classList.add('is-lit'); io.disconnect(); }
+      }, { threshold: 0.4 });
+      io.observe(el);
+    });
+  }
   // this year in the footer
   var y = String(new Date().getFullYear());
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = y; });

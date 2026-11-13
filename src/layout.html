@@ -15,13 +15,13 @@
 <meta property="og:image" content="https://mediajacksystems.com/assets/img/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="MediaJack Systems: print and digital marketing, handled by one person you can call.">
+<meta property="og:image:alt" content="MediaJack Systems: marketing for local businesses.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/overpass-var.woff2" as="font" type="font/woff2" crossorigin>
 {{preload_photo}}
 <link rel="stylesheet" href="/assets/site.css?v={{version}}">
 <script src="/assets/site.js?v={{version}}" defer></script>
@@ -29,13 +29,17 @@
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to the main content</a>
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <symbol id="mark" viewBox="0 0 100 100"><rect class="mark-ground" x="14.65" y="14.65" width="70.7" height="70.7" rx="8" transform="rotate(45 50 50)" fill="#d6ee00" stroke="#000" stroke-width="1.2"/><rect x="20.6" y="20.6" width="58.8" height="58.8" rx="4.6" transform="rotate(45 50 50)" fill="none" stroke="#000" stroke-width="3.4"/><path d="M56.5 20L72 37.5L62.25 34.9V58A16.75 16.75 0 0 1 28.75 58H40.25A5.25 5.25 0 0 0 50.75 58V34.9L41 37.5Z"/></symbol>
+  <symbol id="arrow" viewBox="0 0 100 100"><path d="M50 0 90 50 64 44v56H36V44l-26 6z"/></symbol>
+</svg>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/" aria-label="MediaJack Systems, home">
-      <svg viewBox="0 0 34 34" aria-hidden="true" focusable="false"><path d="M17 17V9.5A7.5 7.5 0 0 1 24.5 17Z" fill="#246b3c"/><path d="M17 17h7.5A7.5 7.5 0 0 1 17 24.5Z" fill="#c2c8cb"/><path d="M17 17v7.5A7.5 7.5 0 0 1 9.5 17Z" fill="#246b3c"/><path d="M17 17H9.5A7.5 7.5 0 0 1 17 9.5Z" fill="#c2c8cb"/><circle cx="17" cy="17" r="11" fill="none" stroke="#0f1412" stroke-width="2"/><path d="M17 1.5v31M1.5 17h31" stroke="#0f1412" stroke-width="2"/></svg>
-      <span>MediaJack Systems</span>
+      <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#mark"/></svg>
+      <span class="brand__name">MediaJack <span>Systems</span></span>
     </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <button class="nav-toggle plate" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul>
         <li><a href="/services/"{{cur_services}}>Services</a></li>
@@ -45,17 +49,19 @@
       </ul>
     </nav>
     <a class="header-phone" href="tel:+19704010185" aria-label="Call (970) 401-0185"><span class="header-phone__verb">Call</span><span class="header-phone__num">(970) 401-0185</span></a>
-    <a class="btn btn--small" href="/check-up/">Free check-up</a>
+    <a class="plate plate--hivis header-cta" href="/check-up/">Free check-up</a>
   </div>
 </header>
 <main id="main">
 {{body}}
 </main>
 <footer class="site-footer">
-  <div class="colour-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="wrap">
-    <div>
-      <p class="brand-line">MediaJack Systems</p>
+    <div class="site-footer__about">
+      <p class="brand brand--dark">
+        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#mark"/></svg>
+        <span class="brand__name">MediaJack <span>Systems</span></span>
+      </p>
       <p>Print and digital marketing for local businesses. Based in Englewood, Colorado, working with businesses across the US.</p>
     </div>
     <div>

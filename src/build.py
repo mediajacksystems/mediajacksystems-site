@@ -109,67 +109,87 @@ def jsonld(kind, meta):
 def e(s):
     return escape(s, quote=True)
 
-def picture(cls, sizes, width, height, lazy=True):
+ARROW = '<svg class="arrow" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#arrow"/></svg>'
+
+def picture(sizes, width, height, lazy=True):
     """The photo of Jack: WebP with a JPEG fallback."""
     if not PHOTO:
         return ''
     base = f'/assets/img/{PHOTO}'
     load = ' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high"'
     return (f'<picture><source type="image/webp" srcset="{base}-480.webp 480w, {base}-640.webp 640w, {base}-880.webp 880w" sizes="{sizes}">'
-            f'<img class="{cls}" src="{base}-880.jpg" width="{width}" height="{height}" alt="{e(CFG.get("photo_alt", "Jack Johnson"))}"{load}></picture>')
+            f'<img src="{base}-880.jpg" width="{width}" height="{height}" alt="{e(CFG.get("photo_alt", "Jack Johnson"))}"{load}></picture>')
+
+def shot(w):
+    """A job's real screenshots, on a computer and a phone: files <shot>-desk-480/-960 and <shot>-phone-160/-320 in assets/img."""
+    name = w.get('shot', '')
+    if not name or not (OUT / f'assets/img/{name}-desk-960.jpg').exists():
+        return ''
+    base = f'/assets/img/{name}'
+    cap = f'<figcaption>{e(w["shot_caption"])}</figcaption>' if w.get('shot_caption') else ''
+    return ('<figure class="shot"><div class="shot__frame">'
+            f'<picture class="shot__desk"><source type="image/webp" srcset="{base}-desk-480.webp 480w, {base}-desk-960.webp 960w" sizes="(max-width: 899px) 80vw, 520px">'
+            f'<img src="{base}-desk-960.jpg" width="960" height="600" loading="lazy" decoding="async" alt="{e(w.get("shot_alt", ""))}"></picture>'
+            f'<picture class="shot__phone"><source type="image/webp" srcset="{base}-phone-160.webp 160w, {base}-phone-320.webp 320w" sizes="(max-width: 899px) 22vw, 142px">'
+            f'<img src="{base}-phone-320.jpg" width="320" height="693" loading="lazy" decoding="async" alt="{e(w.get("shot_phone_alt", ""))}"></picture>'
+            f'</div>{cap}</figure>')
 
 def parts():
     p = {}
     b = CFG.get('booking_url', '')
     label = e(CFG.get('booking_label', 'Book a call'))
     p['booking_url'] = e(b)
-    p['booking_btn'] = f'<a class="btn btn--line" href="{e(b)}" rel="noopener">{label}</a>' if b else ''
+    p['booking_btn'] = f'<a class="plate" href="{e(b)}" rel="noopener">{label}</a>' if b else ''
+    p['booking_post'] = f'<a class="plate plate--post" href="{e(b)}" rel="noopener">{label}</a>' if b else ''
     p['booking_li'] = f'<li><a href="{e(b)}" rel="noopener">{label}</a></li>' if b else ''
     p['booking_sentence'] = f' Or <a href="{e(b)}" rel="noopener">pick a time for a 30-minute call</a>.' if b else ''
     p['reply_promise'] = e(CFG.get('reply_promise', ''))
     p['capacity'] = e(CFG.get('capacity', ''))
     p['hours'] = e(CFG.get('hours', ''))
+    p['arrow'] = ARROW
     names = {'google_business': 'MediaJack on Google', 'linkedin': 'Jack on LinkedIn', 'facebook': 'Facebook', 'instagram': 'Instagram'}
     p['profile_links'] = ''.join(f'<li><a href="{e(u)}" rel="noopener me">{names.get(k, k)}</a></li>' for k, u in CFG.get('profiles', {}).items() if u)
     # the photo
     if PHOTO:
         base = f'/assets/img/{PHOTO}'
-        p['byline'] = (f'<p class="byline"><picture><source type="image/webp" srcset="{base}-160.webp"><img src="{base}-160.jpg" width="64" height="64" alt=""></picture>'
+        p['byline'] = (f'<p class="byline"><picture><source type="image/webp" srcset="{base}-160.webp"><img src="{base}-160.jpg" width="54" height="62" alt=""></picture>'
                        '<span><strong>Jack Johnson</strong>, owner. You deal with me from the first call to the finished job.</span></p>')
         def figure(lazy):
-            return f'<figure class="portrait crop">{picture("", "(max-width: 960px) 80vw, 400px", 880, 1100, lazy)}<figcaption>Jack Johnson, Englewood, Colorado</figcaption></figure>'
+            return (f'<figure class="portrait">{picture("(max-width: 420px) 80vw, 322px", 880, 1100, lazy)}'
+                    '<figcaption class="blade"><span class="blade__name">Jack Johnson</span><span class="blade__tag">Englewood, Colorado</span></figcaption></figure>')
         p['portrait'] = figure(True)          # far down the home page: loads when the reader gets near it
         p['portrait_lead'] = figure(False)    # near the top of About, where it is the biggest thing on screen: loads first
     else:
         p['byline'] = p['portrait'] = p['portrait_lead'] = ''
-    # work samples: job tickets
+    # work zone: real jobs, each with its number
     work = CFG.get('work', [])
     if work:
+        def job(w, cls='', pic='', detail=None):
+            return (f'<li class="job{cls}">{pic}<div class="job__body">'
+                    f'<p class="job__num">{e(w["number"])}</p><p class="job__label">{e(w.get("number_label", ""))}</p>'
+                    f'<dl class="job__facts"><div><dt>Client</dt><dd>{e(w["client"])}</dd></div><div><dt>Job</dt><dd>{e(w["job"])}</dd></div></dl>'
+                    f'<p class="job__detail">{detail if detail is not None else e(w["detail"])}</p></div></li>')
         t = []
-        for w in work:
-            t.append('<li class="ticket"><dl>'
-                     f'<div><dt>Client</dt><dd>{e(w["client"])}</dd></div>'
-                     f'<div><dt>Job</dt><dd>{e(w["job"])}</dd></div></dl>'
-                     f'<p class="ticket-number"><strong>{e(w["number"])}</strong> <span>{e(w.get("number_label", ""))}</span></p>'
-                     f'<p>{e(w["detail"])}</p></li>')
+        for i, w in enumerate(work):
+            pic = shot(w)
+            t.append(job(w, ' job--lead' if pic and i == 0 else '', pic))
+        t.append(job({'client': 'MediaJack Systems', 'job': 'The website you are on', 'number': '0', 'number_label': 'cookies, trackers and pop-ups'}, '',
+                     detail='One small script and one font file, built to the same checks I run on client sites. You can check it yourself: '
+                            '<a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fmediajacksystems.com%2F" rel="noopener">run Google\'s speed test on this page</a>.'))
         also = f'<p class="work-also">{e(CFG["work_also"])}</p>' if CFG.get('work_also') else ''
         note = f'<p>{e(CFG.get("work_note", ""))}</p>' if CFG.get('work_note') else ''
-        p['work'] = ('<section class="section" aria-labelledby="work-title"><div class="wrap">'
-                     f'<div class="section-head"><h2 id="work-title">Jobs I\'ve done, with the numbers</h2>{note}</div>'
-                     f'<ul class="tickets">{"".join(t)}'
-                     '<li class="ticket ticket--self"><dl><div><dt>Client</dt><dd>MediaJack Systems</dd></div><div><dt>Job</dt><dd>The website you are on</dd></div></dl>'
-                     '<p class="ticket-number"><strong>0</strong> <span>cookies, trackers and pop-ups</span></p>'
-                     '<p>One small script and one font, built to the same checks I run on client sites. You can check it yourself: '
-                     '<a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fmediajacksystems.com%2F" rel="noopener">run Google\'s speed test on this page</a>.</p></li>'
-                     f'</ul>{also}</div></section>')
+        p['work'] = ('<section class="section section--overcast" aria-labelledby="work-title"><div class="wrap">'
+                     '<div class="section-head work-head"><p class="zone"><span>Work zone</span></p>'
+                     f'<div><h2 id="work-title">Jobs I\'ve done, with the numbers</h2>{note}</div></div>'
+                     f'<ul class="jobs">{"".join(t)}</ul>{also}</div></section>')
     else:
         p['work'] = ''
     # testimonials: real, named, with permission, or nothing
     ts = CFG.get('testimonials', [])
     if ts:
-        q = ''.join(f'<li><blockquote><p>{e(x["quote"])}</p></blockquote><p class="who"><strong>{e(x["name"])}</strong>, {e(x["business"])}{", " + e(x["town"]) if x.get("town") else ""}</p></li>' for x in ts)
-        p['testimonials'] = ('<section class="section section--mist" aria-labelledby="said-title"><div class="wrap">'
-                             f'<div class="section-head"><h2 id="said-title">What clients say</h2></div><ul class="quotes">{q}</ul></div></section>')
+        q = ''.join(f'<li><blockquote><p>{e(x["quote"])}</p></blockquote><p class="quote__who"><strong>{e(x["name"])}</strong>, {e(x["business"])}{", " + e(x["town"]) if x.get("town") else ""}</p></li>' for x in ts)
+        p['testimonials'] = ('<section class="section quote" aria-labelledby="said-title"><div class="wrap">'
+                             f'<h2 class="sr-only" id="said-title">What clients say</h2><ul class="quote__list">{q}</ul></div></section>')
     else:
         p['testimonials'] = ''
     return p

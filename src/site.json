@@ -20,7 +20,11 @@
       "job": "A new website in place of an old WordPress one",
       "number": "210 MB to 17 MB",
       "number_label": "of photos in two project galleries",
-      "detail": "Same photos at a twelfth of the weight, so the galleries open on a phone. Then I set up visitor counts and Google Search Console, so the owner can see what the site brings in."
+      "detail": "Same photos at a twelfth of the weight, so the galleries open on a phone. Then I set up visitor counts and Google Search Console, so the owner can see what the site brings in.",
+      "shot": "work-landscape",
+      "shot_alt": "The home page of a website I built for a landscape architecture studio, on a computer",
+      "shot_phone_alt": "The same website on a phone",
+      "shot_caption": "A website I built for a landscape architecture studio in Aspen."
     },
     {
       "client": "A freight broker in Texas",

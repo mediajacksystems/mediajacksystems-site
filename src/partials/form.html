@@ -1,4 +1,4 @@
-<div class="form-wrap crop" id="{{form_id}}">
+<div class="form-wrap" id="{{form_id}}">
   <h2>{{form_title}}</h2>
   <p class="lede">{{form_lede}}</p>
   <form class="form" action="/form/check-up" method="post" novalidate hidden data-form>
@@ -33,14 +33,14 @@
       <label for="f-url">Leave this one empty</label>
       <input id="f-url" name="company_url" type="text" tabindex="-1" autocomplete="off">
     </div>
-    <button class="btn" type="submit">{{form_button}}</button>
+    <button class="plate plate--hivis" type="submit">{{form_button}}</button>
     <p class="form-note">This goes straight to my inbox. I read every message myself and reply by email.{{#if reply_promise}} {{reply_promise}}{{/if}} I use what you send to answer you and for nothing else. <a href="/privacy/">Privacy</a></p>
     <p class="form-status" role="status" aria-live="polite"></p>
   </form>
   <div class="form-fallback" data-form-fallback>
     <p>Email me your website, or just your business name and town. I read every message myself and reply by email.{{#if reply_promise}} {{reply_promise}}{{/if}}</p>
     <div class="actions">
-      <a class="btn" href="mailto:jack@mediajacksystems.com?subject={{form_subject}}&amp;body=My%20business%20and%20website%3A%20">{{form_button}} by email</a>
+      <a class="plate plate--hivis" href="mailto:jack@mediajacksystems.com?subject={{form_subject}}&amp;body=My%20business%20and%20website%3A%20">{{form_button}} by email</a>
       {{booking_btn}}
     </div>
   </div>

@@ -1,98 +1,85 @@
 <!--meta
-{"path": "/", "title": "MediaJack Systems | Print and digital marketing, flat fees", "og_title": "Print and digital marketing, handled by one person you can call", "description": "Websites from $500, Google, social, email, ads and print, planned and run by one marketing pro in Englewood, Colorado. Flat fees, quoted before work starts.", "jsonld": "home"}
+{"path": "/", "title": "MediaJack Systems | Print and digital marketing, flat fees", "og_title": "Print and digital marketing, handled by one person you can call", "description": "Websites from $500, Google, social, email, ads and print, planned and run by one marketing pro in Englewood, Colorado. Flat fees, quoted before work starts.", "jsonld": "home", "cta_title": "Tell me what you're working on.", "cta_text": "Big job or small, it starts with a call or a message."}
 -->
 <section class="hero" aria-labelledby="hero-title">
-  <div class="wrap">
-    <div>
-      <h1 id="hero-title">Print and digital marketing, handled by one person you can call.</h1>
-      <p class="lede">I do the marketing for local businesses like contractors, salons, restaurants and shops. That covers your website, Google listing, social pages, emails and ads, plus the cards, mailers and signs that go out the door. Every job is a flat fee, quoted before I start.</p>
-      {{byline}}
-      <div class="actions">
-        <a class="btn" href="/check-up/">Get a free marketing check-up</a>
-        <a class="btn btn--line" href="tel:+19704010185">Call (970) 401-0185</a>
-      </div>
-      <p class="hero-note">Based in Englewood, Colorado. Websites from $500. <a href="#prices">See prices</a></p>
-    </div>
-    <figure class="work-shot">
-      <div class="shots crop">
-        <div class="shot shot--desk">
-          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-          <picture><source type="image/webp" srcset="/assets/img/work-landscape-desk-480.webp 480w, /assets/img/work-landscape-desk-960.webp 960w" sizes="(max-width: 960px) 78vw, 440px"><img src="/assets/img/work-landscape-desk-960.jpg" width="960" height="600" fetchpriority="high" alt="The home page of a website I built for a landscape architecture studio, on a computer"></picture>
-        </div>
-        <div class="shot shot--phone">
-          <picture><source type="image/webp" srcset="/assets/img/work-landscape-phone-160.webp 160w, /assets/img/work-landscape-phone-320.webp 320w" sizes="(max-width: 960px) 24vw, 140px"><img src="/assets/img/work-landscape-phone-320.jpg" width="320" height="693" alt="The same website on a phone"></picture>
-        </div>
-      </div>
-      <figcaption>A website I built for a landscape architecture studio in Aspen.</figcaption>
-    </figure>
+  <span class="posts" aria-hidden="true"></span>
+  <div class="sign sign--hero" data-shine>
+    <p class="sign__tab">Englewood, Colorado</p>
+    <h1 id="hero-title"><span>Marketing for</span> <span>local businesses.</span></h1>
+    <p class="sign__line">Websites, Google, social, mailers and signs. One person does it all, for a flat fee.</p>
+    <svg class="arrow sign__arrow" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#arrow"/></svg>
+    <a class="panel" href="/check-up/"><span>Get a free marketing <span class="nb">check-up</span></span>{{arrow}}</a>
+    <span class="shine" aria-hidden="true"></span>
   </div>
+  <div class="hero__row">
+    <a class="plate plate--post hero__call" href="tel:+19704010185">Call (970) 401-0185</a>
+    {{byline}}
+  </div>
+  <p class="hero-lede">I do the marketing for local businesses like contractors, salons, restaurants and shops. Every job is a flat fee, quoted in writing before I start.</p>
+  <div class="road" aria-hidden="true"></div>
 </section>
 
-<section class="section section--tight" id="prices" aria-labelledby="prices-title">
-  <div class="wrap">
-    <div class="section-head section-head--row">
-      <h2 id="prices-title">What it costs</h2>
-      <p>Where most jobs start. <a href="/services/#prices">All prices</a></p>
-    </div>
-    {{> prices-strip}}
-  </div>
-</section>
-
-<section class="section section--mist" aria-labelledby="services-title">
+<section class="section section--overcast section--after-intro" id="prices" aria-labelledby="prices-title">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="services-title">What I can take off your plate</h2>
+      <h2 id="prices-title">What it costs</h2>
+      <p>Where most jobs start.</p>
+    </div>
+    {{> plates}}
+    <p class="limits-more"><a class="more" href="/services/#prices">All prices</a></p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="services-title"><span class="line">Customers follow signs.</span> <span class="line">I put them up.</span></h2>
       <p>Pick the part that's giving you trouble, or hand me all of it.</p>
     </div>
-    <ul class="doors">
-      <li class="door">
-        <span class="ink ink--leaf" aria-hidden="true"></span>
-        <div>
-          <h3><a href="/services/#get-found">Google and local search</a></h3>
-          <p class="what">So people find you when they search for what you do, including on the map and in AI answers.</p>
-        </div>
-        <ul>
+    <ul class="fingerpost">
+      <li class="way">
+        <a class="blade" href="/services/#get-found"><h3 class="blade__name">Google and local search</h3><span class="blade__tag">Get found</span>{{arrow}}</a>
+        <div class="way__body">
+          <p class="way__what">So people find you when they search for what you do, including on the map and in AI answers.</p>
+          <ul class="ticks">
           <li>Google Business Profile setup and upkeep</li>
           <li>Local search fixes for your website</li>
           <li>Showing up in ChatGPT and Google's AI answers</li>
           <li>Google and Facebook/Instagram ads</li>
           <li>A simple way to ask customers for reviews</li>
         </ul>
-      </li>
-      <li class="door">
-        <span class="ink ink--silver" aria-hidden="true"></span>
-        <div>
-          <h3><a href="/services/#look-the-part">Websites and branding</a></h3>
-          <p class="what">A website, logo and photos that look like they belong to the same business.</p>
         </div>
-        <ul>
+      </li>
+      <li class="way">
+        <a class="blade" href="/services/#look-the-part"><h3 class="blade__name">Websites and branding</h3><span class="blade__tag">Look the part</span>{{arrow}}</a>
+        <div class="way__body">
+          <p class="way__what">A website, logo and photos that look like they belong to the same business.</p>
+          <ul class="ticks">
           <li><a href="/websites/">New websites, from $500</a></li>
           <li>Fixes to the website you have, $295</li>
           <li>Logos and brand guides</li>
           <li>Landing pages for offers and ads</li>
           <li>Photo and video for your site and socials</li>
         </ul>
-      </li>
-      <li class="door">
-        <span class="ink ink--moss" aria-hidden="true"></span>
-        <div>
-          <h3><a href="/services/#stay-in-touch">Social media and email</a></h3>
-          <p class="what">Posts, emails and follow-ups that go out on schedule, so you don't have to remember.</p>
         </div>
-        <ul>
+      </li>
+      <li class="way">
+        <a class="blade" href="/services/#stay-in-touch"><h3 class="blade__name">Social media and email</h3><span class="blade__tag">Stay in touch</span>{{arrow}}</a>
+        <div class="way__body">
+          <p class="way__what">Posts, emails and follow-ups that go out on schedule, so you don't have to remember.</p>
+          <ul class="ticks">
           <li>Social media posting and management</li>
           <li>Email newsletters and campaigns</li>
           <li>Follow-ups for open quotes and past customers</li>
           <li>A content calendar you can see</li>
         </ul>
-      </li>
-      <li class="door">
-        <span class="ink ink--bark" aria-hidden="true"></span>
-        <div>
-          <h3><a href="/services/#print">Print and direct mail</a></h3>
-          <p class="what">I design it and get it printed. For mailers, I get them into mailboxes too.</p>
         </div>
-        <ul>
+      </li>
+      <li class="way">
+        <a class="blade" href="/services/#print"><h3 class="blade__name">Print and direct mail</h3><span class="blade__tag">Put it in their hands</span>{{arrow}}</a>
+        <div class="way__body">
+          <p class="way__what">I design it and get it printed. For mailers, I get them into mailboxes too.</p>
+          <ul class="ticks">
           <li>Business cards and stationery</li>
           <li>Postcards and direct mail, including Every Door Direct Mail</li>
           <li>Flyers, brochures and menus</li>
@@ -100,19 +87,19 @@
           <li>Vehicle graphics</li>
           <li>Trade show displays</li>
         </ul>
-      </li>
-      <li class="door">
-        <span class="ink ink--all" aria-hidden="true"></span>
-        <div>
-          <h3><a href="/services/#run-it">Part-time marketing lead</a></h3>
-          <p class="what">Someone to run your marketing for a monthly fee instead of a salary.</p>
         </div>
-        <ul>
+      </li>
+      <li class="way">
+        <a class="blade" href="/services/#run-it"><h3 class="blade__name">Part-time marketing lead</h3><span class="blade__tag">Run it for you</span>{{arrow}}</a>
+        <div class="way__body">
+          <p class="way__what">Someone to run your marketing for a monthly fee instead of a salary.</p>
+          <ul class="ticks">
           <li>A marketing plan, budget and calendar</li>
           <li>Managing your printers, freelancers and vendors</li>
           <li>Sales materials and presentations</li>
           <li>A short monthly report</li>
         </ul>
+        </div>
       </li>
     </ul>
   </div>
@@ -122,33 +109,26 @@
 
 {{testimonials}}
 
-<section class="section{{#if work}} section--flush-top{{/if}}" aria-labelledby="checkup-title">
-  <div class="wrap">
-    <div class="checkup crop">
-      <div>
-        <h2 id="checkup-title">Start with a free marketing check-up.</h2>
-        <p class="lede">Send me your website, or just your business name and town. I'll look at what your customers see and email you a short list of what I'd fix first and why. It's free, and you don't owe me anything.</p>
-        <div class="actions">
-          <a class="btn" href="/check-up/">Ask for my check-up</a>
-          <a class="btn btn--line" href="/check-up/#self-check">Check it yourself in a minute</a>
-        </div>
+<section class="section band" aria-labelledby="checkup-title">
+  <div class="wrap band__grid">
+    <div>
+      <h2 id="checkup-title">Start with a free marketing <span class="nb">check-up.</span></h2>
+      <p class="lede">Send me your website, or just your business name and town. I'll look at what your customers see and email you a short list of what I'd fix first and why. It's free, and you don't owe me anything.</p>
+      <div class="actions">
+        <a class="plate plate--ink" href="/check-up/">Ask for my check-up</a>
+        <a class="plate plate--white" href="/check-up/#self-check">Check it yourself in a minute</a>
       </div>
-      <ul aria-label="What the check-up looks at">
-        <li>Your website, on a phone and a computer</li>
-        <li>Your Google listing and reviews</li>
-        <li>Your social pages</li>
-        <li>Anything you hand out or mail</li>
-      </ul>
     </div>
+    {{> looks}}
   </div>
 </section>
 
-<section class="section section--mist" id="how-it-works" aria-labelledby="how-title">
+<section class="section" id="how-it-works" aria-labelledby="how-title">
   <div class="wrap">
     <div class="section-head">
       <h2 id="how-title">How working with me works</h2>
     </div>
-    <ol class="steps">
+    <ol class="route">
       <li>
         <h3>A free check-up</h3>
         <p>I look at what you have and tell you what I'd fix first. You decide whether any of it is worth doing.</p>
@@ -169,10 +149,10 @@
   </div>
 </section>
 
-<section class="section" aria-labelledby="about-title">
-  <div class="wrap about-strip{{#if portrait}} about-strip--photo{{/if}}">
+<section class="section section--overcast" aria-labelledby="about-title">
+  <div class="wrap split">
     <div>
-      <h2 class="big" id="about-title">Who you'd be working with</h2>
+      <h2 id="about-title">Who you'd be working with</h2>
       {{portrait}}
     </div>
     <div class="prose">
@@ -186,8 +166,8 @@
   </div>
 </section>
 
-<section class="section section--mist" aria-labelledby="faq-title">
-  <div class="wrap">
+<section class="section" aria-labelledby="faq-title">
+  <div class="wrap split">
     <div class="section-head">
       <h2 id="faq-title">Questions owners ask</h2>
     </div>
@@ -220,14 +200,4 @@
   </div>
 </section>
 
-<section class="section band" aria-labelledby="cta-title">
-  <div class="wrap">
-    <h2 id="cta-title">Tell me what you're working on.</h2>
-    <p>Big job or small, it starts with a call or a message.</p>
-    <div class="actions">
-      <a class="btn" href="/check-up/">Get a free marketing check-up</a>
-      <a class="btn btn--line" href="tel:+19704010185">Call (970) 401-0185</a>
-      {{booking_btn}}
-    </div>
-  </div>
-</section>
+{{> closing}}
