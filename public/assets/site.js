@@ -28,8 +28,7 @@
       el.addEventListener('pointerleave', function () { el.style.removeProperty('--mx'); el.style.removeProperty('--my'); });
     });
     if ('IntersectionObserver' in window) document.querySelectorAll('[data-light]').forEach(function (el) {
-      if (el.getBoundingClientRect().top < window.innerHeight) return;      // already on screen: leave it lit
-      el.classList.add('is-dim');
+      el.classList.add('is-dim');                                           // no measuring here: the observer reports where the sign is
       var io = new IntersectionObserver(function (entries) {
         if (entries[0].isIntersecting) { el.classList.remove('is-dim'); el.classList.add('is-lit'); io.disconnect(); }
       }, { threshold: 0.4 });
