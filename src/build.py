@@ -152,8 +152,10 @@ def parts():
     # the photo
     if PHOTO:
         base = f'/assets/img/{PHOTO}'
-        p['byline'] = (f'<p class="byline"><picture><source type="image/webp" srcset="{base}-160.webp"><img src="{base}-160.jpg" width="56" height="56" alt=""></picture>'
-                       '<span><strong>Jack Johnson</strong>, owner. You deal with me from the first call to the finished job.</span></p>')
+        p['byline'] = (f'<div class="byline"><figure class="byline__plate"><picture><source type="image/webp" srcset="{base}-240.webp 240w, {base}-480.webp 480w" sizes="114px">'
+                       f'<img src="{base}-240.jpg" width="240" height="300" loading="lazy" decoding="async" alt="{e(CFG.get("photo_alt", "Jack Johnson"))}"></picture>'
+                       '<figcaption class="blade"><span class="blade__name">Jack Johnson</span><span class="blade__tag">Owner</span></figcaption></figure>'
+                       '<p>You deal with me from the first call to the finished job.</p></div>')
         def figure(lazy):
             return (f'<figure class="portrait">{picture("(max-width: 420px) 80vw, 322px", 880, 1100, lazy)}'
                     '<figcaption class="blade"><span class="blade__name">Jack Johnson</span><span class="blade__tag">Englewood, Colorado</span></figcaption></figure>')
@@ -232,7 +234,6 @@ def build():
             'title': e(meta['title']), 'og_title': e(meta.get('og_title', meta['title'])), 'description': e(meta['description']),
             'canonical': e(SITE + (path if path != '/404.html' else '/')), 'robots': e(meta.get('robots', 'index, follow')),
             'version': version, 'jsonld': jsonld(meta.get('jsonld', 'none'), meta),
-            'preload_photo': f'<link rel="preload" as="image" type="image/webp" href="/assets/img/{PHOTO}-160.webp">' if PHOTO and path == '/' else '',
         })
         for key in ('services', 'websites', 'about', 'contact'):
             vals['cur_' + key] = ' aria-current="page"' if nav == key else ''

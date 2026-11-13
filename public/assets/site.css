@@ -197,52 +197,92 @@ a.brand:hover { background: none; }
 .stand > .sign, .stand > .plate { z-index: 1; }
 .stand > .plate { position: relative; }
 
-/* ---------------------------------------------------------------- the first screen */
-.hero { display: grid; grid-template-columns: var(--gutter) minmax(0, 1fr) var(--gutter); padding-top: 56px; background: var(--overcast); }
-.hero > *, .hero__row > * { grid-column: 2; }
-.hero .posts { position: relative; inset: auto; grid-row: 1 / 3; margin-top: 40px; }
-.hero__row { display: contents; }
-.sign--hero { grid-row: 1; z-index: 1; padding: 30px 26px 0; }
-.sign--hero h1 { font-size: clamp(2.5rem, 12.6vw, 3.3rem); line-height: .98; padding-bottom: 18px; border-bottom: 4px solid #fff; }
-.sign--hero .sign__line { margin-top: 15px; }
-.sign--hero .panel { margin: 20px -12px 14px; }
-.hero__call { grid-row: 2; position: relative; z-index: 1; justify-self: center; width: min(100% - 8px, 420px); margin: 16px 0 30px; }   /* the 4px halo ends at the sign's edge */
-.road { grid-row: 3; grid-column: 1 / -1; position: relative; height: 64px; background: var(--asphalt); }
-.road::before { content: ""; position: absolute; inset: 8px 0; border-block: 3px solid var(--lane); }
-.road::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 6px; margin-top: -3px; background: repeating-linear-gradient(90deg, var(--hivis) 0 54px, transparent 54px 108px); }
-.byline { grid-row: 4; z-index: 1; display: flex; align-items: center; gap: 13px; padding-top: 30px; font-size: 1rem; line-height: 1.38; max-width: 27em; }
-.byline picture { flex: none; }
-.byline img { width: 56px; height: 56px; object-fit: cover; object-position: 50% 50%; border-radius: 7px; box-shadow: 0 0 0 2px #000; }
-.hero-lede { grid-row: 5; z-index: 1; margin-top: 20px; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.45; max-width: 31em; }
-@media (max-width: 359px) { .sign--hero { padding-inline: 21px; } .sign--hero .panel { margin-inline: -7px; } }
+/* ---------------------------------------------------------------- the first screen: the screen is the sign */
+/* One guide sign fills the screen under the header. Its two destinations are as large as the width allows
+   (Overpass 800 "Marketing" is 4.78em wide), and the border, corners and rule grow with the sign. */
+.hero { background: #fff; }
+.hero__screen { --m: 16px; --tab: 37px; padding: calc(var(--tab) + 14px) var(--m) var(--m); }
+.sign--hero {
+  --pad: 24px; --edge: 12px;                                      /* the legend's inset; the panels' inset (border plus a 3px gap) */
+  --big: calc((100vw - 2 * var(--m) - 2 * var(--pad)) / 4.8);
+  display: flex; flex-direction: column; max-width: 1680px; margin-inline: auto;
+  min-height: min(860px, 100vh - 4rem - 1px - var(--tab) - 14px - var(--m));
+  min-height: min(860px, 100svh - 4rem - 1px - var(--tab) - 14px - var(--m));
+  padding: calc(var(--pad) + 2px) var(--pad) 0;
+}
+.sign--hero h1 { margin-block: auto; padding-bottom: clamp(20px, 4vh, 40px); font-size: var(--big); line-height: .95; letter-spacing: -.012em; text-wrap: nowrap; }   /* the legend stands in the middle of the field, like a real sign's */
+.hero__big, .hero__for { display: block; }
+.hero__big { margin-left: -.047em; }                             /* the M's side bearing: its stem stands on the rule's end */
+.hero__for { margin-top: .22em; font-size: .5em; font-weight: 700; line-height: 1; letter-spacing: 0; }
+.sign--hero .sign__line { padding-top: 14px; border-top: 4px solid #fff; max-width: none; font-size: clamp(1.15rem, 1.62vw, 1.45rem); text-wrap: balance; }
+.sign__exits { display: grid; gap: 6px; margin: 20px calc(var(--edge) - var(--pad)) var(--edge); }
+.sign--hero .panel { min-height: 62px; }
+.panel--white { justify-content: center; background: #fff; }
+.panel--white:hover { background: #fff; }
+@media (max-width: 359px) { .sign--hero { --pad: 20px; } }
 @media (min-width: 700px) {
-  .sign { border-radius: 22px; }
-  .sign::before { inset: 6px; border-width: 5px; border-radius: 16px; }
-  .sign__tab { right: 30px; padding: 15px 18px 12px; font-size: 1rem; }
-  .sign--hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: clamp(20px, 3vw, 44px); padding: 44px 44px 0; }
-  .sign--hero h1 { grid-column: 1; align-self: end; font-size: clamp(3.2rem, 7.1vw, 5.7rem); padding-bottom: 24px; }
-  .sign--hero .sign__line { grid-column: 1; margin-top: 20px; }
-  .sign--hero .sign__arrow { display: block; grid-column: 2; grid-row: 1 / span 2; align-self: center; width: clamp(104px, 17vw, 248px); height: auto; margin-right: 6px; transform: rotate(45deg); }
-  .sign--hero .panel { grid-column: 1 / -1; margin: 28px -30px 14px; padding: 23px 28px 20px 30px; }
-  .panel .arrow { width: 42px; height: 42px; }
+  .hero__screen { --m: 24px; --tab: 42px; }
+  .sign--hero {
+    --pad: clamp(40px, 5vw, 64px); --edge: 15px;
+    --big: clamp(5.25rem, min(13vw, (100vh - 26.25rem) / 2.65), 12.5rem);
+    display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr auto auto; padding-top: clamp(38px, 8.6vh, 78px);
+    min-height: min(860px, 92vw, 100vh - 4.75rem - 1px - var(--tab) - 14px - var(--m));
+    min-height: min(860px, 92vw, 100svh - 4.75rem - 1px - var(--tab) - 14px - var(--m));
+  }
+  .sign--hero h1 { grid-area: 1 / 1; margin-block: 0; padding-bottom: .18em; }
+  .hero__for { font-size: max(1.75rem, .27em); margin-top: .3em; }
+  .sign--hero .sign__arrow { display: block; grid-area: 1 / 1; justify-self: end; width: calc(var(--big) * 1.66); height: auto; margin-top: calc(var(--big) * .02); }
+  .sign--hero .sign__line { padding-top: 18px; border-top-width: 5px; }
+  .sign__exits { grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin-top: 24px; }
+  .sign--hero .panel { min-height: 72px; padding-block: 20px 17px; font-size: clamp(1.25rem, 2.7vw, 1.6rem); }
+  .panel--white { padding-inline: clamp(24px, 3.4vw, 52px); }
 }
-@media (min-width: 900px) {
-  .sign--hero { padding: 54px 56px 0; }
-  .sign--hero h1 span { display: block; }
-  .sign--hero .panel { margin-inline: -42px; }
-}
+@supports (height: 1svh) { @media (min-width: 700px) { .sign--hero { --big: clamp(5.25rem, min(13vw, (100svh - 26.25rem) / 2.65), 12.5rem); } } }
 @media (min-width: 1000px) {
-  .hero { grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, var(--max)) minmax(var(--gutter), 1fr); padding-top: 72px; }
-  .hero .posts { grid-row: 1 / 3; }
-  .posts::before { left: 17%; }
-  .posts::after { right: 17%; }
-  .hero__row { grid-row: 2; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 30px; margin: 22px 0 34px; }
-  .sign--hero .sign__line span { display: block; }               /* one sentence a line */
-  .hero__call { width: auto; margin: 0; padding-inline: 1.3em; }
-  .byline { padding: 0; font-size: .9375rem; max-width: 20.5em; }
-  .road { grid-row: 3; height: 76px; }
-  .hero-lede { grid-row: 4; justify-self: start; max-width: 34em; margin-top: clamp(3rem, 5vw, 4.25rem); font-size: 1.4rem; line-height: 1.42; color: #000; }   /* the standfirst, below the road */
-  .road::before { inset: 9px 0; }
+  .hero__screen { --m: clamp(24px, 2.2vw, 32px); --tab: 48px; }
+  .sign--hero { border-radius: 36px; --edge: 23px; --pad: max(64px, (100vw - var(--max)) / 2 - var(--m)); }
+  .sign--hero::before { inset: 10px; border-width: 8px; border-radius: 26px; }
+  .sign--hero .sign__tab { right: 52px; padding: 17px 22px 13px; border-radius: 16px 16px 4px 4px; font-size: 1.125rem; }
+  .sign--hero .sign__tab::before { inset: 5px; border-width: 4px; border-radius: 11px 11px 1px 1px; }
+  .sign--hero .sign__line { padding-top: 22px; border-top-width: 8px; }
+  .sign__exits { margin-top: 24px; }
+  .sign--hero .panel { min-height: 78px; padding: 21px 32px 17px 36px; border-radius: 14px; font-size: clamp(1.6rem, 2.3vw, 2.1rem); }
+  .sign--hero .panel::before { inset: 5px; border-width: 4px; border-radius: 9px; }
+  .sign--hero .panel .arrow { width: 46px; height: 46px; }
+  .sign--hero .panel--white { padding-inline: clamp(32px, 3.4vw, 52px); }
+}
+@media (min-width: 1744px) { .sign--hero { --pad: 250px; } }      /* the sign stops growing at 1680px; the legend stays on the page's column */
+
+/* under the sign: the standfirst, who you deal with, and where */
+.intro { display: grid; gap: 2.25rem; padding-block: clamp(2.5rem, 6vw, 4.75rem) var(--section); }
+.hero-lede { font-size: clamp(1.3rem, 2.5vw, 1.6rem); line-height: 1.36; max-width: 34em; text-wrap: pretty; }
+.byline { display: flex; align-items: center; gap: 18px; }
+.byline__plate { flex: none; width: 128px; }
+.byline picture { position: relative; display: block; padding: 7px; background: #fff; border-radius: 10px; box-shadow: 0 0 0 1px #9aa1a4; }
+.byline picture::after { content: ""; position: absolute; inset: 3.5px; border: 3px solid #000; border-radius: 7px; }
+.byline img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 3.5px; }
+.byline .blade { display: block; min-height: 0; margin-top: 6px; padding: 10px 11px 7px; border-radius: 7px; text-align: center; }
+.byline .blade::before { inset: 3px; border-width: 2px; border-radius: 4.5px; }
+.byline .blade__name, .byline .blade__tag { display: block; }
+.byline .blade__name { font-size: 1rem; line-height: 1.05; }
+.byline .blade__tag { margin-top: 3px; font-size: .9375rem; line-height: 1; }
+.byline p { font-weight: 600; font-size: clamp(1.15rem, 2vw, 1.3rem); line-height: 1.36; max-width: 13.5em; text-wrap: balance; }
+.distance { list-style: none; margin: 0; padding: 20px 26px 18px; }
+.distance li { padding: 15px 0 12px; line-height: 1.1; }
+.distance li + li { border-top: 3px solid #fff; }
+.distance strong, .distance span { display: block; }
+.distance strong { font-weight: 800; font-size: 1.5rem; }
+.distance span { margin-top: 4px; font-weight: 600; font-size: 1.2rem; }
+@media (min-width: 700px) {                                       /* a distance sign: the place on the left, how on the right */
+  .distance { padding: 26px 34px 24px; }
+  .distance li { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding: 20px 0 16px; white-space: nowrap; }
+  .distance li + li { border-top-width: 4px; }
+  .distance strong { font-size: clamp(1.4rem, 2.05vw, 1.75rem); }
+  .distance span { margin: 0; font-size: clamp(1.15rem, 1.55vw, 1.3rem); }
+}
+@media (min-width: 1100px) {
+  .intro { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem clamp(2.5rem, 6vw, 5.5rem); align-items: start; }
+  .intro__where { grid-column: 2; grid-row: 1 / span 2; margin-top: .45rem; }
 }
 
 /* ---------------------------------------------------------------- sections */
