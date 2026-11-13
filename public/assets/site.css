@@ -255,6 +255,11 @@ h2 + .lede { margin-top: 1rem; }
 .split > .section-head { margin-bottom: 0; }
 .section-head p { margin-top: .85rem; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.45; color: var(--ink-muted); max-width: 32em; }
 .split { display: grid; gap: clamp(2rem, 5vw, 4rem); }
+@media (max-width: 899px) {                                       /* About on a phone: the story first, the photo after it */
+  .split--story > div:first-child { display: contents; }
+  .split--story .prose { order: 1; }
+  .split--story .portrait { order: 2; margin-top: 0; }
+}
 @media (min-width: 900px) {
   .split { grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: start; }
   .split--even { grid-template-columns: repeat(2, minmax(0, 1fr)); }
