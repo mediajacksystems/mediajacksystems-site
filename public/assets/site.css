@@ -183,6 +183,7 @@ a.brand:hover { background: none; }
   .sign::before { inset: 6px; border-width: 5px; border-radius: 16px; }
   .sign__tab { right: 30px; padding: 15px 18px 12px; font-size: 1rem; }
   .panel .arrow { width: 42px; height: 42px; }
+  .sign__exits { grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin-top: 24px; }
   .panel--white { padding-inline: clamp(24px, 3.4vw, 52px); }
 }
 
@@ -218,17 +219,22 @@ a.brand:hover { background: none; }
   --pad: 24px; --edge: 12px;                                      /* the legend's inset; the panels' inset (border plus a 3px gap) */
   --big: calc((100vw - 2 * var(--m) - 2 * var(--pad)) / 4.8);
   display: flex; flex-direction: column; max-width: 1680px; margin-inline: auto;
-  min-height: min(860px, 100vh - 4rem - 1px - var(--tab) - 14px - var(--m));
-  min-height: min(860px, 100svh - 4rem - 1px - var(--tab) - 14px - var(--m));
+  min-height: min(860px, 178vw, 100vh - 4rem - 1px - var(--tab) - 14px - var(--m));
+  min-height: min(860px, 178vw, 100svh - 4rem - 1px - var(--tab) - 14px - var(--m));
   padding: calc(var(--pad) + 2px) var(--pad) 0;
 }
-.sign--hero h1 { margin-block: auto; padding-bottom: clamp(20px, 4vh, 40px); font-size: var(--big); line-height: .95; letter-spacing: -.012em; text-wrap: nowrap; }   /* the legend stands in the middle of the field, like a real sign's */
+.sign--hero h1 { margin-top: auto; padding-block: 22px 17px; font-size: var(--big); line-height: .95; letter-spacing: -.012em; text-wrap: nowrap; }   /* the legend stands on its rule */
 .hero__big, .hero__for { display: block; }
 .hero__big { margin-left: -.047em; }                             /* the M's side bearing: its stem stands on the rule's end */
 .hero__for { margin-top: .22em; font-size: .5em; font-weight: 700; line-height: 1; letter-spacing: 0; }
-.sign--hero .sign__line { padding-top: 14px; border-top: 4px solid #fff; max-width: none; font-size: clamp(1.15rem, 1.62vw, 1.45rem); text-wrap: balance; }
+.sign--hero .sign__line { padding-top: 14px; border-top: 4px solid #fff; max-width: none; font-size: clamp(1.15rem, 1.62vw, 1.45rem); text-wrap: pretty; }
 .sign--hero .panel { min-height: 62px; }
 @media (max-width: 359px) { .sign--hero { --pad: 20px; } }
+/* On a phone tall enough to leave green above the legend, the arrow takes it: top right, the words lower left of it,
+   as on a real guide sign. It grows with the screen, so the field never has a dead band. */
+@media (max-width: 699px) and (min-height: 700px) {
+  .sign--hero .sign__arrow { display: block; order: -1; align-self: flex-end; width: clamp(72px, 100vh - 630px, 46vw); width: clamp(72px, 100svh - 630px, 46vw); height: auto; margin: 2px -2px 0 0; }
+}
 @media (min-width: 700px) {
   .hero__screen { --m: 24px; --tab: 42px; }
   .sign--hero {
@@ -319,25 +325,28 @@ h2 + .lede { margin-top: 1rem; }
 .limits { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 14px; }
 .limit { display: grid; gap: 12px; justify-items: center; align-content: start; text-align: center; }
 .limit__plate {
-  container-type: inline-size; position: relative; display: grid; grid-template-rows: 2.2rem auto 1.1rem; row-gap: .35rem; align-content: center; justify-items: center;
-  width: 100%; max-width: 236px; aspect-ratio: 4 / 5; background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px #9aa1a4;
+  container-type: inline-size; position: relative; display: flex; flex-direction: column; align-items: center;
+  width: 100%; max-width: 272px; aspect-ratio: 4 / 5; background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px #9aa1a4;
 }
 .limit__plate::before { content: ""; position: absolute; inset: 5px; border: 4.5px solid #000; border-radius: 9.5px; }
-.limit__top { align-self: center; width: min-content; font-weight: 800; font-size: 1rem; line-height: 1.05; letter-spacing: .03em; text-transform: uppercase; }
-.limit__num { align-self: end; font-weight: 900; font-size: clamp(3rem, 14vw, 4.6rem); line-height: .76; letter-spacing: -.02em; white-space: nowrap; }
-.limit__cur { display: inline-block; margin-right: .04em; font-size: .55em; line-height: 0; letter-spacing: 0; vertical-align: .34em; }
-.limit__unit { grid-row: 3; align-self: end; font-weight: 800; font-size: 1rem; line-height: 1.05; letter-spacing: .04em; text-transform: uppercase; }
-/* The legend fills the plate like a real speed-limit sign. Every plate has the same three rows (label, numeral,
-   sub-label), sized from the plate's own width (100cqw), so the numerals in a row share one baseline whether or not
-   a plate has a sub-label. The dollar sign is set at 55% and raised to the numeral's top, which lets the numeral
-   grow: "$500" is then 2.23em wide and takes 82% of the width inside the black border (19px of edge and border). */
+/* The legend fills the plate like a real speed-limit sign. Every plate has the same three rows from the top (label,
+   numeral, sub-label), sized from the plate's own width (100cqw), so the numerals in a row share one baseline whether
+   or not a plate has a sub-label. The numeral stands on an invisible strut, so a smaller numeral ("$1,500") keeps the
+   same baseline. The dollar sign is set at 55% and raised to the numeral's top, which lets the numeral grow: the
+   widest, "$500", takes 80% of the width inside the black border (19px of edge and border). */
+.limit__top { display: grid; place-items: center; width: min-content; height: 2.4rem; margin-top: 2.1rem; font-weight: 800; font-size: 1rem; line-height: 1.04; letter-spacing: .03em; text-transform: uppercase; }
+.limit__num { margin-top: .25rem; font-weight: 900; font-size: 3.4rem; line-height: 0; letter-spacing: -.02em; white-space: nowrap; }
+.limit__num::before { content: ""; display: inline-block; height: 3.7rem; }
+.limit__cur { display: inline-block; margin-right: .05em; font-size: .55em; letter-spacing: 0; vertical-align: .5em; }
+.limit__unit { margin-top: .55rem; font-weight: 800; font-size: 1rem; line-height: 1; letter-spacing: .04em; text-transform: uppercase; }
 @supports (width: 1cqw) {
-  .limit__plate { grid-template-rows: 22.5cqw 28.5cqw 11.5cqw; row-gap: 5.5cqw; padding-top: 2cqw; }
-  .limit__top, .limit__unit { font-size: max(.9375rem, 10.5cqw); }
-  .limit__num { font-size: calc((100cqw - 19px) * .368); }
-  .limit--long .limit__num { font-size: calc((100cqw - 19px) * .29); }
+  .limit__top { height: 24cqw; margin-top: 23cqw; font-size: max(.9375rem, 11cqw); }
+  .limit__num { margin-top: 0; font-size: calc((100cqw - 19px) * .359); }
+  .limit__num::before { height: 43cqw; }
+  .limit--long .limit__num { font-size: calc((100cqw - 19px) * .283); }
+  .limit__unit { margin-top: 5.6cqw; font-size: max(.9375rem, 9.5cqw); }
 }
-.limit__note { font-size: 1rem; line-height: 1.36; max-width: 14.5em; color: var(--ink-muted); }
+.limit__note { font-size: 1rem; line-height: 1.36; max-width: 14.5em; color: var(--ink-muted); text-wrap: balance; }
 .limits-also { margin-top: clamp(1.75rem, 4vw, 2.5rem); max-width: 30em; font-weight: 600; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.4; }
 .limits-more { margin-top: 1rem; }
 .more { display: inline-block; padding-block: .7rem; margin-block: -.7rem; font-weight: 700; }
