@@ -432,11 +432,57 @@ a.blade:active { transform: translateY(1px); }
 .band .lede { margin-top: 18px; font-weight: 500; }
 .band .plate--white { background: transparent; box-shadow: inset 0 0 0 3px #000; }
 .band .plate--white:hover { background: #fff; }
-.band__grid { display: grid; gap: clamp(2.25rem, 5vw, 4rem); }
+.band__maker { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+.band__maker > .actions { margin-top: 0; }
+.looks { margin-top: .9rem; }
 .looks h3 { font-size: 1.125rem; font-weight: 800; padding-bottom: 12px; }
 .looks ul { list-style: none; padding: 0; }
-.looks li { border-top: 3px solid #000; padding: 13px 0 11px; font-weight: 700; font-size: 1.2rem; line-height: 1.25; }
-@media (min-width: 900px) { .band__grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: end; } }
+.looks li { border-top: 3px solid #000; padding: 13px 0 11px; font-weight: 700; font-size: 1.2rem; line-height: 1.25; text-wrap: balance; }
+
+/* your business on the sign: the two fields draw a guide sign as you type. Its legend is sized from the sign's own
+   width (100cqw) and steps down by class for long names, so the sign keeps one size whatever is typed. */
+.maker { display: grid; gap: .9rem; }
+.maker .field label { font-weight: 800; }
+.maker .field input { border-width: 3px; }
+.maker__stage { padding-top: 37px; }                              /* room for the exit tab */
+.maker__sign { container-type: inline-size; max-width: 620px; margin-inline: auto; }
+.maker__sign .sign__tab { max-width: calc(100% - 44px); overflow: hidden; text-overflow: ellipsis; }
+.maker__face { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; padding: 1.6rem 1.6rem 1.4rem; }
+.maker__legend { grid-column: 1 / -1; display: flex; align-items: flex-end; height: 6.4rem; padding-bottom: .7rem; border-bottom: 4px solid #fff; }
+.maker__name { width: 100%; font-weight: 800; font-size: 2.7rem; line-height: 1; letter-spacing: -.012em; }
+.maker__name.is-m { font-size: 1.9rem; }
+.maker__name.is-s { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: 1.35rem; line-height: 1.1; letter-spacing: 0; overflow-wrap: anywhere; }
+.maker__next { font-weight: 700; font-size: 1.3rem; line-height: 1; }
+.maker__face .arrow { width: 2.6rem; height: 2.6rem; margin-top: .7rem; }
+@supports (width: 1cqw) {
+  .maker__face { padding: 7cqw 8cqw 6.6cqw; }
+  .maker__legend { height: 32cqw; padding-bottom: 3.4cqw; border-bottom-width: max(4px, 1.1cqw); }
+  .maker__name { font-size: 13.6cqw; }
+  .maker__name.is-m { font-size: 9.3cqw; }
+  .maker__name.is-s { font-size: 6.5cqw; }
+  .maker__next { font-size: 6.4cqw; padding-bottom: 1.6cqw; }
+  .maker__face .arrow { width: 13cqw; height: 13cqw; margin-top: 3.4cqw; }
+}
+@media (scripting: none) { .maker, .maker__stage { display: none; } }   /* without JavaScript the band is the offer and its two buttons */
+@media (min-width: 700px) {
+  .maker { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+  .maker__stage { padding-top: 42px; }
+  .looks ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(1.5rem, 3vw, 2.5rem); }
+}
+@media (min-width: 900px) {
+  .band__maker { grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr); grid-template-areas: "say stage" "maker stage" "actions stage" "looks looks"; column-gap: clamp(2.5rem, 5vw, 4.5rem); }
+  .band__say { grid-area: say; }
+  .maker { grid-area: maker; }
+  .maker__stage { grid-area: stage; align-self: center; }
+  .band__maker > .actions { grid-area: actions; }
+  .looks { grid-area: looks; margin-top: clamp(1.75rem, 4vw, 3rem); }
+  .looks ul { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 900px) and (scripting: none) {
+  .band__maker { grid-template-areas: "say looks" "actions looks"; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); align-items: end; }
+  .looks { margin-top: 0; }
+  .looks ul { display: block; }
+}
 
 /* ---------------------------------------------------------------- mile markers along one route: the steps */
 .route { position: relative; list-style: none; margin: 0; padding: 0; counter-reset: mile; display: grid; gap: 30px; }

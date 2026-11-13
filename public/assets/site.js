@@ -85,6 +85,53 @@
         .catch(function () { btn.disabled = false; say('error', FAIL); });
     });
   }
+  // your business on the sign: the two fields draw a guide sign as you type. Nothing is sent anywhere; the button
+  // carries the two values to the check-up form in this tab's own storage.
+  var KEY = 'mj-sign';
+  var tidy = function (v) { return String(v || '').replace(/\s+/g, ' ').trim(); };
+  var maker = document.querySelector('[data-maker]');
+  if (maker) {
+    var inName = maker.querySelector('[data-maker-in="name"]'), inTown = maker.querySelector('[data-maker-in="town"]');
+    var outName = document.querySelector('[data-maker-out="name"]'), outTown = document.querySelector('[data-maker-out="town"]');
+    var go = document.querySelector('[data-maker-go]');
+    var fits = function () {                                                // one word per line at most, two lines at most
+      return outName.scrollWidth <= outName.clientWidth + 1 && outName.offsetHeight <= parseFloat(getComputedStyle(outName).fontSize) * 2.3;
+    };
+    var draw = function () {
+      outName.textContent = tidy(inName.value) || 'Your business';
+      outTown.textContent = tidy(inTown.value) || 'Your town';
+      outName.classList.remove('is-m', 'is-s');                             // long names step the type down, by class
+      if (!fits()) { outName.classList.add('is-m'); if (!fits()) { outName.classList.remove('is-m'); outName.classList.add('is-s'); } }
+    };
+    if (inName && inTown && outName && outTown) {
+      inName.addEventListener('input', draw); inTown.addEventListener('input', draw);
+      draw();
+      if (go) {
+        go.setAttribute('href', '/check-up/#ask');
+        go.addEventListener('click', function () {
+          try {
+            var pair = [tidy(inName.value), tidy(inTown.value)];
+            if (pair[0] || pair[1]) sessionStorage.setItem(KEY, JSON.stringify(pair)); else sessionStorage.removeItem(KEY);
+          } catch (e) {}
+        });
+        inName.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); inTown.focus(); } });
+        inTown.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); go.click(); } });
+      }
+    }
+  }
+  // on a page with the form: a name and town typed on the home page's sign go into the form, once
+  var biz = document.getElementById('f-business');
+  var carried = '';
+  if (biz) {
+    try {
+      var kept = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+      if (kept && kept.filter) carried = kept.map(tidy).filter(Boolean).join(', ').slice(0, 80);
+      sessionStorage.removeItem(KEY);
+    } catch (e) {}
+    if (carried && !biz.value) biz.value = carried;
+    var direct = carried && fallback && fallback.querySelector('a[href^="mailto:"]');
+    if (direct) direct.href = direct.href.split('&body=')[0] + '&body=' + encodeURIComponent('My business and website: ' + carried);
+  }
   // the eight-question self-check: runs here, in the browser; nothing is sent unless the visitor adds it to a message
   var sc = document.querySelector('[data-selfcheck]');
   if (sc) {
@@ -105,7 +152,7 @@
         : no + ' things to look at. Each one is under a box you left empty, and the free check-up covers them all.');
       result.textContent = ''; result.appendChild(p);
       var mail = fallback && fallback.querySelector('a[href^="mailto:"]');
-      if (mail) mail.href = mail.href.split('&body=')[0] + '&body=' + encodeURIComponent('My business and website: \n\n' + answers());
+      if (mail) mail.href = mail.href.split('&body=')[0] + '&body=' + encodeURIComponent('My business and website: ' + carried + '\n\n' + answers());
     };
     boxes.forEach(function (b) { b.addEventListener('change', update); });
     var send = sc.querySelector('[data-send-answers]');
