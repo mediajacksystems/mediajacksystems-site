@@ -61,7 +61,7 @@ p + p { margin-top: 1em; }
 strong, b { font-weight: 800; }
 
 a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: .18em; }
-a:hover { background: var(--hivis); color: #000; }
+a:hover, a:not([class]):focus-visible { background: var(--hivis); color: #000; }
 a[href^="tel:"] { white-space: nowrap; }                        /* a phone number never breaks across two lines */
 :focus-visible { outline: 3px solid #000; outline-offset: 3px; border-radius: 2px; }
 .sign :focus-visible, .board :focus-visible, .night :focus-visible, .site-footer :focus-visible { outline-color: #fff; }
@@ -180,7 +180,7 @@ a.brand:hover { background: none; }
 .shine::before { content: ""; position: absolute; inset: -20% -60%; background: linear-gradient(100deg, transparent 42%, rgba(255, 255, 255, .32) 50%, transparent 58%); transform: translateX(-72%); }
 @keyframes sweep { from { transform: translateX(-72%); } to { transform: translateX(72%); } }
 @media (prefers-reduced-motion: no-preference) {
-  .sign--hero .shine::before { animation: sweep 1.5s .45s cubic-bezier(.3, .1, .2, 1) both; }
+  .sign--hero .shine::before { animation: sweep 1.5s .45s cubic-bezier(.3, .1, .2, 1) both; will-change: transform; }
   .sign.is-lit .shine::before { animation: sweep 1.5s .15s cubic-bezier(.3, .1, .2, 1) both; }
   .plate, .panel, .blade, .header-phone { transition: transform .08s; }
 }
@@ -210,7 +210,6 @@ a.brand:hover { background: none; }
 .road { grid-row: 3; grid-column: 1 / -1; position: relative; height: 64px; background: var(--asphalt); }
 .road::before { content: ""; position: absolute; inset: 8px 0; border-block: 3px solid var(--lane); }
 .road::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 6px; margin-top: -3px; background: repeating-linear-gradient(90deg, var(--hivis) 0 54px, transparent 54px 108px); }
-.hero::after { content: ""; grid-row: 4 / 6; grid-column: 1 / -1; background: var(--paper); }
 .byline { grid-row: 4; z-index: 1; display: flex; align-items: center; gap: 13px; padding-top: 30px; font-size: 1rem; line-height: 1.38; max-width: 27em; }
 .byline img { width: 54px; height: 62px; flex: none; object-fit: cover; border-radius: 7px; box-shadow: 0 0 0 2px #000; }
 .hero-lede { grid-row: 5; z-index: 1; margin-top: 20px; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.45; max-width: 31em; }
@@ -242,7 +241,6 @@ a.brand:hover { background: none; }
   .hero-lede { grid-row: 3; justify-self: center; width: 58%; margin: 30px 0 42px; text-align: center; text-wrap: balance; }
   .road { grid-row: 4; height: 76px; }
   .road::before { inset: 9px 0; }
-  .hero::after { display: none; }
 }
 
 /* ---------------------------------------------------------------- sections */
@@ -250,7 +248,7 @@ a.brand:hover { background: none; }
 .section--overcast { background: var(--overcast); }
 .section--ruled { border-top: 1px solid var(--aluminum); }
 h2 + .lede { margin-top: 1rem; }
-.section--after-intro { padding-top: clamp(3rem, 8vw, 6.5rem); }
+.section--after-intro { padding-top: clamp(3.25rem, 8vw, 6.5rem); }
 .section-head { margin-bottom: clamp(2rem, 5vw, 3.25rem); }
 .section-head h2 { max-width: 17ch; }
 .section-head h2 .line { display: block; }
@@ -295,6 +293,7 @@ h2 + .lede { margin-top: 1rem; }
   min-height: 74px; padding: 15px 16px 12px 20px; background: var(--guide); color: #fff; border-radius: 9px; text-decoration: none;
 }
 .blade::before { content: ""; position: absolute; inset: 4px; border: 3px solid #fff; border-radius: 5.5px; pointer-events: none; }
+.fingerpost .blade { max-width: 480px; }
 a.blade:hover { background: var(--guide-deep); color: #fff; }
 a.blade:active { transform: translateY(1px); }
 .blade__name { font-size: clamp(1.25rem, 5vw, 1.6rem); font-weight: 800; line-height: 1.08; letter-spacing: 0; }
@@ -314,7 +313,7 @@ a.blade:active { transform: translateY(1px); }
 }
 
 /* ---------------------------------------------------------------- work zone: real jobs, with their numbers */
-.zone { position: relative; isolation: isolate; display: grid; place-items: center; width: 112px; height: 112px; margin: 0 0 18px -8px; }
+.section-head .zone { position: relative; isolation: isolate; display: grid; place-items: center; width: 112px; height: 112px; margin: 0 0 18px -8px; color: #000; }
 .zone::before { content: ""; position: absolute; inset: 14.65%; z-index: -1; background: var(--work); border-radius: 9px; transform: rotate(45deg); box-shadow: inset 0 0 0 4px var(--work), inset 0 0 0 7px #000; }
 .zone span { width: min-content; padding-top: .2em; font-weight: 800; font-size: .9375rem; line-height: 1.04; letter-spacing: .02em; text-align: center; text-transform: uppercase; }
 .jobs { list-style: none; padding: 0; display: grid; gap: clamp(2.25rem, 5vw, 3.25rem) clamp(1.75rem, 4vw, 3rem); }
@@ -338,7 +337,7 @@ a.blade:active { transform: translateY(1px); }
 .work-also { margin-top: clamp(2rem, 5vw, 3rem); max-width: 34em; color: var(--ink-muted); }
 @media (min-width: 900px) {
   .work-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 34px; align-items: center; }
-  .zone { width: 148px; height: 148px; margin: 0 0 0 -10px; }
+  .section-head .zone { width: 148px; height: 148px; margin: 0 0 0 -10px; }
   .zone::before { border-radius: 11px; box-shadow: inset 0 0 0 5px var(--work), inset 0 0 0 9px #000; }
   .zone span { font-size: 1.2rem; }
   .jobs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -559,7 +558,7 @@ h2 + .contact-list { margin-top: 1.75rem; }
 .form-note a { color: #000; }
 .form-status { min-height: 1.5em; font-weight: 700; }
 .form-status[data-state="error"] { color: var(--stop); }
-.form-status[data-state="ok"] { position: relative; justify-self: start; padding: 18px 22px 15px; background: var(--guide); color: #fff; border-radius: 12px; font-weight: 700; line-height: 1.35; max-width: 26em; }
+.form-status[data-state="ok"] { position: relative; justify-self: start; padding: 18px 22px 15px; background: var(--guide); color: #fff; border-radius: 12px; font-weight: 700; line-height: 1.35; max-width: 27em; text-wrap: balance; }
 .form-status[data-state="ok"]::before { content: ""; position: absolute; inset: 4px; border: 3px solid #fff; border-radius: 8.5px; }
 .form-fallback { margin-top: 1.1rem; }
 .form-fallback p { max-width: 32em; }

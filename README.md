@@ -1,6 +1,6 @@
 # mediajacksystems.com
 
-The website for MediaJack Systems LLC: print and digital marketing for small and growing businesses, run by Jack Johnson in Englewood, Colorado.
+The website for MediaJack Systems LLC: print and digital marketing for local businesses, run by Jack Johnson in Englewood, Colorado.
 
 Plain HTML and CSS, one small script, no packages, no build tools to install, no cookies and no tracking.
 
@@ -14,9 +14,9 @@ How the site is graded (11 categories, 92 checks) and its score: https://claude.
 | `src/pages/` | Each page's content, with its title and description in the `<!--meta {...} -->` block at the top. |
 | `src/layout.html` | The header, footer and `<head>` shared by every page. |
 | `src/build.py` | Puts the layout, pages, partials and `src/site.json` together into `public/`, and writes `sitemap.xml`. |
-| `src/partials/` | Pieces used on more than one page: the message form, the price strip. |
+| `src/partials/` | Pieces used on more than one page: the message form, the price plates, the check-up list, the closing sign. |
 | `src/site.json` | The booking link, the photo, the work samples and the other facts that switch parts of the site on. |
-| `public/assets/site.css` | All the styles. Colours, type and spacing are set at the top. |
+| `public/assets/site.css` | All the styles. Colours and spacing are set at the top; each sign part has its own block. |
 | `server.mjs` | A tiny Node web server for `public/` (pretty URLs, redirects from the old site, compression, security headers) and the message form's endpoint. |
 
 ## Change something
@@ -38,14 +38,17 @@ The site is published on Replit at mediajacksystems.com without using Replit's A
 - The one-time switch in Replit is `replit/setup.sh` (it keeps the old settings as `artifact.toml.before-github`):
   `curl -fsSL https://raw.githubusercontent.com/mediajacksystems/mediajacksystems-site/main/replit/setup.sh | sh`
 
-## The look
+## The look: the sign system
 
-The full brand book is `brand/BRAND.md`.
+Customers follow signs, so the site is built from the American road-sign system. The full brand book is `brand/BRAND.md`.
 
-- Type: Archivo (variable width and weight), self-hosted. Licence: SIL Open Font License, `public/assets/fonts/OFL.txt`.
-- Colours: wet-bark `#0f1412` (text), rain-silver `#c2c8cb`, rain-leaf `#246b3c` (the one accent), on paper `#ffffff` and mist `#eef1f0`.
-- Printers' marks are the only ornament: the registration mark (the logo), crop marks, the dashed tear line on the job tickets and the colour bar above the footer.
-- Accessibility: WCAG 2.2 AA (checked with axe-core on every page at phone and desktop widths), body text above 7:1.
+- Type: Overpass (drawn from Highway Gothic, the US road-sign alphabet), one variable file, self-hosted. Licence: SIL Open Font License, `public/assets/fonts/OFL.txt`. A fallback with matching measurements is set in the CSS, so nothing moves when the font arrives.
+- Colours: highway green `#00674a` (sign plates), hi-vis yellow-green `#d6ee00` (the one colour that means "do this", always with black text), black `#000000`, asphalt `#1c1d1f`, overcast `#eceeed`, aluminium `#b9bfc1` (posts and hairlines), construction orange `#f58220` (the work-zone sign only) and stop red `#b3202b` (errors). They are set at the top of `public/assets/site.css`.
+- The parts: the guide sign with its exit tab and hi-vis panel (`.sign`, `.panel`), plates for buttons (`.plate`), speed-limit price plates (`.limit`), street blades on a post (`.blade`, `.fingerpost`), the price board (`.board`), mile markers for steps (`.route`), the road strip (`.road`), the hi-vis band (`.band`) and the night section with the closing sign (`.night`).
+- Sign legends are real text. Capitals come from CSS only.
+- Motion is one idea, headlights: a band of light crosses the hero sign once, the closing sign lights up when it comes into view, and a soft light follows the pointer across a sign. All of it is off when the device asks for reduced motion.
+- Accessibility: WCAG 2.2 AA, checked with axe-core on every page at phone and desktop widths. White on green is 6.9:1 and black on hi-vis is 16:1.
+- The strict content policy in `server.mjs` allows no inline styles or scripts, so custom properties are set from `site.js`.
 
 ## Facts that switch parts of the site on: `src/site.json`
 
@@ -53,8 +56,8 @@ The full brand book is `brand/BRAND.md`.
 | --- | --- |
 | `booking_url` | Adds the "Book a 30-minute call" buttons and links. Now Jack's Google Calendar booking page. |
 | `photo` | The photo of Jack on the home and About pages. Files: `public/assets/img/<name>-160`, `-480`, `-880` (`.webp` and `.jpg`). |
-| `work` | The job tickets ("Jobs I've done, with the numbers"). Real jobs only. Client names stay off unless Jack says otherwise. |
-| `testimonials` | A "What clients say" section. Each needs `quote`, `name`, `business` and the person's permission. |
+| `work` | The work zone ("Jobs I've done, with the numbers"). Real jobs only. Client names stay off unless Jack says otherwise. A job with `shot` shows its real screenshots: files `<shot>-desk-480/-960` and `<shot>-phone-160/-320` in `public/assets/img/`. |
+| `testimonials` | The big client quote. Each needs `quote`, `name`, `business` and the person's permission. |
 | `profiles` | Links to the Google Business Profile, LinkedIn and others in the footer, and `sameAs` in the structured data. |
 | `reply_promise`, `capacity`, `hours` | One sentence each, shown by the form, on the About page and on the Contact page. |
 

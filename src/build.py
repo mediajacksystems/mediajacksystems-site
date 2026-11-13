@@ -240,7 +240,16 @@ def build():
         html = render(html, vals)
         top, rest = html.split('<body>', 1)                                # "check-up" never breaks at its hyphen, anywhere on the page
         rest = re.sub(r'<span class="nb">(check-up[.,]?)</span>', r'\1', rest)
-        rest = ''.join(seg if seg.startswith('<') else re.sub(r'check-up[.,]?', lambda m: f'<span class="nb">{m.group(0)}</span>', seg) for seg in re.split(r'(<[^>]+>)', rest))
+        out, prev = [], ''
+        for seg in re.split(r'(<[^>]+>)', rest):
+            if seg.startswith('<'):
+                prev = seg
+            elif 'check-up' in seg:
+                seg = re.sub(r'check-up[.,]?', lambda m: f'<span class="nb">{m.group(0)}</span>', seg)
+                if re.search(r'class="[^"]*\bplate\b', prev):                 # a plate lays its text out as one piece, so keep it one piece
+                    seg = f'<span>{seg}</span>'
+            out.append(seg)
+        rest = ''.join(out)
         html = top + '<body>' + rest
         assert '{{' not in html, f'unfilled placeholder in {f.name}: ' + re.search(r'\{\{.{0,40}', html).group(0)
         dest = OUT / ('index.html' if path == '/' else path.strip('/') if path.endswith('.html') else path.strip('/') + '/index.html')
