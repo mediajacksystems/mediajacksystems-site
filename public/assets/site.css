@@ -119,6 +119,21 @@ a.brand:hover { background: none; }
 .header-phone:hover { background: #000; color: var(--hivis); }
 .header-phone:active { transform: translateY(1px); }
 .header-phone__num, .header-cta { display: none; }
+/* One hi-vis thing on the first screen. On the home page that is the band at the foot of the sign, so the header's
+   hi-vis plate (Call on phones, Free check-up on wide screens) starts as a quiet white plate and turns hi-vis once the
+   reader has scrolled about a screen. CSS only; where scroll timelines are missing, or motion is not wanted, it is
+   hi-vis all the time. Hover drops the animation, so the plate still answers the pointer. */
+@keyframes wake { from { background-color: #fff; } to { background-color: var(--hivis); } }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    body:has(.sign--hero) .header-cta { animation: wake step-end both; animation-timeline: scroll(root block); animation-range: 0 85vh; }
+    body:has(.sign--hero) .header-cta:hover { animation: none; }
+    @media (max-width: 939px) {
+      body:has(.sign--hero) .header-phone { animation: wake step-end both; animation-timeline: scroll(root block); animation-range: 0 85vh; }
+      body:has(.sign--hero) .header-phone:hover { animation: none; }
+    }
+  }
+}
 @media (max-width: 359px) {
   .brand svg { width: 38px; height: 38px; }
   .brand__name { font-size: 1.05rem; }
@@ -209,6 +224,9 @@ a.brand:hover { background: none; }
 @media (min-width: 700px) {
   .sign--bleed { --inset: 16px; --r: 24px; --gap: 6px; --gutter: 40px; --col: max(var(--gutter), (100vw - var(--max)) / 2); }
   .sign--bleed .sign__tab { padding: 10px 14px 7px; }
+  /* from tablet width the home page's plaque sits in the frame's top right corner, as far from the line as on a phone;
+     inner pages follow once there is room beside the heading */
+  .sign--hero .sign__tab { position: absolute; z-index: 2; top: calc(var(--inset) + var(--frame) + 16px); right: calc(var(--inset) + var(--frame) + 16px); }
   .sign--bleed .panel:first-child:not(:last-child) { padding-right: 30px; }
   .sign--bleed .panel + .panel { padding-left: clamp(26px, 3.4vw, 44px); }
 }
@@ -269,21 +287,19 @@ a.brand:hover { background: none; }
 @media (min-width: 700px) {
   .sign--hero { min-height: min(880px, 82vw, 100vh - 4.75rem - 1px); min-height: min(880px, 82vw, 100svh - 4.75rem - 1px); }
   .hero__face {
-    --big: clamp(5.25rem, min(15.3vw - 3px, (100vh - 22.5rem) / 2.65), 11.875rem);
-    grid-template-rows: 1fr auto auto; padding-top: calc(var(--inset) + clamp(20px, 3.4vh, 34px));
+    --big: clamp(5.25rem, min(15.3vw - 3px, (100vh - 23.75rem) / 2.65), 11.875rem);
+    grid-template-rows: 1fr auto auto; padding-top: calc(var(--inset) + clamp(40px, 6vh, 56px));
   }
-  .hero__face .sign__tab { grid-area: 2 / 2; justify-self: end; margin-top: calc(var(--big) * .03); }
   .sign--hero h1 { padding-block: 0 .18em; }
   .hero__big { font-weight: 700; }                                /* at this size the lighter cut reads as sign lettering, not as weight */
   .hero__for { font-size: max(1.75rem, .27em); margin-top: .3em; }
-  /* the arrow hangs under the plaque and lands on the second word's baseline */
-  .sign--hero .sign__arrow { display: block; grid-area: 2 / 2; justify-self: end; width: calc(var(--big) * 1.645 - 60px); height: auto; margin-top: calc(var(--big) * .03 + 60px); }
+  /* the arrow stands beside the two words, centred between the first one's top and the second one's baseline */
+  .sign--hero .sign__arrow { display: block; grid-area: 2 / 2; justify-self: end; align-self: start; width: calc(var(--big) * 1.645 - 60px); height: auto; margin-top: calc(var(--big) * .03 + 30px); }
   .sign--hero .sign__line { padding-top: 18px; }
   .sign--hero .sign__exits { margin-top: clamp(24px, 4.4vh, 44px); }
 }
-@supports (height: 1svh) { @media (min-width: 700px) { .hero__face { --big: clamp(5.25rem, min(15.3vw - 3px, (100svh - 22.5rem) / 2.65), 11.875rem); } } }
+@supports (height: 1svh) { @media (min-width: 700px) { .hero__face { --big: clamp(5.25rem, min(15.3vw - 3px, (100svh - 23.75rem) / 2.65), 11.875rem); } } }
 @media (min-width: 1000px) {
-  .hero__face .sign__tab { font-size: 1.0625rem; }
   .sign--hero .sign__line { padding-top: 21px; border-top-width: 4px; }
   .sign--hero .panel { min-height: 84px; font-size: clamp(1.6rem, 2.2vw, 2rem); }
   .sign--hero .panel .arrow { width: 44px; height: 44px; }
@@ -603,10 +619,10 @@ a.blade:active { transform: translateY(1px); }
   .sign--page h1 { max-width: 20ch; padding-bottom: 22px; }
   .sign--page .sign__line { margin-top: 20px; }
 }
-@media (min-width: 1000px) {                                      /* room beside the heading: the plaque goes top right */
-  .sign--page > .wrap { position: relative; padding-top: calc(var(--inset) + 52px); }
+@media (min-width: 1000px) {                                      /* room beside the heading: the plaque goes to the frame's top right corner */
+  .sign--page > .wrap { padding-top: calc(var(--inset) + 52px); }
   .sign--page:not(.sign--panel) > .wrap { padding-bottom: calc(var(--inset) + 50px); }
-  .sign--page .sign__tab { position: absolute; right: 0; top: calc(var(--inset) + 30px); margin: 0; }
+  .sign--page .sign__tab { position: absolute; z-index: 2; top: calc(var(--inset) + var(--frame) + 16px); right: calc(var(--inset) + var(--frame) + 16px); margin: 0; }
 }
 /* the 404 sign is off the route: a boxed sign on two posts */
 .detour { background: var(--overcast); padding-top: 56px; }
