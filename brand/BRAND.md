@@ -76,12 +76,12 @@ CMYK values are the screen colours converted to FOGRA39 coated (relative colorim
 
 - Rules do the work shadows would: a `rule-heavy` line in `ink` over every list (services, steps, FAQ), `rule` lines in `border` between rows.
 - Corners are print-sharp: `radius-sm` (2px) for buttons, `radius-hair` for stripes, `radius-full` only for dots and the map pill.
-- No shadows. The only gradients are the silver blend and the foil on the drawn business card.
+- No shadows. The only gradient is the silver blend.
 - Printers' marks are the only ornament: crop marks frame the one thing to do (CheckupPanel, the message form) and the photo of Jack; the registration mark is the logo and sits on every job ticket; a dashed tear line splits a job ticket; one colour bar (leaf, moss, new-leaf, silver, pewter, graphite) runs above the footer like a press sheet's control strip.
 
 ## Imagery
 
-- Drawings of the real surfaces a customer sees, in brand colours: a mailer with a green edge, a black business card with silver foil, a green street sign with white letters, a phone, a map pin.
+- Real work, not drawings: the first screen shows a client website on a computer and a phone, made from screenshots, in plain frames (a hairline browser bar, an ink phone bezel) inside crop marks. No placeholder text or stand-in images anywhere.
 - No stock photos, no mascots, no icon sets. Photographs only of Jack and his real work. The one photo of Jack appears small beside his name in the first screen and large, in crop marks, where the page says who you'd be working with.
 - Real jobs are shown as job tickets: client (kind and place, name left off), job, one number from the job's own records, two lines of detail. Never an invented number.
 

@@ -53,11 +53,11 @@ if CFG.get('hours'):
     BUSINESS['openingHours'] = CFG['hours']
 
 SERVICES = [
-    ('Get found', 'Google Business Profile, local search, AI search visibility, Google and Facebook/Instagram ads, and review routines.', '/services/#get-found'),
-    ('Look the part', 'Logos and brand guides, websites and website fixes, landing pages, and photo and video.', '/services/#look-the-part'),
-    ('Stay in touch', 'Social media management, email newsletters and campaigns, follow-ups and content.', '/services/#stay-in-touch'),
-    ('Put it in their hands', 'Business cards, postcards and direct mail including Every Door Direct Mail, flyers, brochures, signs, banners, vehicle graphics and trade show displays.', '/services/#print'),
-    ('Run it for you', 'Fractional CMO: marketing plan, budget and calendar, vendor management, sales materials and plain-English reporting.', '/services/#run-it'),
+    ('Google and local search', 'Google Business Profile, local search, AI search visibility, Google and Facebook/Instagram ads, and review routines.', '/services/#get-found'),
+    ('Websites and branding', 'Logos and brand guides, websites and website fixes, landing pages, and photo and video.', '/services/#look-the-part'),
+    ('Social media and email', 'Social media management, email newsletters and campaigns, follow-ups and content.', '/services/#stay-in-touch'),
+    ('Print and direct mail', 'Business cards, postcards and direct mail including Every Door Direct Mail, flyers, brochures, signs, banners, vehicle graphics and trade show displays.', '/services/#print'),
+    ('Part-time marketing lead', 'Fractional CMO: marketing plan, budget and calendar, vendor management, sales materials and plain-English reporting.', '/services/#run-it'),
 ]
 # Jack's price list of 30 Oct 2026: (what, price in USD, per month?)
 PRICES = [
@@ -135,7 +135,7 @@ def parts():
     if PHOTO:
         base = f'/assets/img/{PHOTO}'
         p['byline'] = (f'<p class="byline"><picture><source type="image/webp" srcset="{base}-160.webp"><img src="{base}-160.jpg" width="64" height="64" alt=""></picture>'
-                       '<span><strong>Jack Johnson</strong>, owner. I quote the job, do the work and answer the phone.</span></p>')
+                       '<span><strong>Jack Johnson</strong>, owner. You deal with me from the first call to the finished job.</span></p>')
         def figure(lazy):
             return f'<figure class="portrait crop">{picture("", "(max-width: 960px) 80vw, 400px", 880, 1100, lazy)}<figcaption>Jack Johnson, Englewood, Colorado</figcaption></figure>'
         p['portrait'] = figure(True)          # far down the home page: loads when the reader gets near it
@@ -159,7 +159,7 @@ def parts():
                      f'<ul class="tickets">{"".join(t)}'
                      '<li class="ticket ticket--self"><dl><div><dt>Client</dt><dd>MediaJack Systems</dd></div><div><dt>Job</dt><dd>The website you are on</dd></div></dl>'
                      '<p class="ticket-number"><strong>0</strong> <span>cookies, trackers and pop-ups</span></p>'
-                     '<p>One small script and one font. Built to the same checks I run on a client site. Don\'t take my word for it: '
+                     '<p>One small script and one font, built to the same checks I run on client sites. You can check it yourself: '
                      '<a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fmediajacksystems.com%2F" rel="noopener">run Google\'s speed test on this page</a>.</p></li>'
                      f'</ul>{also}</div></section>')
     else:

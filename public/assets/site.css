@@ -130,29 +130,16 @@ h3 { font-size: var(--step-2); line-height: 1.1; }
 .hero h1 { max-width: 14em; }
 .hero .lede { margin-top: var(--space-3); }
 .hero-note { margin-top: var(--space-3); color: var(--graphite); font-size: var(--step--1); }
-.surfaces { position: relative; }
-.surfaces figcaption { margin-top: 0.75rem; color: var(--graphite); font-size: var(--step--1); text-align: center; }
-.surfaces svg { width: 100%; height: auto; overflow: visible; }
-.surfaces .piece { transform-box: fill-box; transform-origin: center; }
-@media (prefers-reduced-motion: no-preference) {
-  .surfaces .piece { animation: settle 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-  .surfaces .piece--card { animation-delay: 80ms; }
-  .surfaces .piece--sign { animation-delay: 160ms; }
-  .surfaces .piece--phone { animation-delay: 240ms; }
-  .surfaces .piece--pin { animation-delay: 420ms; }
-}
-@keyframes settle {
-  from { opacity: 0; translate: 0 18px; rotate: -4deg; }
-  to { opacity: 1; translate: 0 0; rotate: 0deg; }
-}
-
-/* the drawing's type (kept here so the page needs no inline styles) */
-.surfaces text { font-family: "Archivo", system-ui, sans-serif; fill: var(--ink); }
-.surfaces .t-head { font-weight: 800; font-stretch: 112%; letter-spacing: -0.01em; }
-.surfaces .t-light { fill: #ffffff; }
-.surfaces .t-foil { fill: url(#foil); }
-.surfaces .t-tiny { font-size: 7.5px; font-weight: 700; letter-spacing: 0.04em; }
-.surfaces .t-btn { fill: #ffffff; font-weight: 700; font-size: 12.5px; }
+/* real work in the hero: a client site on a computer and a phone */
+.work-shot { margin: 0; }
+.work-shot .shots { position: relative; padding-bottom: 24%; }
+.work-shot .shot--desk { width: 86%; background: #ffffff; border: 1px solid #c2c8cb; }
+.work-shot .shot-bar { display: flex; gap: 6px; align-items: center; height: 24px; padding-inline: 10px; background: var(--mist); border-bottom: 1px solid var(--line); }
+.work-shot .shot-bar i { width: 8px; height: 8px; border-radius: 50%; background: #c2c8cb; }
+.work-shot img { display: block; width: 100%; height: auto; }
+.work-shot .shot--phone { position: absolute; right: 0; bottom: 0; width: 27%; padding: 5px; background: var(--ink); border-radius: 18px; }
+.work-shot .shot--phone img { border-radius: 13px; }
+.work-shot figcaption { margin-top: 1.25rem; color: var(--graphite); font-size: var(--step--1); }
 .checkup.checkup--single { grid-template-columns: minmax(0, 1fr); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
@@ -262,7 +249,7 @@ h3 { font-size: var(--step-2); line-height: 1.1; }
 /* ---------------------------------------------------------------- small screens */
 @media (max-width: 960px) {
   .hero .wrap, .checkup, .why, .about-strip, .contact-grid { grid-template-columns: minmax(0, 1fr); }
-  .surfaces { max-width: 560px; margin-inline: auto; width: 100%; }
+  .work-shot { max-width: 560px; margin-inline: auto; width: 100%; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .door, .service { grid-template-columns: 0.9rem minmax(0, 1fr); }
   .door > :last-child, .service > :last-child { grid-column: 2; }
@@ -301,7 +288,7 @@ h3 { font-size: var(--step-2); line-height: 1.1; }
   .actions .btn { width: 100%; }
 }
 @media print {
-  .site-header, .band, .site-footer, .surfaces { display: none; }
+  .site-header, .band, .site-footer, .work-shot { display: none; }
   body { font-size: 12pt; }
 }
 
@@ -355,9 +342,6 @@ h3 { font-size: var(--step-2); line-height: 1.1; }
 .portrait img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
 .portrait figcaption { margin-top: 0.6rem; color: var(--graphite); font-size: var(--step--1); }
 .prose h3 { margin-top: var(--space-4); font-size: var(--step-1); font-stretch: 110%; }
-.why-list { display: grid; gap: var(--space-2); margin-block: var(--space-2) var(--space-3); padding-top: var(--space-2); border-top: 2px solid var(--ink); }
-.why-list dt { font-weight: 700; font-stretch: 108%; }
-.why-list dd { margin: 0.25rem 0 0; color: var(--graphite); max-width: 30em; }
 .why dd, .service dd { max-width: 30em; }
 
 /* ---------------------------------------------------------------- websites page */
