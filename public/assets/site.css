@@ -150,51 +150,78 @@ a.brand:hover { background: none; }
 }
 
 /* ---------------------------------------------------------------- the guide sign */
-.sign { position: relative; isolation: isolate; background: var(--guide); color: #fff; border-radius: 18px; }
-.sign::before { content: ""; position: absolute; inset: 5px; z-index: 1; border: 4px solid #fff; border-radius: 13px; pointer-events: none; }
+/* Green plate, one thin white line set in from the edge. --inset is where the line sits, --frame its width, --r its
+   radius and --gap the green between the line and the hi-vis band at the foot of a sign. */
+.sign { --inset: 6px; --frame: 2px; --r: 12px; --gap: 4px; position: relative; isolation: isolate; background: var(--guide); color: #fff; border-radius: 18px; }
+.sign::before { content: ""; position: absolute; inset: var(--inset); z-index: 1; border: var(--frame) solid #fff; border-radius: var(--r); pointer-events: none; }
 .sign a:not(.panel) { text-decoration-thickness: 2px; }
-.sign__tab {
-  position: absolute; right: 22px; bottom: calc(100% - 1px); margin: 0; padding: 14px 16px 11px;
-  background: var(--guide); border-radius: 11px 11px 3px 3px;
-  font-weight: 700; font-size: .9375rem; line-height: 1; letter-spacing: .02em; white-space: nowrap;
-}
-.sign__tab::before { content: ""; position: absolute; inset: 4px; border: 3px solid #fff; border-radius: 7.5px 7.5px 1px 1px; }
 .sign h1, .sign h2 { font-weight: 800; letter-spacing: 0; }
 .sign__line { font-weight: 600; font-size: clamp(1.1rem, 2.1vw, 1.4rem); line-height: 1.36; max-width: 33em; text-wrap: balance; }
 .sign__arrow { display: none; }
-/* the hi-vis panel: the one thing to do, like the yellow EXIT ONLY panel */
-.panel {
-  position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  padding: 19px 20px 16px 22px; background: var(--hivis); color: #000; border-radius: 10px;
-  font-weight: 800; font-size: clamp(1.2rem, 4.6vw, 1.9rem); line-height: 1.08; text-decoration: none;
+/* the exit tab: on a sign that stands on a ground it sits on the top edge */
+.sign__tab {
+  position: absolute; right: 22px; bottom: calc(100% - 1px); margin: 0; padding: 14px 16px 10px;
+  background: var(--guide); border-radius: 11px 11px 3px 3px;
+  font-weight: 700; font-size: .9375rem; line-height: 1; letter-spacing: .02em; white-space: nowrap;
 }
-.panel::before { content: ""; position: absolute; inset: 4px; border: 3px solid #000; border-radius: 6.5px; pointer-events: none; }
-.panel:hover { background: var(--hivis); }
-.panel:hover span { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: .16em; }
-.panel:active { transform: translateY(1px); }
-.sign .panel:focus-visible { outline: 4px solid #000; outline-offset: -13px; border-radius: 10px; }
-.panel .arrow { width: 34px; height: 34px; transform: rotate(135deg); margin-top: -3px; }
-/* the bottom of a sign: the hi-vis panel and a white one beside it, inside the border */
-.sign__exits { position: relative; z-index: 2; display: grid; gap: 6px; margin: 20px calc(var(--edge) - var(--pad)) var(--edge); }
-.panel--white { justify-content: center; min-height: 56px; background: #fff; text-align: center; }
-.panel--white:hover { background: #fff; }
+.sign__tab::before { content: ""; position: absolute; inset: 5px; border: 2px solid #fff; border-radius: 6px 6px 1px 1px; }
+/* the hi-vis band at the foot of a sign, inside the line: what to do next, like the yellow EXIT ONLY panel.
+   One band, one or two links; a thin black rule divides two. */
+.sign__face { padding: 30px 26px 0; }
+.sign__exits {
+  --off: calc(var(--inset) + var(--frame) + var(--gap));
+  position: relative; z-index: 2; display: grid; margin: 22px var(--off) var(--off);
+  background: var(--hivis); color: #000; border-radius: calc(var(--r) - var(--frame) - var(--gap));
+}
+.panel {
+  position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 60px; padding: 15px 18px 11px 20px; border-radius: inherit; color: #000;
+  font-weight: 800; font-size: clamp(1.2rem, 5.2vw, 1.4rem); line-height: 1.08; text-decoration: none;
+}
+.panel + .panel { border-top: 2px solid #000; border-radius: 0; }
+.panel:hover { background: none; }
+.panel:hover > span { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: .16em; }
+.panel:active > * { transform: translateY(1px); }
+.sign .panel:focus-visible { outline: 3px solid #000; outline-offset: -7px; border-radius: 9px; }
+.panel .arrow { width: 30px; height: 30px; transform: rotate(135deg); margin-top: -3px; }
+.panel:active .arrow { transform: translateY(1px) rotate(135deg); }
+@media (max-width: 359px) { .sign__face { padding-inline: 21px; } }
 @media (min-width: 700px) {
-  .sign { border-radius: 22px; }
-  .sign::before { inset: 6px; border-width: 5px; border-radius: 16px; }
-  .sign__tab { right: 30px; padding: 15px 18px 12px; font-size: 1rem; }
-  .panel .arrow { width: 42px; height: 42px; }
-  .sign__exits { grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin-top: 24px; }
-  .panel--white { padding-inline: clamp(24px, 3.4vw, 52px); }
+  .sign { --inset: 7px; --frame: 3px; --r: 15px; --gap: 5px; border-radius: 22px; }
+  .sign__tab { right: 30px; padding: 15px 18px 11px; font-size: 1rem; }
+  .sign__face { padding: 46px 52px 0; }
+  .sign__exits { grid-template-columns: minmax(0, 1fr) auto; margin-top: 28px; }
+  .panel { min-height: 72px; padding: 20px 26px 16px 30px; font-size: clamp(1.3rem, 2.7vw, 1.75rem); }
+  .panel + .panel { border-top: 0; border-left: 2px solid #000; padding-inline: clamp(26px, 3.4vw, 44px); }
+  .panel .arrow { width: 38px; height: 38px; }
+}
+
+/* the sign as the screen: full-bleed green under the header, framed by the one thin white line. The home page's
+   first screen and every inner page's head. Its tab becomes a small outlined plaque inside the line. */
+.sign--bleed { --inset: 10px; --r: 16px; --gutter: 28px; --col: var(--gutter); border-radius: 0; }
+.sign--bleed .sign__tab { position: static; justify-self: start; align-self: start; width: max-content; padding: 9px 12px 6px; background: none; border: 2px solid #fff; border-radius: 8px; }
+.sign--bleed .sign__tab::before { content: none; }
+.sign--bleed .panel { padding-inline: calc(var(--col) - var(--off)); }      /* the band's words stand on the page's column */
+@media (max-width: 359px) { .sign--bleed { --gutter: 24px; } }
+@media (min-width: 700px) {
+  .sign--bleed { --inset: 16px; --r: 24px; --gap: 6px; --gutter: 40px; --col: max(var(--gutter), (100vw - var(--max)) / 2); }
+  .sign--bleed .sign__tab { padding: 10px 14px 7px; }
+  .sign--bleed .panel:first-child:not(:last-child) { padding-right: 30px; }
+  .sign--bleed .panel + .panel { padding-left: clamp(26px, 3.4vw, 44px); }
+}
+@supports (width: 1cqw) {                                         /* measured from the sign, not the window, so a scrollbar changes nothing */
+  .sign--bleed { container-type: inline-size; }
+  @media (min-width: 700px) { .sign--bleed > * { --col: max(var(--gutter), (100cqw - var(--max)) / 2); } }
 }
 
 /* headlights: signs are retroreflective, so they shine back at the light that finds them */
 .shine { position: absolute; inset: 0; z-index: 3; border-radius: inherit; overflow: hidden; pointer-events: none; }
-.shine::before { content: ""; position: absolute; inset: -20% -60%; background: linear-gradient(100deg, transparent 42%, rgba(255, 255, 255, .32) 50%, transparent 58%); transform: translateX(-72%); }
+.shine::before { content: ""; position: absolute; inset: -20% -60%; background: linear-gradient(100deg, transparent 42%, rgba(255, 255, 255, .28) 50%, transparent 58%); transform: translateX(-72%); }
 @keyframes sweep { from { transform: translateX(-72%); } to { transform: translateX(72%); } }
 @media (prefers-reduced-motion: no-preference) {
   .sign--hero .shine::before { animation: sweep 1.5s .45s cubic-bezier(.3, .1, .2, 1) both; will-change: transform; }
   .sign.is-lit .shine::before { animation: sweep 1.5s .15s cubic-bezier(.3, .1, .2, 1) both; }
-  .plate, .panel, .blade, .header-phone { transition: transform .08s; }
+  .plate, .panel > *, .blade, .header-phone { transition: transform .08s; }
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .shine::after { content: ""; position: absolute; inset: 0; background: radial-gradient(340px circle at var(--mx, -999px) var(--my, -999px), rgba(255, 255, 255, .2), transparent 70%); }
@@ -211,60 +238,53 @@ a.brand:hover { background: none; }
 @media (min-width: 1000px) { .posts::before { left: 17%; } .posts::after { right: 17%; } }
 
 /* ---------------------------------------------------------------- the first screen: the screen is the sign */
-/* One guide sign fills the screen under the header. Its two destinations are as large as the width allows
-   (Overpass 800 "Marketing" is 4.78em wide), and the border, corners and rule grow with the sign. */
+/* The green fills the screen under the header, edge to edge. Its two destinations are as large as the page's column
+   allows (Overpass 800 "Marketing" is 4.78em wide) and stand on their rule; the hi-vis band runs along the foot. */
 .hero { background: #fff; }
-.hero__screen { --m: 16px; --tab: 37px; padding: calc(var(--tab) + 14px) var(--m) var(--m); }
 .sign--hero {
-  --pad: 24px; --edge: 12px;                                      /* the legend's inset; the panels' inset (border plus a 3px gap) */
-  --big: calc((100vw - 2 * var(--m) - 2 * var(--pad)) / 4.8);
-  display: flex; flex-direction: column; max-width: 1680px; margin-inline: auto;
-  min-height: min(860px, 178vw, 100vh - 4rem - 1px - var(--tab) - 14px - var(--m));
-  min-height: min(860px, 178vw, 100svh - 4rem - 1px - var(--tab) - 14px - var(--m));
-  padding: calc(var(--pad) + 2px) var(--pad) 0;
+  display: flex; flex-direction: column;
+  min-height: min(880px, 205vw, 100vh - 4rem - 1px);
+  min-height: min(880px, 205vw, 100svh - 4rem - 1px);
 }
-.sign--hero h1 { margin-top: auto; padding-block: 22px 17px; font-size: var(--big); line-height: .95; letter-spacing: -.012em; text-wrap: nowrap; }   /* the legend stands on its rule */
+.hero__face {
+  --big: calc((100vw - 2 * var(--gutter)) / 4.8);
+  flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto 1fr auto; column-gap: 10px;
+  padding-top: calc(var(--inset) + 16px);
+}
+.hero__face .sign__tab { grid-area: 1 / 1 / 2 / -1; }
+.sign--hero h1 { grid-area: 2 / 1 / 3 / -1; align-self: end; padding-block: 20px 16px; font-size: var(--big); line-height: .95; letter-spacing: -.012em; text-wrap: nowrap; }   /* the legend stands on its rule */
 .hero__big, .hero__for { display: block; }
 .hero__big { margin-left: -.047em; }                             /* the M's side bearing: its stem stands on the rule's end */
 .hero__for { margin-top: .22em; font-size: .5em; font-weight: 700; line-height: 1; letter-spacing: 0; }
-.sign--hero .sign__line { padding-top: 14px; border-top: 4px solid #fff; max-width: none; font-size: clamp(1.15rem, 1.62vw, 1.45rem); text-wrap: pretty; }
-.sign--hero .panel { min-height: 62px; }
-@media (max-width: 359px) { .sign--hero { --pad: 20px; } }
-/* On a phone tall enough to leave green above the legend, the arrow takes it: top right, the words lower left of it,
-   as on a real guide sign. It grows with the screen, so the field never has a dead band. */
+.sign--hero .sign__line { grid-area: 3 / 1 / 4 / -1; padding-top: 13px; border-top: 3px solid #fff; max-width: none; font-size: clamp(1.15rem, 1.62vw, 1.45rem); text-wrap: pretty; }
+.sign--hero .sign__exits { margin-top: 20px; }
+/* On a phone tall enough to leave green above the legend, the arrow takes it: top right, the plaque top left, the
+   words lower left of the arrow, as on a real guide sign. It grows with the screen, so the field has no dead band. */
 @media (max-width: 699px) and (min-height: 700px) {
-  .sign--hero .sign__arrow { display: block; order: -1; align-self: flex-end; width: clamp(72px, 100vh - 630px, 46vw); width: clamp(72px, 100svh - 630px, 46vw); height: auto; margin: 2px -2px 0 0; }
+  .sign--hero .sign__arrow { display: block; grid-area: 1 / 1 / 2 / -1; justify-self: end; width: clamp(72px, 100vh - 650px, min(52vw, 160vw - 390px)); width: clamp(72px, 100svh - 650px, min(52vw, 160vw - 390px)); height: auto; margin: 1px -1px 0 0; }
 }
 @media (min-width: 700px) {
-  .hero__screen { --m: 24px; --tab: 42px; }
-  .sign--hero {
-    --pad: clamp(40px, 5vw, 64px); --edge: 15px;
-    --big: clamp(5.25rem, min(13vw, (100vh - 26.25rem) / 2.65), 12.5rem);
-    display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr auto auto; padding-top: clamp(38px, 8.6vh, 78px);
-    min-height: min(860px, 92vw, 100vh - 4.75rem - 1px - var(--tab) - 14px - var(--m));
-    min-height: min(860px, 92vw, 100svh - 4.75rem - 1px - var(--tab) - 14px - var(--m));
+  .sign--hero { min-height: min(880px, 82vw, 100vh - 4.75rem - 1px); min-height: min(880px, 82vw, 100svh - 4.75rem - 1px); }
+  .hero__face {
+    --big: clamp(5.25rem, min(15.3vw - 3px, (100vh - 22.5rem) / 2.65), 11.875rem);
+    grid-template-rows: 1fr auto auto; padding-top: calc(var(--inset) + clamp(20px, 3.4vh, 34px));
   }
-  .sign--hero h1 { grid-area: 1 / 1; margin-block: 0; padding-bottom: .18em; }
+  .hero__face .sign__tab { grid-area: 2 / 2; justify-self: end; margin-top: calc(var(--big) * .03); }
+  .sign--hero h1 { padding-block: 0 .18em; }
+  .hero__big { font-weight: 700; }                                /* at this size the lighter cut reads as sign lettering, not as weight */
   .hero__for { font-size: max(1.75rem, .27em); margin-top: .3em; }
-  .sign--hero .sign__arrow { display: block; grid-area: 1 / 1; justify-self: end; width: calc(var(--big) * 1.66); height: auto; margin-top: calc(var(--big) * .02); }
-  .sign--hero .sign__line { padding-top: 18px; border-top-width: 5px; }
-  .sign--hero .panel { min-height: 72px; padding-block: 20px 17px; font-size: clamp(1.25rem, 2.7vw, 1.6rem); }
+  /* the arrow hangs under the plaque and lands on the second word's baseline */
+  .sign--hero .sign__arrow { display: block; grid-area: 2 / 2; justify-self: end; width: calc(var(--big) * 1.645 - 60px); height: auto; margin-top: calc(var(--big) * .03 + 60px); }
+  .sign--hero .sign__line { padding-top: 18px; }
+  .sign--hero .sign__exits { margin-top: clamp(24px, 4.4vh, 44px); }
 }
-@supports (height: 1svh) { @media (min-width: 700px) { .sign--hero { --big: clamp(5.25rem, min(13vw, (100svh - 26.25rem) / 2.65), 12.5rem); } } }
+@supports (height: 1svh) { @media (min-width: 700px) { .hero__face { --big: clamp(5.25rem, min(15.3vw - 3px, (100svh - 22.5rem) / 2.65), 11.875rem); } } }
 @media (min-width: 1000px) {
-  .hero__screen { --m: clamp(24px, 2.2vw, 32px); --tab: 48px; }
-  .sign--hero { border-radius: 36px; --edge: 23px; --pad: max(64px, (100vw - var(--max)) / 2 - var(--m)); }
-  .sign--hero::before { inset: 10px; border-width: 8px; border-radius: 26px; }
-  .sign--hero .sign__tab { right: 52px; padding: 17px 22px 13px; border-radius: 16px 16px 4px 4px; font-size: 1.125rem; }
-  .sign--hero .sign__tab::before { inset: 5px; border-width: 4px; border-radius: 11px 11px 1px 1px; }
-  .sign--hero .sign__line { padding-top: 22px; border-top-width: 8px; }
-  .sign__exits { margin-top: 24px; }
-  .sign--hero .panel { min-height: 78px; padding: 21px 32px 17px 36px; border-radius: 14px; font-size: clamp(1.6rem, 2.3vw, 2.1rem); }
-  .sign--hero .panel::before { inset: 5px; border-width: 4px; border-radius: 9px; }
-  .sign--hero .panel .arrow { width: 46px; height: 46px; }
-  .sign--hero .panel--white { padding-inline: clamp(32px, 3.4vw, 52px); }
+  .hero__face .sign__tab { font-size: 1.0625rem; }
+  .sign--hero .sign__line { padding-top: 21px; border-top-width: 4px; }
+  .sign--hero .panel { min-height: 84px; font-size: clamp(1.6rem, 2.2vw, 2rem); }
+  .sign--hero .panel .arrow { width: 44px; height: 44px; }
 }
-@media (min-width: 1744px) { .sign--hero { --pad: 250px; } }      /* the sign stops growing at 1680px; the legend stays on the page's column */
 
 /* under the sign: the standfirst, who you deal with, and where */
 .intro { display: grid; gap: 2.25rem; padding-block: clamp(2.5rem, 6vw, 4.75rem) var(--section); }
@@ -282,14 +302,14 @@ a.brand:hover { background: none; }
 .byline p { font-weight: 600; font-size: clamp(1.15rem, 2vw, 1.3rem); line-height: 1.36; max-width: 13.5em; text-wrap: balance; }
 .distance { list-style: none; margin: 0; padding: 20px 26px 18px; }
 .distance li { padding: 15px 0 12px; line-height: 1.1; }
-.distance li + li { border-top: 3px solid #fff; }
+.distance li + li { border-top: 2px solid #fff; }
 .distance strong, .distance span { display: block; }
 .distance strong { font-weight: 800; font-size: 1.5rem; }
 .distance span { margin-top: 4px; font-weight: 600; font-size: 1.2rem; }
 @media (min-width: 700px) {                                       /* a distance sign: the place on the left, how on the right */
   .distance { padding: 26px 34px 24px; }
   .distance li { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding: 20px 0 16px; white-space: nowrap; }
-  .distance li + li { border-top-width: 4px; }
+  .distance li + li { border-top-width: 3px; }
   .distance strong { font-size: clamp(1.4rem, 2.05vw, 1.75rem); }
   .distance span { margin: 0; font-size: clamp(1.15rem, 1.55vw, 1.3rem); }
 }
@@ -363,7 +383,7 @@ h2 + .lede { margin-top: 1rem; }
   position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 14px;
   min-height: 74px; padding: 15px 16px 12px 20px; background: var(--guide); color: #fff; border-radius: 9px; text-decoration: none;
 }
-.blade::before { content: ""; position: absolute; inset: 4px; border: 3px solid #fff; border-radius: 5.5px; pointer-events: none; }
+.blade::before { content: ""; position: absolute; inset: 4px; border: 2px solid #fff; border-radius: 5.5px; pointer-events: none; }
 .fingerpost .blade { max-width: 480px; }
 a.blade:hover { background: var(--guide-deep); color: #fff; }
 a.blade:active { transform: translateY(1px); }
@@ -444,11 +464,11 @@ a.blade:active { transform: translateY(1px); }
 .maker { display: grid; gap: .9rem; }
 .maker .field label { font-weight: 800; }
 .maker .field input { border-width: 3px; }
-.maker__stage { padding-top: 37px; }                              /* room for the exit tab */
+.maker__stage { padding-top: 39px; }                              /* room for the exit tab */
 .maker__sign { container-type: inline-size; max-width: 620px; margin-inline: auto; }
 .maker__sign .sign__tab { max-width: calc(100% - 44px); overflow: hidden; text-overflow: ellipsis; }
 .maker__face { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; padding: 1.6rem 1.6rem 1.4rem; }
-.maker__legend { grid-column: 1 / -1; display: flex; align-items: flex-end; height: 6.4rem; padding-bottom: .7rem; border-bottom: 4px solid #fff; }
+.maker__legend { grid-column: 1 / -1; display: flex; align-items: flex-end; height: 6.4rem; padding-bottom: .7rem; border-bottom: 3px solid #fff; }
 .maker__name { width: 100%; font-weight: 800; font-size: 2.7rem; line-height: 1; letter-spacing: -.012em; }
 .maker__name.is-m { font-size: 1.9rem; }
 .maker__name.is-s { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: 1.35rem; line-height: 1.1; letter-spacing: 0; overflow-wrap: anywhere; }
@@ -456,7 +476,7 @@ a.blade:active { transform: translateY(1px); }
 .maker__face .arrow { width: 2.6rem; height: 2.6rem; margin-top: .7rem; }
 @supports (width: 1cqw) {
   .maker__face { padding: 7cqw 8cqw 6.6cqw; }
-  .maker__legend { height: 32cqw; padding-bottom: 3.4cqw; border-bottom-width: max(4px, 1.1cqw); }
+  .maker__legend { height: 32cqw; padding-bottom: 3.4cqw; border-bottom-width: max(3px, .7cqw); }
   .maker__name { font-size: 13.6cqw; }
   .maker__name.is-m { font-size: 9.3cqw; }
   .maker__name.is-s { font-size: 6.5cqw; }
@@ -534,20 +554,16 @@ a.blade:active { transform: translateY(1px); }
 .night { position: relative; overflow: hidden; background: var(--asphalt); color: #fff; padding-bottom: 0; }
 .night::before { content: ""; position: absolute; left: 50%; top: 4%; width: min(1500px, 190%); height: 86%; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(255, 255, 255, .085), transparent); pointer-events: none; }
 .lanes { position: relative; height: 10px; margin-top: 34px; background: repeating-linear-gradient(90deg, var(--lane) 0 54px, transparent 54px 108px); }
-.night .stand { max-width: 880px; margin-top: clamp(3.25rem, 8vw, 5.5rem); padding-bottom: clamp(2.5rem, 6vw, 4rem); display: grid; justify-items: center; }
-.sign--night { width: 100%; padding: 36px 26px 0; box-shadow: 0 0 90px rgba(60, 230, 160, .26), 0 0 26px rgba(60, 230, 160, .2); }
+.night__stand { max-width: 880px; margin-top: clamp(3.25rem, 8vw, 5.5rem); padding-bottom: clamp(2.5rem, 6vw, 4rem); display: grid; justify-items: center; }
+.sign--night { width: 100%; box-shadow: 0 0 90px rgba(60, 230, 160, .26), 0 0 26px rgba(60, 230, 160, .2); }
 .sign--night.is-dim { box-shadow: 0 0 0 rgba(60, 230, 160, 0); }
 .sign--night h2 { max-width: 15ch; font-size: clamp(2.1rem, 7vw, 4rem); line-height: 1.02; }
 .sign--night .sign__line { margin-top: 14px; }
-.sign--night .panel { margin: 24px -12px 14px; }
 .night__plates { position: relative; z-index: 1; display: grid; gap: 14px; width: min(100%, 420px); margin-top: 18px; }
 .night .plate--post { box-shadow: inset 0 0 0 3px #000; }
 .night .plate--post:hover { box-shadow: inset 0 0 0 3px #000; }
 @media (prefers-reduced-motion: no-preference) { .sign--night { transition: box-shadow 1.1s ease-out; } }
-@media (max-width: 359px) { .sign--night { padding-inline: 21px; } .sign--night .panel { margin-inline: -7px; } }
 @media (min-width: 700px) {
-  .sign--night { padding: 50px 52px 0; }
-  .sign--night .panel { margin: 30px -38px 14px; padding: 23px 28px 20px 30px; }
   .night__plates { display: flex; justify-content: center; width: auto; gap: 16px; margin-top: 22px; }
 }
 
@@ -568,26 +584,35 @@ a.blade:active { transform: translateY(1px); }
   .site-footer li a { min-height: 2.25rem; }
 }
 
-/* ---------------------------------------------------------------- inner pages: a shorter guide sign */
-.page-head { background: var(--overcast); padding-top: 56px; }
-.page-head > .wrap { padding-bottom: 36px; display: grid; }
-.sign--page { --pad: 26px; --edge: 14px; padding: 28px var(--pad) 30px; }
-.sign--page h1 { max-width: 17ch; font-size: clamp(2.1rem, 9.4vw, 3.9rem); line-height: 1; padding-bottom: 16px; border-bottom: 4px solid #fff; }
+/* ---------------------------------------------------------------- inner pages: the same sign, as tall as its words */
+.sign--page > .wrap { display: grid; padding-block: calc(var(--inset) + 16px) calc(var(--inset) + 24px); }
+.sign--page.sign--panel > .wrap { padding-bottom: 0; }
+.sign--page .sign__tab { margin-bottom: 20px; }
+.sign--page h1 { max-width: 17ch; font-size: clamp(2.1rem, 9.4vw, 3.9rem); line-height: 1; padding-bottom: 16px; border-bottom: 3px solid #fff; }
 .sign--page .sign__line { margin-top: 15px; max-width: 40em; text-wrap: pretty; }
-.sign--page.sign--panel { padding-bottom: 0; }
-.sign--page > .panel { margin: 20px -12px 14px; }
-.page-head .plate--post { justify-self: center; width: min(100%, 420px); margin-top: 16px; }
-@media (max-width: 359px) { .sign--page { --pad: 21px; } .sign--page > .panel { margin-inline: -7px; } }
 @media (min-width: 700px) {
-  .page-head { padding-top: 64px; }
-  .page-head > .wrap { padding-bottom: 44px; }
-  .sign--page { --pad: 52px; padding: 46px var(--pad) 46px; }
+  .sign--page > .wrap { padding-block: calc(var(--inset) + 26px) calc(var(--inset) + 38px); }
+  .sign--page .sign__tab { margin-bottom: 26px; }
   .sign--page h1 { max-width: 20ch; padding-bottom: 22px; }
   .sign--page .sign__line { margin-top: 20px; }
-  .sign--page > .panel { margin: 28px -38px 14px; }
-  .sign--page .panel { padding: 23px 28px 20px 30px; }
-  .sign--page .sign__exits { margin-top: 28px; }
-  .page-head .plate--post { width: auto; padding-inline: 1.3em; margin-top: 20px; }
+}
+@media (min-width: 1000px) {                                      /* room beside the heading: the plaque goes top right */
+  .sign--page > .wrap { position: relative; padding-top: calc(var(--inset) + 52px); }
+  .sign--page:not(.sign--panel) > .wrap { padding-bottom: calc(var(--inset) + 50px); }
+  .sign--page .sign__tab { position: absolute; right: 0; top: calc(var(--inset) + 30px); margin: 0; }
+}
+/* the 404 sign is off the route: a boxed sign on two posts */
+.detour { background: var(--overcast); padding-top: 56px; }
+.detour > .wrap { padding-bottom: 36px; display: grid; }
+.sign--detour h1 { max-width: 17ch; font-size: clamp(2.1rem, 9.4vw, 3.9rem); line-height: 1; padding-bottom: 16px; border-bottom: 3px solid #fff; }
+.sign--detour .sign__line { margin-top: 15px; max-width: 40em; }
+.detour .plate--post { justify-self: center; width: min(100%, 420px); margin-top: 16px; }
+@media (min-width: 700px) {
+  .detour { padding-top: 64px; }
+  .detour > .wrap { padding-bottom: 44px; }
+  .sign--detour h1 { padding-bottom: 22px; }
+  .sign--detour .sign__line { margin-top: 20px; }
+  .detour .plate--post { width: auto; padding-inline: 1.3em; margin-top: 20px; }
 }
 
 /* facts in pairs: what you get, what you can hold me to */
@@ -625,14 +650,14 @@ a.blade:active { transform: translateY(1px); }
 /* the price board: a green distance sign, service on the left, price on the right */
 .board { display: grid; padding: 30px 26px 26px; }
 .board table { width: 100%; border-collapse: collapse; }
-.board caption { padding-bottom: 14px; border-bottom: 4px solid #fff; text-align: left; font-weight: 600; font-size: 1.0625rem; line-height: 1.35; }
+.board caption { padding-bottom: 14px; border-bottom: 3px solid #fff; text-align: left; font-weight: 600; font-size: 1.0625rem; line-height: 1.35; }
 .board caption strong { display: block; font-size: clamp(1.6rem, 5.4vw, 2.2rem); line-height: 1.05; }
 .board th, .board td { padding: 15px 0 0; vertical-align: top; font-size: clamp(1.15rem, 3.9vw, 1.45rem); line-height: 1.16; }
 .board tbody tr:first-child th, .board tbody tr:first-child td { padding-top: 18px; }
 .board tbody th { padding-right: 18px; text-align: left; font-weight: 600; }
 .board td { text-align: right; font-weight: 800; white-space: nowrap; }
 .board table + table { margin-top: 34px; }
-.board__also { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 18px; margin-top: 26px; padding-top: 18px; border-top: 4px solid #fff; font-size: clamp(1.15rem, 3.9vw, 1.45rem); line-height: 1.16; }
+.board__also { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 18px; margin-top: 26px; padding-top: 18px; border-top: 3px solid #fff; font-size: clamp(1.15rem, 3.9vw, 1.45rem); line-height: 1.16; }
 .board__also span { font-weight: 600; }
 .price-note { margin-top: clamp(1.5rem, 4vw, 2.25rem); max-width: 33em; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.45; }
 .price-note + .price-note { margin-top: .8em; font-weight: 600; }
@@ -641,7 +666,7 @@ a.blade:active { transform: translateY(1px); }
   .board table + table { margin-top: 0; }
   .board tbody th { height: calc(2.32em + 15px); }                 /* every row two lines high, so the two halves line up */
   .board tbody tr:first-child th { height: calc(2.32em + 18px); }
-  .board table:first-child { border-right: 4px solid #fff; }
+  .board table:first-child { border-right: 3px solid #fff; }
   .board table:first-child caption, .board table:first-child th { padding-left: 0; }
   .board table:first-child td, .board table:first-child caption { padding-right: 44px; }
   .board table + table caption, .board table + table tbody th { padding-left: 44px; }
