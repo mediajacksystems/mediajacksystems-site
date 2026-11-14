@@ -148,7 +148,7 @@ def parts():
     p['capacity'] = e(CFG.get('capacity', ''))
     p['hours'] = e(CFG.get('hours', ''))
     p['arrow'] = ARROW
-    names = {'google_business': 'MediaJack on Google', 'linkedin': 'Jack on LinkedIn', 'facebook': 'Facebook', 'instagram': 'Instagram'}
+    names = {'google_business': 'MediaJack on Google', 'linkedin_company': 'MediaJack on LinkedIn', 'linkedin': 'Jack on LinkedIn', 'facebook': 'Facebook', 'instagram': 'Instagram'}
     p['profile_links'] = ''.join(f'<li><a href="{e(u)}" rel="noopener me">{names.get(k, k)}</a></li>' for k, u in CFG.get('profiles', {}).items() if u)
     # the photo
     if PHOTO:
