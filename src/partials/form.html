@@ -1,5 +1,5 @@
 <div class="form-wrap" id="{{form_id}}">
-  <h2>{{form_title}}</h2>
+  <h2 id="{{form_id}}-title">{{form_title}}</h2>
   <p class="lede">{{form_lede}}</p>
   <form class="form" action="/form/check-up" method="post" novalidate hidden data-form>
     <input type="hidden" name="topic" value="{{form_topic}}">
@@ -18,8 +18,9 @@
       <input id="f-phone" name="phone" type="tel" autocomplete="tel" maxlength="40">
     </div>
     <div class="field">
-      <label for="f-business">Business name and website <span class="optional">(optional)</span></label>
-      <input id="f-business" name="business" type="text" autocomplete="organization" maxlength="200">
+      <label for="f-business">{{form_business_label}}{{#if form_business_optional}} <span class="optional">(optional)</span>{{/if}}</label>
+      <input id="f-business" name="business" type="text" autocomplete="organization" maxlength="200"{{#if form_business_required}} required aria-describedby="f-business-error"{{/if}}>
+      {{#if form_business_required}}<p class="field-error" id="f-business-error" hidden></p>{{/if}}
     </div>
     <div class="field">
       <label for="f-message">What's going on? <span class="optional">(optional)</span></label>
@@ -38,7 +39,7 @@
     <p class="form-status" role="status" aria-live="polite"></p>
   </form>
   <div class="form-fallback" data-form-fallback>
-    <p>Email me your website, or just your business name and town. I read every message myself and reply by email.{{#if reply_promise}} {{reply_promise}}{{/if}}</p>
+    <p>{{form_fallback}} I read every message myself and reply by email.{{#if reply_promise}} {{reply_promise}}{{/if}}</p>
     <div class="actions">
       <a class="plate plate--hivis" href="mailto:jack@mediajacksystems.com?subject={{form_subject}}&amp;body=My%20business%20and%20website%3A%20">{{form_button}} by email</a>
       {{booking_btn}}

@@ -1,5 +1,5 @@
 <!--meta
-{"path": "/websites/", "title": "Websites for local businesses, from $500 | MediaJack Systems", "og_title": "A website for your business, from $500", "description": "A website for a contractor, salon, restaurant or shop: your services, a gallery of your real work and a call button on every page. $500 flat, $50 a month.", "nav": "websites", "jsonld": "websites", "cta_title": "Not sure what your site needs?", "cta_text": "Send it to me. The free check-up tells you what I'd fix first, whether you hire me or not."}
+{"path": "/websites/", "title": "Websites from $500 for Denver-area businesses | MediaJack", "og_title": "A website for your business, from $500", "description": "A website for a contractor, salon, restaurant or shop: your services, a gallery of your real work and a call button on every page. $500 flat, $50 a month.", "nav": "websites", "jsonld": "websites", "cta_title": "Not sure what your site needs?", "cta_text": "Send it to me. The free check-up tells you what I'd fix first, whether you hire me or not.", "form_id": "quote", "form_title": "Get a quote for your website", "form_lede": "Tell me about your business and what the site needs to do. I'll reply by email with one price, in writing.", "form_topic": "Website quote", "form_button": "Get a quote for my website", "form_subject": "Website%20quote", "form_business_label": "Business name, and website if you have one", "form_business_required": "1", "form_fallback": "Email me your business name and what the site needs to do."}
 -->
 <div class="page-head sign sign--bleed sign--page sign--panel" data-shine>
   <div class="wrap">
@@ -8,7 +8,7 @@
     <p class="sign__line">For contractors, salons, restaurants and shops. It shows your services and photos of your own work, with a button to call you on every page. One flat price, quoted in writing before I start.</p>
   </div>
   <div class="sign__exits">
-    <a class="panel" href="/check-up/"><span>Get a free <span class="nb">check-up</span> first</span>{{arrow}}</a>
+    <a class="panel" href="#quote"><span>Get a quote for my website</span>{{arrow}}</a>
     <a class="panel" href="tel:+19704010185"><span>Call (970) 401-0185</span></a>
   </div>
   <span class="shine" aria-hidden="true"></span>
@@ -43,6 +43,16 @@
     </dl>
   </div>
 </section>
+
+{{#if work_shot}}<section class="section section--overcast" aria-labelledby="built-title">
+  <div class="wrap split split--shot">
+    <div>
+      <h2 id="built-title">A website I built</h2>
+      <p class="lede">A landscape architecture studio in Colorado had an old WordPress site with 210 MB of photos in two galleries. The new site shows the same photos at 17 MB, so the galleries open on a phone.</p>
+    </div>
+    {{work_shot}}
+  </div>
+</section>{{/if}}
 
 <section class="section section--ruled" aria-labelledby="kinds-title">
   <div class="wrap">
@@ -82,7 +92,7 @@
         <h3>Small businesses</h3>
         <p>One-person shops and small crews.</p>
         <ul class="limits limits--pair">
-          <li class="limit"><p class="limit__plate"><span class="limit__top">Website</span> <span class="limit__num"><span class="limit__cur">$</span>500</span></p><p class="limit__note">Website, with a gallery of your work</p></li>
+          <li class="limit"><p class="limit__plate"><span class="limit__top">Website</span> <span class="limit__num"><span class="limit__cur">$</span>500</span> <span class="limit__unit">flat fee</span></p><p class="limit__note">Website, with a gallery of your work</p></li>
           <li class="limit"><p class="limit__plate"><span class="limit__top">Hosting</span> <span class="limit__num"><span class="limit__cur">$</span>50</span> <span class="limit__unit">a month</span></p><p class="limit__note">Hosting and small updates, like new photos</p></li>
         </ul>
       </div>
@@ -90,7 +100,7 @@
         <h3>Bigger operations</h3>
         <p>More people and more to keep up to date.</p>
         <ul class="limits limits--pair">
-          <li class="limit limit--long"><p class="limit__plate"><span class="limit__top">Website</span> <span class="limit__num"><span class="limit__cur">$</span>1,500</span></p></li>
+          <li class="limit limit--long"><p class="limit__plate"><span class="limit__top">Website</span> <span class="limit__num"><span class="limit__cur">$</span>1,500</span> <span class="limit__unit">flat fee</span></p></li>
           <li class="limit"><p class="limit__plate"><span class="limit__top">Hosting</span> <span class="limit__num"><span class="limit__cur">$</span>150</span> <span class="limit__unit">a month</span></p><p class="limit__note">Hosting and updates</p></li>
         </ul>
       </div>
@@ -122,6 +132,20 @@
         <p>Nothing is published until you've seen it and said yes.</p>
       </li>
     </ol>
+  </div>
+</section>
+
+<section class="section section--overcast" aria-labelledby="quote-title">
+  <div class="wrap split split--even">
+    {{> form}}
+    <div class="form-side">
+      <h2 id="call-title">Rather talk it through?</h2>
+      <ul class="contact-list" aria-labelledby="call-title">
+        <li><span class="label">Phone</span><a href="tel:+19704010185">(970) 401-0185</a></li>
+        <li><span class="label">Email</span><a href="mailto:jack@mediajacksystems.com?subject=Website%20quote">jack@mediajacksystems.com</a></li>
+        {{#if booking_url}}<li><span class="label">Or pick a time</span><a href="{{booking_url}}" rel="noopener">Book a 30-minute call</a></li>{{/if}}
+      </ul>
+    </div>
   </div>
 </section>
 

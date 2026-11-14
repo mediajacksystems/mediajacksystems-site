@@ -15,7 +15,7 @@ It keeps Jack's three colours, black, silver and the green of trees after rain, 
 - Write as Jack, in the first person singular: "I", "me". Never "we". One person you can call is the pitch.
 - Use the words an owner uses: "Get found", "Look the part", "Stay in touch", "Put it in their hands", "Run it for you". No jargon ("omnichannel", "leverage", "solutions").
 - Short sentences, facts over adjectives, like a sign: "Flat fee." "One person." "Quoted in writing first."
-- Sentence case for headings and buttons. A button starts with a verb: "Get a free marketing check-up", "Call (970) 401-0185".
+- Sentence case for headings and buttons. A button starts with a verb: "Get my free check-up", "Call (970) 401-0185". One action keeps one name: every button that leads to the check-up says "Get my free check-up".
 - No exclamation marks, no emoji, no em dashes, no hype words ("best", "#1", "guaranteed").
 - Headings are statements. The only questions are the FAQ's, in the owner's words ("What does it cost?").
 - The brand line is "Customers follow signs. I put them up." Use it once on a page at most. Don't add road puns beyond the lines in the direction.
@@ -117,7 +117,7 @@ Spend the boldness on the signs. Everything between them is quiet: white or over
 11. **Night.** The last section before the footer is `asphalt`, opened by dashed white lane marks. The closing sign glows a little, as if headlights just found it.
 12. **Posts.** Only two things stand on posts: the service blades (one slim post) and the 404 sign, which is off the route. Nothing else.
 
-One hi-vis thing on a first screen. On the home page that is the band at the foot of the sign, so the header's hi-vis plate ("Call" on phones, "Free check-up" on wide screens) is a quiet white plate with its black line until the reader has scrolled about a screen, then turns hi-vis. Where the browser can't do that, or motion is not wanted, it is hi-vis all the time.
+One hi-vis thing on a first screen. On the home page that is the band at the foot of the sign, so the header's hi-vis plate ("Call" on phones, "Get my free check-up" on wide screens) is a quiet white plate with its black line until the reader has scrolled about a screen, then turns hi-vis. Where the browser can't do that, or motion is not wanted, it is hi-vis all the time.
 
 No section adds a decorative object. If in doubt, take it out.
 

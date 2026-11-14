@@ -181,12 +181,13 @@ def parts():
                             '<a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fmediajacksystems.com%2F" rel="noopener">run Google\'s speed test on this page</a>.'))
         also = f'<p class="work-also">{e(CFG["work_also"])}</p>' if CFG.get('work_also') else ''
         note = f'<p>{e(CFG.get("work_note", ""))}</p>' if CFG.get('work_note') else ''
+        p['work_shot'] = next((s for s in (shot(w) for w in work) if s), '')
         p['work'] = ('<section class="section section--overcast" aria-labelledby="work-title"><div class="wrap">'
                      '<div class="section-head work-head"><p class="zone"><span>Work zone</span></p>'
                      f'<div><h2 id="work-title">Jobs I\'ve done, with the numbers</h2>{note}</div></div>'
                      f'<ul class="jobs">{"".join(t)}</ul>{also}</div></section>')
     else:
-        p['work'] = ''
+        p['work'] = p['work_shot'] = ''
     # testimonials: real, named, with permission, or nothing
     ts = CFG.get('testimonials', [])
     if ts:
@@ -219,6 +220,7 @@ def build():
     layout = (SRC / 'layout.html').read_text(encoding='utf-8')
     css_js = (OUT / 'assets/site.css').read_bytes() + (OUT / 'assets/site.js').read_bytes()
     version = hashlib.sha1(css_js).hexdigest()[:8]
+    og_version = hashlib.sha1((OUT / 'assets/img/og-image.png').read_bytes()).hexdigest()[:8]
     shared = parts()
     pages = []
     for f in sorted((SRC / 'pages').glob('*.html')):
@@ -234,7 +236,7 @@ def build():
         vals.update({
             'title': e(meta['title']), 'og_title': e(meta.get('og_title', meta['title'])), 'description': e(meta['description']),
             'canonical': e(SITE + (path if path != '/404.html' else '/')), 'robots': e(meta.get('robots', 'index, follow')),
-            'version': version, 'jsonld': jsonld(meta.get('jsonld', 'none'), meta),
+            'version': version, 'og_version': og_version, 'jsonld': jsonld(meta.get('jsonld', 'none'), meta),
         })
         for key in ('services', 'websites', 'about', 'contact'):
             vals['cur_' + key] = ' aria-current="page"' if nav == key else ''

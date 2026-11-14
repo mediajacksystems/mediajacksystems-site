@@ -67,10 +67,11 @@
     };
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var name = form.elements.name, email = form.elements.email;
+      var name = form.elements.name, email = form.elements.email, firm = form.elements.business;
       var okName = check(name, name.value.trim().length > 1, 'Enter your name.');
       var okEmail = check(email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()), 'Enter an email address I can reply to, like name@example.com.');
-      if (!okName || !okEmail) { (okName ? email : name).focus(); say('error', 'Nothing was sent yet. Fix the marked field and send again.'); return; }
+      var okFirm = !(firm && firm.required) || check(firm, firm.value.trim().length > 1, 'Enter your business name, and your website if you have one.');
+      if (!okName || !okEmail || !okFirm) { (!okName ? name : !okEmail ? email : firm).focus(); say('error', 'Nothing was sent yet. Fix the marked field and send again.'); return; }
       var data = { elapsed: Date.now() - started };
       Array.prototype.forEach.call(form.elements, function (el) { if (el.name) data[el.name] = el.value; });
       var btn = form.querySelector('button[type=submit]');

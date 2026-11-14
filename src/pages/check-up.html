@@ -1,5 +1,5 @@
 <!--meta
-{"path": "/check-up/", "title": "Free marketing check-up | MediaJack Systems", "og_title": "A free marketing check-up for your business", "description": "Send your website or business name. Jack Johnson looks at what your customers see and emails back a short list of what to fix first. Free, no obligation.", "jsonld": "checkup", "form_id": "ask", "form_title": "Ask for your check-up", "form_lede": "Tell me who you are and where to look. That's all I need to start.", "form_topic": "Free check-up", "form_button": "Send my check-up request", "form_subject": "Free%20marketing%20check-up"}
+{"path": "/check-up/", "title": "Free marketing check-up | MediaJack Systems", "og_title": "A free marketing check-up for your business", "description": "Send your website or business name. Jack Johnson looks at what your customers see and emails back a short list of what to fix first. Free, no obligation.", "jsonld": "checkup", "form_id": "ask", "form_title": "Ask for your check-up", "form_lede": "Tell me who you are and where to look. That's all I need to start.", "form_topic": "Free check-up", "form_button": "Get my free check-up", "form_subject": "Free%20marketing%20check-up", "form_business_label": "Business name and website", "form_business_required": "1", "form_fallback": "Email me your website, or just your business name and town."}
 -->
 <div class="page-head sign sign--bleed sign--page sign--panel" data-shine>
   <div class="wrap">
@@ -8,11 +8,25 @@
     <p class="sign__line">Send me your website, or just your business name and town. I look at your business the way a customer does and email you a short list of what I'd fix first, and why. It's free, and you don't owe me anything after.</p>
   </div>
   <div class="sign__exits">
-    <a class="panel" href="#ask"><span>Ask for my <span class="nb">check-up</span></span>{{arrow}}</a>
+    <a class="panel" href="#ask"><span>Get my free <span class="nb">check-up</span></span>{{arrow}}</a>
     <a class="panel" href="#self-check"><span>Check it yourself first</span></a>
   </div>
   <span class="shine" aria-hidden="true"></span>
 </div>
+
+<section class="section section--first" aria-labelledby="ask-title">
+  <div class="wrap split split--even">
+    {{> form}}
+    <div class="form-side">
+      <h2 id="talk-title">Rather talk it through?</h2>
+      <ul class="contact-list" aria-labelledby="talk-title">
+        <li><span class="label">Phone</span><a href="tel:+19704010185">(970) 401-0185</a></li>
+        <li><span class="label">Email</span><a href="mailto:jack@mediajacksystems.com?subject=Free%20marketing%20check-up&amp;body=My%20business%20and%20website%3A%20">jack@mediajacksystems.com</a></li>
+        {{#if booking_url}}<li><span class="label">Or pick a time</span><a href="{{booking_url}}" rel="noopener">Book a 30-minute call</a></li>{{/if}}
+      </ul>
+    </div>
+  </div>
+</section>
 
 <section class="section" aria-labelledby="looks-title">
   <div class="wrap split">
@@ -71,19 +85,5 @@
         <a class="plate plate--hivis" href="#ask" data-send-answers>Send these answers with my request</a>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="ask-title">
-  <div class="wrap split split--even">
-    <div>
-      <h2 id="ask-title">Or reach me directly</h2>
-      <ul class="contact-list">
-        <li><span class="label">Phone</span><a href="tel:+19704010185">(970) 401-0185</a></li>
-        <li><span class="label">Email</span><a href="mailto:jack@mediajacksystems.com?subject=Free%20marketing%20check-up&amp;body=My%20business%20and%20website%3A%20">jack@mediajacksystems.com</a></li>
-        {{#if booking_url}}<li><span class="label">Or talk it through</span><a href="{{booking_url}}" rel="noopener">Book a 30-minute call</a></li>{{/if}}
-      </ul>
-    </div>
-    {{> form}}
   </div>
 </section>

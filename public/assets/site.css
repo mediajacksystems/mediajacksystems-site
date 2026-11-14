@@ -115,6 +115,9 @@ a.brand:hover { background: none; }
 .site-nav li + li { border-top: 1px solid var(--aluminum); }
 .site-nav a { display: block; padding: .95rem 0 .8rem; font-size: 1.5rem; font-weight: 800; line-height: 1.1; text-decoration: none; }
 .site-nav a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: .22em; }
+.site-nav li.site-nav__cta { border-top: 0; padding-top: .6rem; }
+.site-nav__cta a { padding: .95rem .9rem .8rem; border-radius: 8px; background: var(--hivis); box-shadow: inset 0 0 0 var(--line) #000; }
+.site-nav__cta a:hover { background: #000; color: var(--hivis); }
 .header-phone { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .62em .95em .5em; border-radius: 8px; background: var(--hivis); box-shadow: inset 0 0 0 var(--line) #000; font-weight: 800; line-height: 1.15; text-decoration: none; }
 .header-phone:hover { background: #000; color: var(--hivis); }
 .header-phone:active { transform: translateY(1px); }
@@ -163,6 +166,13 @@ a.brand:hover { background: none; }
   .header-phone__verb { display: none; }
   .header-phone__num { display: inline; }
   .header-cta { display: inline-flex; }
+  .site-nav__cta { display: none; }
+}
+.header-cta { white-space: nowrap; }
+@media (min-width: 940px) and (max-width: 1099px) {               /* room for "Get my free check-up" beside the menu and the phone */
+  .site-header .wrap { gap: .9rem; }
+  .site-nav ul { gap: 1rem; }
+  .site-header .header-cta { padding-inline: .8em; }
 }
 
 /* ---------------------------------------------------------------- the guide sign */
@@ -268,7 +278,7 @@ a.brand:hover { background: none; }
   min-height: min(880px, 205vw, 100svh - 4rem - 1px);
 }
 .hero__face {
-  --big: calc((100vw - 2 * var(--gutter)) / 4.8);
+  --big: calc((100vw - 2 * var(--gutter)) / 5.02);              /* the widest legend line on a phone is "and Systems", 5em wide */
   flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto 1fr auto; column-gap: 10px;
   padding-top: calc(var(--inset) + 16px);
 }
@@ -277,6 +287,8 @@ a.brand:hover { background: none; }
 .hero__big, .hero__for { display: block; }
 .hero__big { margin-left: -.047em; }                             /* the M's side bearing: its stem stands on the rule's end */
 .hero__for { margin-top: .22em; font-size: .5em; font-weight: 700; line-height: 1; letter-spacing: 0; }
+.hero__big--and { margin-left: 0; }
+.hero__and { font-size: .5em; font-weight: 700; letter-spacing: 0; }
 .sign--hero .sign__line { grid-area: 3 / 1 / 4 / -1; padding-top: 13px; border-top: 3px solid #fff; max-width: none; font-size: clamp(1.15rem, 1.62vw, 1.45rem); text-wrap: pretty; }
 .sign--hero .sign__exits { margin-top: 20px; }
 /* On a phone tall enough to leave green above the legend, the arrow takes it: top right, the plaque top left, the
@@ -293,6 +305,7 @@ a.brand:hover { background: none; }
   .sign--hero h1 { padding-block: 0 .18em; }
   .hero__big { font-weight: 700; }                                /* at this size the lighter cut reads as sign lettering, not as weight */
   .hero__for { font-size: max(1.75rem, .27em); margin-top: .3em; }
+  .hero__and { font-size: max(1.75rem, .27em); }
   /* the arrow stands beside the two words, centred between the first one's top and the second one's baseline */
   .sign--hero .sign__arrow { display: block; grid-area: 2 / 2; justify-self: end; align-self: start; width: calc(var(--big) * 1.645 - 60px); height: auto; margin-top: calc(var(--big) * .03 + 30px); }
   .sign--hero .sign__line { padding-top: 18px; }
@@ -335,6 +348,11 @@ a.brand:hover { background: none; }
 @media (min-width: 1100px) {
   .intro { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem clamp(2.5rem, 6vw, 5.5rem); align-items: start; }
   .intro__where { grid-column: 2; grid-row: 1 / span 2; margin-top: .45rem; }
+  .byline { gap: 24px; }
+  .byline__plate { width: 176px; }
+  .byline .blade__name { font-size: 1.125rem; }
+  .byline p { font-size: 1.5rem; max-width: 12em; }
+  .intro__where { align-self: center; margin-top: 0; }
   .distance { padding: 28px 38px 26px; }
   .distance li { padding: 27px 0 22px; }
 }
@@ -343,6 +361,7 @@ a.brand:hover { background: none; }
 .section { padding-block: var(--section); }
 .section--overcast { background: var(--overcast); }
 .section--ruled { border-top: 1px solid var(--aluminum); }
+.section--first { padding-top: clamp(2rem, 5vw, 3.25rem); }
 h2 + .lede { margin-top: 1rem; }
 .section-head { margin-bottom: clamp(2rem, 5vw, 3.25rem); }
 .section-head h2 { max-width: 17ch; }
@@ -390,7 +409,7 @@ h2 + .lede { margin-top: 1rem; }
 }
 .limit__note { font-size: 1rem; line-height: 1.36; max-width: 14.5em; color: var(--ink-muted); text-wrap: balance; }
 .limits-also { margin-top: clamp(1.75rem, 4vw, 2.5rem); max-width: 30em; font-weight: 600; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.4; }
-.limits-more { margin-top: 1rem; }
+.limits-more { display: flex; flex-wrap: wrap; gap: .25rem 2rem; margin-top: 1rem; }
 .more { display: inline-block; padding-block: .7rem; margin-block: -.7rem; font-weight: 700; }
 @media (min-width: 760px) {
   .limits { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
@@ -714,6 +733,8 @@ h2 + .contact-list { margin-top: 1.75rem; }
 .form-wrap { border-top: 4px solid #000; padding-top: 1.1rem; scroll-margin-top: 6.5rem; }
 .form-wrap h2 { font-size: clamp(1.75rem, 5vw, 2.2rem); line-height: 1.05; }
 .form-wrap .lede { margin-top: .6rem; font-size: 1.125rem; color: var(--ink-muted); }
+.form-side { border-top: 4px solid #000; padding-top: 1.1rem; }
+.split .form-side h2 { font-size: clamp(1.75rem, 5vw, 2.2rem); line-height: 1.05; }
 .form { margin-top: 1.6rem; display: grid; gap: 1.1rem; }
 .form[hidden], .form-fallback[hidden] { display: none; }
 .field label { display: block; margin-bottom: .3rem; font-weight: 700; }
