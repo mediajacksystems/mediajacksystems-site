@@ -32,7 +32,7 @@ BUSINESS = {
     'description': 'Marketing and custom systems for local businesses: websites, Google and AI search, branding, social media, email, ads, print and direct mail, fractional CMO work, and custom-built software. Flat fees, quoted in writing before work starts.',
     'telephone': '+1-970-401-0185',
     'email': 'jack@mediajacksystems.com',
-    'priceRange': '$295 to $1,500',
+    'priceRange': '$50 a month to $1,500 and up',
     'address': {'@type': 'PostalAddress', 'addressLocality': 'Englewood', 'addressRegion': 'CO', 'postalCode': '80111', 'addressCountry': 'US'},
     'areaServed': [{'@type': 'City', 'name': 'Englewood, Colorado'}, {'@type': 'City', 'name': 'Denver, Colorado'}, {'@type': 'Country', 'name': 'United States'}],
     'founder': {'@id': SITE + '/about/#jack'},
@@ -60,21 +60,30 @@ SERVICES = [
     ('Part-time marketing lead', 'Fractional CMO: marketing plan, budget and calendar, vendor management, sales materials and plain-English reporting.', '/services/#run-it'),
     ('Custom systems', 'Software built around how a business works: tools on a website such as calculators, checkers and maps, lead capture and follow-up systems, and company platforms built from the ground up. Quoted for the job.', '/services/#custom-systems'),
 ]
-# Jack's price list of 30 Oct 2026: (what, price in USD, per month?)
+# The public prices Jack adopted on 15 Nov 2026 (adopted-prices.md, "What the public website shows"):
+# (what, price in USD, per month?, a website offer?, a starting price?)
 PRICES = [
-    ('Website for a small business, with a gallery of your work', 500, False),
-    ('Hosting and small updates for a small business website', 50, True),
-    ('Website for a bigger operation', 1500, False),
-    ('Hosting and updates for a bigger operation', 150, True),
-    ('Fixing the problems on a website you already have', 295, False),
-    ('One social platform set up with 4 posts, small business', 150, False),
-    ('12 social posts a month, small business', 100, True),
+    ('Website for 1 to 3 people, founding rate for the first 5 clients', 500, False, True),
+    ('Website for 1 to 3 people', 750, False, True),
+    ('Website for 1 to 3 people, paid monthly for 12 months, nothing down, hosting included', 92, True, True),
+    ('Hosting and small updates for a website for 1 to 3 people', 50, True, True),
+    ('Website for 4 to 10 people, or an office or showroom', 1500, False, True, True),
+    ('Hosting and updates for a website for 4 to 10 people', 100, True, True),
+    ('Fixing the problems on a website you already have', 295, False, True),
+    ('One social platform set up with 4 posts', 150, False, False),
+    ('12 social posts a month', 250, True, False),
+    ('Google Business Profile, managed', 150, True, False),
+    ('Google Business Profile, managed, for website clients', 100, True, False),
+    ('Get Found: hosting, Google profile management and 8 posts a month', 300, True, False),
 ]
 
-def offer(name, price, monthly):
+def offer(name, price, monthly, website=False, starting=False):
     o = {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': name, 'provider': {'@id': SITE + '/#business'}}, 'priceCurrency': 'USD', 'price': price}
     if monthly:
         o['priceSpecification'] = {'@type': 'UnitPriceSpecification', 'price': price, 'priceCurrency': 'USD', 'unitCode': 'MON'}
+    if starting:
+        del o['price']
+        o['priceSpecification'] = {'@type': 'PriceSpecification', 'minPrice': price, 'priceCurrency': 'USD'}
     return o
 
 def crumbs(name, path):
@@ -94,7 +103,7 @@ def jsonld(kind, meta):
     elif kind == 'websites':
         graph = [{'@type': 'Service', '@id': SITE + '/websites/#service', 'name': 'Websites for local businesses', 'serviceType': 'Website design', 'url': SITE + '/websites/',
                   'description': meta['description'], 'provider': {'@id': SITE + '/#business'}, 'areaServed': BUSINESS['areaServed'],
-                  'offers': [offer(*p) for p in PRICES[:5]]}, BUSINESS, JACK, crumbs('Websites', '/websites/')]
+                  'offers': [offer(*p) for p in PRICES if p[3]]}, BUSINESS, JACK, crumbs('Websites', '/websites/')]
     elif kind == 'checkup':
         graph = [{'@type': 'WebPage', 'url': SITE + '/check-up/', 'name': meta['title'], 'description': meta['description'], 'about': {'@id': SITE + '/#business'}},
                  BUSINESS, JACK, crumbs('Free check-up', '/check-up/')]
