@@ -703,6 +703,9 @@ a.blade:active { transform: translateY(1px); }
 .board__also span { font-weight: 600; }
 .price-note { margin-top: clamp(1.5rem, 4vw, 2.25rem); max-width: 33em; font-size: clamp(1.15rem, 2.2vw, 1.3rem); line-height: 1.45; }
 .price-note + .price-note { margin-top: .8em; font-weight: 600; }
+.pay { margin-top: clamp(2rem, 5vw, 3rem); padding-top: clamp(1.5rem, 4vw, 2rem); border-top: 3px solid #000; }
+.pay .price-note { margin-top: .5em; }
+.pay .actions { margin-top: 1.25rem; }
 @media (min-width: 900px) {
   .board { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 50px 56px 48px; }
   .board table + table { margin-top: 0; }
