@@ -16,9 +16,9 @@ const TYPES = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8', '.xml': 'application/xml; charset=utf-8', '.txt': 'text/plain; charset=utf-8',
   '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.webp': 'image/webp', '.jpg': 'image/jpeg',
-  '.woff2': 'font/woff2', '.webmanifest': 'application/manifest+json',
+  '.woff2': 'font/woff2', '.webmanifest': 'application/manifest+json', '.vcf': 'text/vcard; charset=utf-8',
 };
-const TEXT = new Set(['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '.webmanifest']);
+const TEXT = new Set(['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '.webmanifest', '.vcf']);
 
 // the oil and gas site's pages, retired in October 2026
 const REDIRECTS = {
@@ -163,6 +163,11 @@ function send(req, res, status, file, extra = {}, versioned = false) {
   const headers = { ...HEADERS, 'Content-Type': TYPES[f.ext] || 'application/octet-stream', ETag: f.etag, Vary: 'Accept-Encoding', ...extra };
   // a file asked for with its version (?v=) never changes at that address; the font never changes at all
   headers['Cache-Control'] = f.ext === '.html' ? 'no-cache' : (f.ext === '.woff2' || versioned) ? 'public, max-age=31536000, immutable' : 'public, max-age=86400';
+  if (f.ext === '.vcf') {                                            // Jack's contact card: phones offer "Add contact"; always the latest copy
+    headers['Content-Disposition'] = `inline; filename="${path.basename(file)}"`;
+    headers['Cache-Control'] = 'no-cache';
+    headers['X-Robots-Tag'] = 'noindex';
+  }
   if (status === 200 && req.headers['if-none-match'] === f.etag) { res.writeHead(304, headers); return res.end(); }
   const ae = String(req.headers['accept-encoding'] || '');
   let body = f.body;

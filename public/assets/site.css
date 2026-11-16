@@ -772,6 +772,32 @@ h2 + .contact-list { margin-top: 1.75rem; }
 .selfcheck.js.is-live li:not(.is-yes) .fix { display: block; }
 .selfcheck-result { margin-top: 1.6rem; font-size: 1.25rem; font-weight: 800; line-height: 1.3; max-width: 30em; text-wrap: balance; }
 
+/* ---------------------------------------------------------------- /card/: Jack's business card for a phone screen (not in the sitemap, noindex) */
+.card-page { background: var(--asphalt); color: #fff; min-height: 100vh; min-height: 100dvh; }
+.card-page :focus-visible { outline-color: var(--hivis); }
+.card { width: min(100% - 2 * clamp(14px, 4vw, 24px), 28rem); margin-inline: auto; padding-block: max(18px, env(safe-area-inset-top)) max(36px, env(safe-area-inset-bottom)); display: grid; gap: 18px; }
+.card__sign { padding: 26px 24px 24px; display: grid; gap: 14px; }
+.card__mark { display: flex; align-items: center; gap: 10px; font-size: 1.05rem; font-weight: 800; line-height: 1; }
+.card__mark svg { width: 38px; height: 38px; flex: none; }
+.card__mark span span { font-weight: 500; }
+.card__who { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: center; padding-top: 4px; }
+.card__photo img { width: 96px; height: 120px; object-fit: cover; border-radius: 8px; box-shadow: 0 0 0 3px #fff; }
+.card__who h1 { font-size: clamp(1.9rem, 9vw, 2.45rem); line-height: 1; letter-spacing: -.01em; }
+.card__role { margin-top: .45em; font-weight: 600; line-height: 1.25; }
+.card__line { padding-top: 13px; border-top: 3px solid #fff; font-size: 1.3rem; font-weight: 800; line-height: 1.2; text-wrap: balance; }
+.card__place { font-weight: 600; line-height: 1.3; margin-top: -4px; }
+.card__save { min-height: 4.25rem; font-size: 1.4rem; border-radius: 10px; box-shadow: inset 0 0 0 3px #000, 0 0 0 3px var(--hivis); }
+.card__save:hover { box-shadow: inset 0 0 0 3px var(--hivis), 0 0 0 3px var(--hivis); }
+.card__actions { list-style: none; padding: 0; display: grid; gap: 10px; }
+.card__actions .plate { width: 100%; min-height: 3.25rem; overflow-wrap: anywhere; }
+.card__links { list-style: none; padding: 4px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; font-weight: 700; }
+.card__links a { display: inline-block; padding: 6px 2px; color: #fff; }
+.card__links a:hover { color: #000; }
+.card__qr { justify-self: center; display: grid; justify-items: center; gap: 10px; margin-top: 8px; padding: 16px 16px 14px; background: #fff; color: #000; border-radius: 12px; text-align: center; }
+.card__qr img { width: 220px; height: 220px; image-rendering: pixelated; }
+.card__qr figcaption { font-weight: 800; line-height: 1.3; }
+.card__qr figcaption span { font-weight: 500; color: var(--ink-muted); }
+
 @media (max-width: 479px) { .actions .plate, .form .plate { width: 100%; } }
 @media print {
   .site-header, .night, .site-footer, .posts, .form-wrap, .selfcheck, .maker, .maker__stage { display: none; }

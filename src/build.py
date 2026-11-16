@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Builds the MediaJack Systems site: src/pages/*.html + src/layout.html + src/site.json -> public/.
 
-Each page starts with a <!--meta {...} --> block (path, title, description, nav, jsonld, robots, sitemap, plus
+Each page starts with a <!--meta {...} --> block (path, title, description, nav, jsonld, robots, sitemap, layout, plus
 anything a partial needs, such as form_title).
 In pages, the layout and partials:
   {{name}}                 a value: page meta first, then the generated parts below
@@ -237,7 +237,7 @@ def build():
         m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->\s*', raw, re.S)
         meta = json.loads(m.group(1)); body = raw[m.end():].rstrip() + '\n'
         path = meta['path']
-        html = layout
+        html = (SRC / meta['layout']).read_text(encoding='utf-8') if meta.get('layout') else layout   # the card page has its own small frame
         if 'noindex' in meta.get('robots', ''):
             html = html.replace('<link rel="canonical" href="{{canonical}}">\n', '')    # a page kept out of search points nowhere
         nav = meta.get('nav', '')
@@ -251,7 +251,7 @@ def build():
             vals['cur_' + key] = ' aria-current="page"' if nav == key else ''
         vals['body'] = render(body.rstrip('\n'), vals)
         html = render(html, vals)
-        top, rest = html.split('<body>', 1)                                # "check-up" never breaks at its hyphen, anywhere on the page
+        top, body_tag, rest = re.split(r'(<body[^>]*>)', html, maxsplit=1)                                # "check-up" never breaks at its hyphen, anywhere on the page
         rest = re.sub(r'<span class="nb">(check-up[.,]?)</span>', r'\1', rest)
         out, prev = [], ''
         for seg in re.split(r'(<[^>]+>)', rest):
@@ -263,7 +263,7 @@ def build():
                     seg = f'<span>{seg}</span>'
             out.append(seg)
         rest = ''.join(out)
-        html = top + '<body>' + rest
+        html = top + body_tag + rest
         assert '{{' not in html, f'unfilled placeholder in {f.name}: ' + re.search(r'\{\{.{0,40}', html).group(0)
         dest = OUT / ('index.html' if path == '/' else path.strip('/') if path.endswith('.html') else path.strip('/') + '/index.html')
         dest.parent.mkdir(parents=True, exist_ok=True)
